@@ -1,0 +1,99 @@
+[gd_scene load_steps=14 format=3 uid="uid://bb8tikhh88a8x"]
+
+[ext_resource type="Script" path="res://scripts/world/world.gd" id="1_y5gbm"]
+[ext_resource type="Script" path="res://scripts/world/tickTimer.gd" id="2_l5a8r"]
+[ext_resource type="Script" path="res://scripts/world/blocks.gd" id="3_cjhhd"]
+[ext_resource type="Script" path="res://scripts/world/voxelTerrain.gd" id="3_pi0oy"]
+[ext_resource type="Resource" uid="uid://bjrytrnlhndwc" path="res://resources/blocks/!block_library.tres" id="4_bqx5r"]
+[ext_resource type="PackedScene" uid="uid://cxl6pil7bqe4h" path="res://scenes/player.tscn" id="4_e88sy"]
+[ext_resource type="Texture2D" uid="uid://bvh7iyhap4tlx" path="res://assets/textures/gui/crosshair.png" id="5_lbf7s"]
+[ext_resource type="VoxelMesherBlocky" path="res://z.misc/mesher.tres" id="5_ot5xu"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_imxfg"]
+noise_type = 3
+frequency = 0.005
+
+[sub_resource type="VoxelGeneratorNoise2D" id="VoxelGeneratorNoise2D_7covq"]
+channel = 0
+height_range = 100.0
+noise = SubResource("FastNoiseLite_imxfg")
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ybnc8"]
+sky_top_color = Color(0.262745, 0.458824, 0.678431, 1)
+sky_horizon_color = Color(0.662745, 0.760784, 0.87451, 1)
+ground_bottom_color = Color(0.454902, 0.643137, 0.862745, 1)
+ground_horizon_color = Color(0.662745, 0.760784, 0.87451, 1)
+ground_curve = 0.15
+
+[sub_resource type="Sky" id="Sky_5yhjg"]
+sky_material = SubResource("ProceduralSkyMaterial_ybnc8")
+
+[sub_resource type="Environment" id="Environment_4yvmq"]
+background_mode = 2
+sky = SubResource("Sky_5yhjg")
+tonemap_mode = 2
+
+[node name="World" type="Node3D"]
+script = ExtResource("1_y5gbm")
+
+[node name="Tick Timer" type="Timer" parent="."]
+wait_time = 0.05
+autostart = true
+script = ExtResource("2_l5a8r")
+tickSpeed = 20.0
+
+[node name="Blocks" type="Node3D" parent="."]
+script = ExtResource("3_cjhhd")
+blockLibrary = ExtResource("4_bqx5r")
+
+[node name="VoxelTerrain" type="VoxelTerrain" parent="Blocks"]
+unique_name_in_owner = true
+generator = SubResource("VoxelGeneratorNoise2D_7covq")
+mesher = ExtResource("5_ot5xu")
+script = ExtResource("3_pi0oy")
+blockLibrary = ExtResource("4_bqx5r")
+
+[node name="Player" parent="." instance=ExtResource("4_e88sy")]
+
+[node name="GUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Crosshair" type="TextureRect" parent="GUI"]
+texture_filter = 3
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -11.0
+offset_top = -11.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+mouse_filter = 2
+texture = ExtResource("5_lbf7s")
+expand_mode = 1
+
+[node name="Environment" type="Node" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
+environment = SubResource("Environment_4yvmq")
+
+[node name="SkyLight" type="DirectionalLight3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, -0.400925, 0.916111, 0, -0.916111, -0.400925, 0, 0, 0)
+light_color = Color(0.9, 0.78, 0.72, 1)
+
+[connection signal="timeout" from="Tick Timer" to="Tick Timer" method="_on_tick"]

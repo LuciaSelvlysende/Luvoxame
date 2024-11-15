@@ -1,0 +1,78 @@
+[gd_scene load_steps=14 format=3 uid="uid://cxl6pil7bqe4h"]
+
+[ext_resource type="Script" path="res://scripts/player/player.gd" id="1_bkqlw"]
+[ext_resource type="Script" path="res://scripts/resources/player/movement.gd" id="2_eom8f"]
+[ext_resource type="Resource" uid="uid://24ytiv60m2y2" path="res://resources/player/movement_walk.tres" id="2_h03gv"]
+[ext_resource type="Script" path="res://scripts/player/interaction.gd" id="3_7rik1"]
+[ext_resource type="Resource" uid="uid://dn4y5dxhggkbo" path="res://resources/player/movement_fly.tres" id="3_jwqfj"]
+[ext_resource type="Script" path="res://scripts/player/collision.gd" id="4_x58h6"]
+[ext_resource type="Script" path="res://scripts/player/camera.gd" id="5_iy6jt"]
+[ext_resource type="Script" path="res://scripts/player/inventory.gd" id="7_sjv2u"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_swr6d"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.14902)
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fw62c"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.501961)
+texture_filter = 0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ludo7"]
+size = Vector3(0.8, 1.95, 0.8)
+
+[sub_resource type="Animation" id="Animation_r11ef"]
+resource_name = "crouch"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vpe3u"]
+_data = {
+"crouch": SubResource("Animation_r11ef")
+}
+
+[node name="Player" type="CharacterBody3D" groups=["PlayerTick"]]
+script = ExtResource("1_bkqlw")
+movement_modes = Array[ExtResource("2_eom8f")]([ExtResource("2_h03gv"), ExtResource("3_jwqfj")])
+
+[node name="Camera" type="Camera3D" parent="." node_paths=PackedStringArray("player")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.67, 0)
+script = ExtResource("5_iy6jt")
+player = NodePath("..")
+
+[node name="VoxelViewer" type="VoxelViewer" parent="Camera"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.637772, 0)
+view_distance = 256
+
+[node name="Interaction" type="Node3D" parent="Camera" node_paths=PackedStringArray("camera", "cooldown", "preview") groups=["PlayerTick"]]
+script = ExtResource("3_7rik1")
+interaction_range = 5.0
+initial_delay = 0.25
+continuous_delay = 0.1
+diagonal_placement_threshold = 0.125
+break_preview_material = SubResource("StandardMaterial3D_swr6d")
+place_preview_material = SubResource("StandardMaterial3D_fw62c")
+camera = NodePath("..")
+cooldown = NodePath("InteractionCooldown")
+preview = NodePath("PreviewMesh")
+
+[node name="InteractionCooldown" type="Timer" parent="Camera/Interaction"]
+one_shot = true
+
+[node name="PreviewMesh" type="MeshInstance3D" parent="Camera/Interaction"]
+transform = Transform3D(1.003, 0, 0, 0, 1.003, 0, 0, 0, 1.003, -0.001, -0.000999987, -0.001)
+top_level = true
+
+[node name="PlayerCollision" type="CollisionShape3D" parent="." groups=["PlayerTick"]]
+unique_name_in_owner = true
+shape = SubResource("BoxShape3D_ludo7")
+script = ExtResource("4_x58h6")
+
+[node name="Inventory" type="Node" parent="."]
+script = ExtResource("7_sjv2u")
+
+[node name="Animations" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_vpe3u")
+}

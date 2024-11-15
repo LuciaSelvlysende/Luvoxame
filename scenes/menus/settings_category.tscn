@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://opot2fac0e0c"]
+
+[ext_resource type="Script" path="res://scripts/nodes/ui/settings/settings_category.gd" id="1_qjd0i"]
+
+[node name="SettingsCategory" type="Node2D" node_paths=PackedStringArray("button")]
+script = ExtResource("1_qjd0i")
+button = NodePath("Button")
+
+[node name="Button" type="Button" parent="."]
+offset_right = 168.0
+offset_bottom = 24.0

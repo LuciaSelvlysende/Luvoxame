@@ -1,0 +1,87 @@
+[gd_scene load_steps=20 format=3 uid="uid://diqassb2eblc3"]
+
+[ext_resource type="Script" path="res://scripts/world/ticks.gd" id="2_5jpyq"]
+[ext_resource type="Script" path="res://scripts/world/voxel_terrain.gd" id="3_kpafy"]
+[ext_resource type="Script" path="res://scripts/resources/blocks/block.gd" id="3_ypu75"]
+[ext_resource type="Resource" uid="uid://d3ply4bnbol2x" path="res://resources/blocks/dirt.tres" id="4_0uk7a"]
+[ext_resource type="Resource" uid="uid://boaxc7wbupcyp" path="res://resources/blocks/stone.tres" id="5_c4gtn"]
+[ext_resource type="Resource" uid="uid://c87naguy1lpiv" path="res://resources/blocks/wood_planks.tres" id="6_qqa42"]
+[ext_resource type="Script" path="res://scripts/resources/blocks/block_library.gd" id="7_heamx"]
+[ext_resource type="PackedScene" uid="uid://cxl6pil7bqe4h" path="res://scenes/player.tscn" id="8_usu38"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ybnc8"]
+sky_top_color = Color(0.262745, 0.458824, 0.678431, 1)
+sky_horizon_color = Color(0.662745, 0.760784, 0.87451, 1)
+ground_bottom_color = Color(0.454902, 0.643137, 0.862745, 1)
+ground_horizon_color = Color(0.662745, 0.760784, 0.87451, 1)
+ground_curve = 0.15
+
+[sub_resource type="Sky" id="Sky_5yhjg"]
+sky_material = SubResource("ProceduralSkyMaterial_ybnc8")
+
+[sub_resource type="Environment" id="Environment_n3lhx"]
+background_mode = 2
+sky = SubResource("Sky_5yhjg")
+ambient_light_source = 3
+tonemap_mode = 2
+fog_enabled = true
+fog_density = 0.001
+fog_aerial_perspective = 0.5
+fog_sky_affect = 0.5
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ulbjf"]
+noise_type = 3
+frequency = 0.005
+
+[sub_resource type="VoxelGeneratorNoise2D" id="VoxelGeneratorNoise2D_beyd8"]
+channel = 0
+height_range = 100.0
+noise = SubResource("FastNoiseLite_ulbjf")
+
+[sub_resource type="VoxelBlockyModelEmpty" id="VoxelBlockyModelEmpty_86vsr"]
+
+[sub_resource type="VoxelBlockyModelCube" id="VoxelBlockyModelCube_wlmbk"]
+
+[sub_resource type="VoxelBlockyLibrary" id="VoxelBlockyLibrary_2jus3"]
+models = Array[VoxelBlockyModel]([SubResource("VoxelBlockyModelEmpty_86vsr"), SubResource("VoxelBlockyModelCube_wlmbk")])
+
+[sub_resource type="VoxelMesherBlocky" id="VoxelMesherBlocky_wyrrm"]
+library = SubResource("VoxelBlockyLibrary_2jus3")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eo6ca"]
+
+[sub_resource type="Resource" id="Resource_8bvxp"]
+script = ExtResource("7_heamx")
+blocks = Array[ExtResource("3_ypu75")]([ExtResource("4_0uk7a"), ExtResource("5_c4gtn"), ExtResource("6_qqa42")])
+
+[node name="World" type="Node3D"]
+
+[node name="Environment" type="Node" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
+environment = SubResource("Environment_n3lhx")
+
+[node name="SkyLight" type="DirectionalLight3D" parent="Environment"]
+transform = Transform3D(0.96669, 0.135729, -0.217, 0, 0.847817, 0.530289, 0.255952, -0.512625, 0.819576, 0, 0, 0)
+light_color = Color(0.901961, 0.780392, 0.721569, 1)
+light_energy = 0.75
+light_indirect_energy = 1.2
+light_angular_distance = 0.5
+shadow_enabled = true
+shadow_opacity = 0.75
+
+[node name="Ticks" type="Timer" parent="."]
+autostart = true
+script = ExtResource("2_5jpyq")
+tick_speed = 20.0
+
+[node name="VoxelTerrain" type="VoxelTerrain" parent="."]
+generator = SubResource("VoxelGeneratorNoise2D_beyd8")
+mesher = SubResource("VoxelMesherBlocky_wyrrm")
+material_override = SubResource("StandardMaterial3D_eo6ca")
+script = ExtResource("3_kpafy")
+block_library = SubResource("Resource_8bvxp")
+
+[node name="Player" parent="." instance=ExtResource("8_usu38")]
+
+[connection signal="timeout" from="Ticks" to="Ticks" method="_on_tick"]

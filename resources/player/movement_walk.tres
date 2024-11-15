@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="Movement" load_steps=5 format=3 uid="uid://24ytiv60m2y2"]
+
+[ext_resource type="Script" path="res://scripts/resources/player/movement.gd" id="2_3mwe8"]
+[ext_resource type="Script" path="res://scripts/resources/player/movement_modifier.gd" id="2_q44ej"]
+
+[sub_resource type="Resource" id="Resource_8rte0"]
+script = ExtResource("2_q44ej")
+condition = 0
+speed_modifier = Vector3(0, 0, 0)
+inertia_modifier = Vector3(-0.67, 0, -0.67)
+
+[sub_resource type="Resource" id="Resource_cs4u0"]
+script = ExtResource("2_q44ej")
+condition = 1
+speed_modifier = Vector3(-0.33, 0, -0.33)
+inertia_modifier = Vector3(0, 0, 0)
+
+[resource]
+script = ExtResource("2_3mwe8")
+enabled = true
+speed = Vector3(5.5, 75, 5.5)
+inertia = Vector3(1, 0.06, 1)
+movement_modifiers = Array[ExtResource("2_q44ej")]([SubResource("Resource_8rte0"), SubResource("Resource_cs4u0")])
+up = &"up"
+down = &"down"
+left = &"left"
+right = &"right"
+forward = &"forward"
+backward = &"backward"
+gravity = true
+safe_walk = false
+jumpSpeed = 10.0

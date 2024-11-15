@@ -1,0 +1,14 @@
+[remap]
+
+importer="image"
+type="Image"
+uid="uid://dont3njw54nsf"
+path="res://.godot/imported/dirt.png-7acc9491ccfc1eb025cbaeb3c2739baf.image"
+
+[deps]
+
+source_file="res://assets/textures/blocks/dirt.png"
+dest_files=["res://.godot/imported/dirt.png-7acc9491ccfc1eb025cbaeb3c2739baf.image"]
+
+[params]
+

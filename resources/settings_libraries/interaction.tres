@@ -1,0 +1,41 @@
+[gd_resource type="Resource" script_class="SettingsLibrary" load_steps=7 format=3 uid="uid://capn3o6w0dicm"]
+
+[ext_resource type="Script" path="res://scripts/resources/ui/settings_library.gd" id="1_al1a8"]
+[ext_resource type="Script" path="res://scripts/resources/ui/setting.gd" id="2_i3sge"]
+
+[sub_resource type="Resource" id="Resource_cka1e"]
+script = ExtResource("2_i3sge")
+property = &"interaction_range"
+type = 2
+name_override = "Range"
+category_id = &"gameplay"
+group_id = &"interaction"
+
+[sub_resource type="Resource" id="Resource_jeq3r"]
+script = ExtResource("2_i3sge")
+property = &"initial_delay"
+type = 2
+name_override = null
+category_id = &"gameplay"
+group_id = &"interaction"
+
+[sub_resource type="Resource" id="Resource_8nhf5"]
+script = ExtResource("2_i3sge")
+property = &"continuous_delay"
+type = 2
+name_override = null
+category_id = &"gameplay"
+group_id = &"interaction"
+
+[sub_resource type="Resource" id="Resource_ykfv2"]
+script = ExtResource("2_i3sge")
+property = &"diagonal_placement_threshold"
+type = 2
+name_override = null
+category_id = &"gameplay"
+group_id = &"interaction"
+
+[resource]
+script = ExtResource("1_al1a8")
+object_path = NodePath("Game/World/Player/Camera/Interaction")
+settings = Array[ExtResource("2_i3sge")]([SubResource("Resource_cka1e"), SubResource("Resource_jeq3r"), SubResource("Resource_8nhf5"), SubResource("Resource_ykfv2")])

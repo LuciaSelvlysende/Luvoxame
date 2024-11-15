@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="Movement" load_steps=4 format=3 uid="uid://dn4y5dxhggkbo"]
+
+[ext_resource type="Script" path="res://scripts/resources/player/movement_modifier.gd" id="1_qwexr"]
+[ext_resource type="Script" path="res://scripts/resources/player/movement.gd" id="1_tt82l"]
+
+[sub_resource type="Resource" id="Resource_mku4f"]
+script = ExtResource("1_qwexr")
+condition = 0
+speed_modifier = Vector3(0, 0, 0)
+inertia_modifier = Vector3(-0.5, -0.5, -0.5)
+
+[resource]
+script = ExtResource("1_tt82l")
+enabled = true
+speed = Vector3(20, 20, 20)
+inertia = Vector3(1, 1, 1)
+movement_modifiers = Array[ExtResource("1_qwexr")]([SubResource("Resource_mku4f")])
+up = &"up"
+down = &"down"
+left = &"left"
+right = &"right"
+forward = &"forward"
+backward = &"backward"
+gravity = false
+safe_walk = false
+jumpSpeed = 0.0

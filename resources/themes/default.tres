@@ -1,0 +1,7 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://t3isi7ybcs74"]
+
+[ext_resource type="FontFile" uid="uid://ccra6nx18fu30" path="res://assets/misc/OrdinaryBasis.ttf" id="1_480ed"]
+
+[resource]
+default_font = ExtResource("1_480ed")
+default_font_size = 16

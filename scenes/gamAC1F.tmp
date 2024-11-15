@@ -1,0 +1,75 @@
+[gd_scene load_steps=13 format=3 uid="uid://dftxcbisvwic5"]
+
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_71n5m"]
+[ext_resource type="PackedScene" uid="uid://diqassb2eblc3" path="res://scenes/world.tscn" id="1_uyy60"]
+[ext_resource type="Resource" uid="uid://d3ply4bnbol2x" path="res://resources/blocks/dirt.tres" id="3_7c1p1"]
+[ext_resource type="Resource" uid="uid://boaxc7wbupcyp" path="res://resources/blocks/stone.tres" id="4_3gdji"]
+[ext_resource type="Resource" uid="uid://c87naguy1lpiv" path="res://resources/blocks/wood_planks.tres" id="5_gb8ov"]
+[ext_resource type="Script" path="res://scripts/resources/blocks/block_library.gd" id="6_tpeah"]
+[ext_resource type="Script" path="res://scripts/ui/ui.gd" id="7_r4xal"]
+[ext_resource type="Texture2D" uid="uid://bvh7iyhap4tlx" path="res://assets/textures/gui/crosshair.png" id="8_v0mou"]
+[ext_resource type="PackedScene" uid="uid://ce27hgsvrniyy" path="res://scenes/menus/pause_menu.tscn" id="9_kbavh"]
+[ext_resource type="PackedScene" uid="uid://cs21mrh4n83vi" path="res://scenes/menus/settings_menu.tscn" id="10_je5kd"]
+[ext_resource type="AudioStream" uid="uid://c01whwwsu4sgy" path="res://assets/audio/music/overworld_1.wav" id="11_hx4m0"]
+
+[sub_resource type="Resource" id="Resource_mslo1"]
+script = ExtResource("6_tpeah")
+blocks = Array[Resource("res://scripts/resources/blocks/block.gd")]([ExtResource("3_7c1p1"), ExtResource("4_3gdji"), ExtResource("5_gb8ov")])
+
+[node name="Game" type="Node3D"]
+script = ExtResource("1_71n5m")
+worlds = Array[PackedScene]([ExtResource("1_uyy60")])
+default_block_library = SubResource("Resource_mslo1")
+
+[node name="UI" type="CanvasLayer" parent="." node_paths=PackedStringArray("background")]
+process_mode = 3
+script = ExtResource("7_r4xal")
+background = NodePath("Background")
+
+[node name="Crosshair" type="CenterContainer" parent="UI"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.5
+offset_top = -5.5
+offset_right = -5.5
+offset_bottom = -5.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+
+[node name="CrosshairTexture" type="TextureRect" parent="UI/Crosshair"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("8_v0mou")
+stretch_mode = 4
+metadata/_edit_use_anchors_ = true
+
+[node name="Background" type="Panel" parent="UI"]
+unique_name_in_owner = true
+visible = false
+modulate = Color(1, 1, 1, 0.498039)
+self_modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PauseMenu" parent="UI" node_paths=PackedStringArray("settings_destination") instance=ExtResource("9_kbavh")]
+unique_name_in_owner = true
+settings_destination = NodePath("../SettingsMenu")
+
+[node name="SettingsMenu" parent="UI" node_paths=PackedStringArray("close_destination") instance=ExtResource("10_je5kd")]
+unique_name_in_owner = true
+close_destination = NodePath("../PauseMenu")
+require_ui = false
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("11_hx4m0")
+volume_db = -10.0
+
+[connection signal="reset_world" from="UI/PauseMenu" to="." method="_on_reset_world"]

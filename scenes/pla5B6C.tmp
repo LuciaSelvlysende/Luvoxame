@@ -1,0 +1,120 @@
+[gd_scene load_steps=12 format=3 uid="uid://cxl6pil7bqe4h"]
+
+[ext_resource type="Script" path="res://scripts/player/player.gd" id="1_bkqlw"]
+[ext_resource type="Script" path="res://scripts/player/interaction.gd" id="3_7rik1"]
+[ext_resource type="ArrayMesh" uid="uid://4by480xqwb82" path="res://assets/models/full.obj" id="7_7rh1q"]
+
+[sub_resource type="GDScript" id="GDScript_wqwxo"]
+script/source = "extends Node
+"
+
+[sub_resource type="GDScript" id="GDScript_2eosk"]
+script/source = "extends Node
+"
+
+[sub_resource type="GDScript" id="GDScript_q1iqi"]
+script/source = "extends Node
+"
+
+[sub_resource type="GDScript" id="GDScript_4a6o6"]
+script/source = "extends Node
+
+#func move(body: PhysicsBody3D, physics: PhysicsProperties, delta) -> void:
+#	var verticalDirection := Vector2(0, 0)
+#
+#	if Input.is_action_pressed(\"jump\"):
+#		verticalDirection.x = 1
+#	else:
+#		verticalDirection.x = 0
+#
+#	if Input.is_action_pressed(\"down\"):
+#		verticalDirection.y = 1
+#	else:
+#		verticalDirection.y = 0
+#
+#	var horizontalDirection = Input.get_vector(\"left\", \"right\", \"forward\", \"backward\")
+#	var direction = (transform.basis * Vector3(horizontalDirection.x, (verticalDirection.x - verticalDirection.y), horizontalDirection.y)).normalized()
+#
+#	if direction:
+#		velocity.x = lerp(velocity.x, direction.x * playerSettingsWorld[\"speedFlight\"] * Global.playerInformation[\"speedModifier\"], playerSettingsWorld[\"inertia\"] * Global.playerInformation[\"inertiaModifier\"])
+#		velocity.y = lerp(velocity.y, direction.y * playerSettingsWorld[\"speedFlight\"] * Global.playerInformation[\"speedModifier\"], playerSettingsWorld[\"inertia\"] * Global.playerInformation[\"inertiaModifier\"])
+#		velocity.z = lerp(velocity.z, direction.z * playerSettingsWorld[\"speedFlight\"] * Global.playerInformation[\"speedModifier\"], playerSettingsWorld[\"inertia\"] * Global.playerInformation[\"inertiaModifier\"])
+#	else:
+#		velocity.x = lerp(velocity.x, 0.0, playerSettingsWorld[\"inertia\"] * Global.playerInformation[\"inertiaModifier\"])
+#		velocity.y = lerp(velocity.y, 0.0, playerSettingsWorld[\"inertia\"] * Global.playerInformation[\"inertiaModifier\"])
+#		velocity.z = lerp(velocity.z, 0.0, playerSettingsWorld[\"inertia\"] * Global.playerInformation[\"inertiaModifier\"])
+#
+#	move_and_slide()
+
+
+
+
+"
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ludo7"]
+size = Vector3(0.8, 1.95, 0.8)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qqmcn"]
+
+[sub_resource type="Animation" id="Animation_r11ef"]
+resource_name = "crouch"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vpe3u"]
+_data = {
+"crouch": SubResource("Animation_r11ef")
+}
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_bkqlw")
+
+[node name="Movement" type="Node" parent="."]
+script = SubResource("GDScript_wqwxo")
+
+[node name="Walk" type="Node" parent="Movement"]
+script = SubResource("GDScript_2eosk")
+
+[node name="Crouch" type="Node" parent="Movement"]
+script = SubResource("GDScript_q1iqi")
+
+[node name="Fly" type="Node" parent="Movement"]
+script = SubResource("GDScript_4a6o6")
+
+[node name="Camera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.67, 0)
+
+[node name="UnitRay" type="Marker3D" parent="Camera"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+
+[node name="VoxelViewer" type="VoxelViewer" parent="Camera"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.637772, 0)
+view_distance = 256
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_ludo7")
+
+[node name="Interaction" type="Node3D" parent="."]
+script = ExtResource("3_7rik1")
+
+[node name="Block Timer" type="Timer" parent="Interaction"]
+one_shot = true
+
+[node name="Placement Area" type="Area3D" parent="Interaction"]
+top_level = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interaction/Placement Area"]
+shape = SubResource("BoxShape3D_qqmcn")
+
+[node name="Preview" type="MeshInstance3D" parent="Interaction"]
+transform = Transform3D(1.003, 0, 0, 0, 1.003, 0, 0, 0, 1.003, -0.001, -0.001, -0.001)
+top_level = true
+mesh = ExtResource("7_7rh1q")
+skeleton = NodePath("../../..")
+
+[node name="Animations" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_vpe3u")
+}
+
+[connection signal="break_block" from="." to="Interaction" method="_on_break_block"]
+[connection signal="place_block" from="." to="Interaction" method="_on_place_block"]
+[connection signal="update_preview" from="." to="Interaction" method="_on_player_tick"]
