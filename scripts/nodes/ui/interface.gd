@@ -30,6 +30,8 @@ enum KeepAspectTypes {
 	Y_CONTROLS_X,  ## [param scale.x] will be set to [param scale.y].
 }
 
+const _base_window_size: Vector2 = Vector2(1152, 648)
+
 @export_group("Anchoring")
 @export var origin_preset: OriginPresets  ## Various presets that determine the [origin] of this Interface.
 @export var origin: Vector2 = Vector2.ZERO  ## The origin point used for anchoring. Relative to this Interface's size.
@@ -68,8 +70,7 @@ var size: Vector2 = Vector2.ZERO
 
 var _margin_adjusted: bool = false
 
-@onready var _window_size: Vector2 = get_window().size
-@onready var _initial_window_size: Vector2 = get_window().size
+@onready var _window_size: Vector2 = Vector2.ZERO
 
 
 func _ready():
@@ -112,7 +113,7 @@ func prepare() -> void:
 
 
 func update() -> void:
-	_window_size = get_window().size
+	_window_size = get_window().size if _window_size else _base_window_size
 	
 	_update_size()
 	_update_scale()
@@ -181,7 +182,7 @@ func _update_size() -> void:
 
 
 func _update_scale() -> void:
-	var window_scale: Vector2 = _window_size / _initial_window_size
+	var window_scale: Vector2 = _window_size / _base_window_size
 	var reference_scale: Vector2 = size_reference.get_scale() if size_reference else Vector2.ZERO
 	
 	match keep_aspect_type:

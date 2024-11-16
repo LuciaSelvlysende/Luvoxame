@@ -31,10 +31,7 @@ config/icon="res://z.misc/icon.png"
 Shcut="*res://scripts/autoloads/shortcuts.gd"
 Math="*res://scripts/autoloads/math.gd"
 Voxels="*res://scripts/autoloads/voxels.gd"
-Signal_Debugger="*res://addons/SignalVisualizer/Debugger/SignalDebugger.gd"
-GuiTransitions="*res://addons/simple-gui-transitions/singleton.gd"
 InterfaceSynchronizer="*res://scripts/autoloads/interface_synchronizer.gd"
-ResourceInitializer="*res://scripts/autoloads/resource_initializer.gd"
 
 [debug]
 
@@ -52,7 +49,7 @@ movie_writer/fps=30
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/SignalVisualizer/plugin.cfg", "res://addons/better_vircle/plugin.cfg", "res://addons/godot_resource_groups/plugin.cfg", "res://addons/resources_spreadsheet_view/plugin.cfg", "res://addons/script-ide/plugin.cfg", "res://addons/simple-gui-transitions/plugin.cfg")
+enabled=PackedStringArray("res://addons/script-ide/plugin.cfg")
 
 [gui]
 

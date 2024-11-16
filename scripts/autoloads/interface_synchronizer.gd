@@ -38,7 +38,6 @@ func get_update_queue() -> void:
 		
 		if update_queue == last_update_queue: 
 			break
-	print_queue()
 
 
 func print_queue() -> void:
@@ -126,15 +125,18 @@ func update() -> void:
 		interface.size_reference.base_size = interface.size_reference.get_size()
 
 
-func update_branch(interface: Interface) -> void:
-	var interface_packets: Array[InterfaceUpdatePacket] = []
-	
-	for update_packet in update_queue:
-		if update_packet.interface != interface: continue
-		interface_packets.append(update_packet)
-	
-	for update_packet in update_queue:
-		if interface_packets.has(update_packet):
-			update_packet.interface.update()
-		if update_packet.has_dependencies(interface_packets):
-			update_packet.interface.update()
+# For whatever reason, updating all Interfaces is more preformant than using this function to selectively update Interfaces.
+# This should probably be revisited in the future.
+
+#func update_branch(interface: Interface) -> void:
+	#var interface_packets: Array[InterfaceUpdatePacket] = []
+	#
+	#for update_packet in update_queue:
+		#if update_packet.interface != interface: continue
+		#interface_packets.append(update_packet)
+	#
+	#for update_packet in update_queue:
+		#if interface_packets.has(update_packet):
+			#update_packet.interface.update()
+		#if update_packet.has_dependencies(interface_packets):
+			#update_packet.interface.update()

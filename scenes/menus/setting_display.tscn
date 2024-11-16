@@ -8,10 +8,10 @@
 [sub_resource type="Resource" id="Resource_vmona"]
 resource_local_to_scene = true
 script = ExtResource("3_vucgu")
-parent_pathes = Array[NodePath]([NodePath("../../../Background")])
-presets = Array[int]([5])
+parent_pathes = Array[NodePath]([NodePath("../Input")])
+presets = Array[int]([9])
 termini = Array[Vector2]([Vector2(0, 0)])
-weights = Array[Vector2]([Vector2(1, 0)])
+weights = Array[Vector2]([Vector2(0, 1)])
 
 [sub_resource type="Resource" id="Resource_0o0s6"]
 resource_local_to_scene = true
@@ -42,6 +42,7 @@ trim_margins = false
 
 [node name="Text" type="Node2D" parent="."]
 script = ExtResource("2_l7ejs")
+origin = Vector2(0, 0.5)
 anchor = SubResource("Resource_vmona")
 margin = SubResource("Resource_0o0s6")
 scaling_mode = 1

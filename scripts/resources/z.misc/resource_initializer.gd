@@ -1,7 +1,8 @@
+class_name ResourceInitializer
 extends Node
 
 
-func initialize(root: Node, resource: Resource) -> void:
+static func initialize(root: Node, resource: Resource) -> void:
 	if not (resource and root): return
 	
 	for property in resource.get_property_list():
@@ -17,12 +18,12 @@ func initialize(root: Node, resource: Resource) -> void:
 		resource._initialize(root)
 
 
-func initialize_batch(root: Node, resources: Array) -> void:
+static func initialize_batch(root: Node, resources: Array) -> void:
 	for resource in resources:
 		initialize(root, resource)
 
 
-func initialize_node_path(root: Node, resource: Resource, path_property: Dictionary) -> void:
+static func initialize_node_path(root: Node, resource: Resource, path_property: Dictionary) -> void:
 	if path_property["type"] != TYPE_NODE_PATH: return
 
 	var node_property_name: StringName = path_property["name"].left(-5)
@@ -37,7 +38,7 @@ func initialize_node_path(root: Node, resource: Resource, path_property: Diction
 		resource.set(node_property_name, object)
 
 
-func initialize_node_path_array(root: Node, resource: Resource, path_array_property: Dictionary) -> void:
+static func initialize_node_path_array(root: Node, resource: Resource, path_array_property: Dictionary) -> void:
 	if path_array_property["type"] != TYPE_ARRAY: return
 	if resource.get(path_array_property["name"]).get_typed_builtin() != TYPE_NODE_PATH: return
 	

@@ -26,6 +26,7 @@ var parents: Array
 
 
 func _initialize(_root):
+	termini.resize(presets.size())
 	for index in termini.size():
 		if presets[index] == Presets.USE_PROVIDED: continue
 		termini[index] = apply_preset(presets[index])

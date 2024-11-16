@@ -47,29 +47,24 @@ func get_ui() -> Variant:
 
 
 func close(ignore_visibility: bool = false) -> void:
-	closed.emit()
-	
-	if not ignore_visibility:
-		visible = false
-	
 	if ui.active_menu == self:
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 		get_tree().paused = false
 		ui.hide_background()
 		ui.active_menu = null
+	
+	visible = true if ignore_visibility else false
+	closed.emit()
 
 
 func open() -> void:
-	opened.emit()
-	visible = true
-	
 	if show_mouse:
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	
 	if pause_game:
 		get_tree().paused = true
-	
 	if use_background and ui.background:
 		ui.show_background()
 	
 	ui.active_menu = self
+	visible = true
+	opened.emit()

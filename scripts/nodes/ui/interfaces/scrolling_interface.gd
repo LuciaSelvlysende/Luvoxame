@@ -32,9 +32,9 @@ func _process(delta):
 	current_step -= 1
 	
 	scroll_root.anchor_offset.y = Math.exp_decay(scroll_root.anchor_offset.y, scroll_destination, scroll_speed, delta)
-	InterfaceSynchronizer.update_branch(scroll_root)
+	InterfaceSynchronizer.update()
 
 
 func reset() -> void:
 	scroll_root.anchor_offset.y = 0
-	InterfaceSynchronizer.update_branch(scroll_root)
+	InterfaceSynchronizer.update()
