@@ -2,19 +2,20 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://ccra6nx18fu30"
-path="res://.godot/imported/OrdinaryBasis.ttf-bc959a0ea64e8268406674ce4cc7c127.fontdata"
+uid="uid://d4bch6vrvg074"
+path="res://.godot/imported/PixelMordred.ttf-fbc79ee32c38993d5caf3c7254e58910.fontdata"
 
 [deps]
 
-source_file="res://assets/misc/OrdinaryBasis.ttf"
-dest_files=["res://.godot/imported/OrdinaryBasis.ttf-bc959a0ea64e8268406674ce4cc7c127.fontdata"]
+source_file="res://assets/fonts/PixelMordred.ttf"
+dest_files=["res://.godot/imported/PixelMordred.ttf-fbc79ee32c38993d5caf3c7254e58910.fontdata"]
 
 [params]
 
 Rendering=null
 antialiasing=1
 generate_mipmaps=false
+disable_embedded_bitmaps=true
 multichannel_signed_distance_field=false
 msdf_pixel_range=8
 msdf_size=48

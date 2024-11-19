@@ -2,19 +2,20 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://5ehc1sr5iuhv"
-path="res://.godot/imported/KarenBook.ttf-558f0539e89026a98e994227acabbc1b.fontdata"
+uid="uid://ccra6nx18fu30"
+path="res://.godot/imported/OrdinaryBasis.ttf-a36540ff7618c88d95483b881f88f8b5.fontdata"
 
 [deps]
 
-source_file="res://assets/misc/KarenBook.ttf"
-dest_files=["res://.godot/imported/KarenBook.ttf-558f0539e89026a98e994227acabbc1b.fontdata"]
+source_file="res://assets/fonts/OrdinaryBasis.ttf"
+dest_files=["res://.godot/imported/OrdinaryBasis.ttf-a36540ff7618c88d95483b881f88f8b5.fontdata"]
 
 [params]
 
 Rendering=null
 antialiasing=1
 generate_mipmaps=false
+disable_embedded_bitmaps=true
 multichannel_signed_distance_field=false
 msdf_pixel_range=8
 msdf_size=48

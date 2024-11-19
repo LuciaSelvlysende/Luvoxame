@@ -1,6 +1,7 @@
 [gd_scene load_steps=20 format=3 uid="uid://diqassb2eblc3"]
 
 [ext_resource type="Script" path="res://scripts/world/ticks.gd" id="2_5jpyq"]
+[ext_resource type="VoxelGraphFunction" uid="uid://b34q8d3bxlf4p" path="res://scripts/resources/generator_graphs/is_solid.tres" id="2_m82op"]
 [ext_resource type="Script" path="res://scripts/world/voxel_terrain.gd" id="3_kpafy"]
 [ext_resource type="Script" path="res://scripts/resources/blocks/block.gd" id="3_ypu75"]
 [ext_resource type="Resource" uid="uid://d3ply4bnbol2x" path="res://resources/blocks/dirt.tres" id="4_0uk7a"]
@@ -29,26 +30,63 @@ fog_density = 0.001
 fog_aerial_perspective = 0.5
 fog_sky_affect = 0.5
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_ulbjf"]
-noise_type = 3
-frequency = 0.005
-
-[sub_resource type="VoxelGeneratorNoise2D" id="VoxelGeneratorNoise2D_beyd8"]
-channel = 0
-height_range = 100.0
-noise = SubResource("FastNoiseLite_ulbjf")
+[sub_resource type="VoxelGeneratorGraph" id="VoxelGeneratorGraph_522jk"]
+graph_data = {
+"connections": [[23, 0, 24, 2], [24, 0, 25, 1], [25, 0, 15, 0], [26, 0, 25, 0], [27, 0, 25, 2]],
+"nodes": {
+"15": {
+"gui_position": Vector2(520, 340),
+"type": "OutputType"
+},
+"23": {
+"gui_position": Vector2(80, 420),
+"type": "InputY"
+},
+"24": {
+"a": 2.0,
+"b": 0.0,
+"gui_position": Vector2(180, 420),
+"threshold": 0.0,
+"type": "Select"
+},
+"25": {
+"gui_position": Vector2(380, 340),
+"threshold": 0.5,
+"type": "Select"
+},
+"26": {
+"gui_position": Vector2(180, 340),
+"type": "Constant",
+"value": 1.0
+},
+"27": {
+"Offset": 0.0,
+"Scalar": 10.0,
+"_function": ExtResource("2_m82op"),
+"auto_connect": true,
+"gui_position": Vector2(180, 560),
+"type": "Function",
+"x": 0.0,
+"y": 0.0,
+"z": 0.0
+}
+},
+"version": 2
+}
 
 [sub_resource type="VoxelBlockyModelEmpty" id="VoxelBlockyModelEmpty_86vsr"]
 
 [sub_resource type="VoxelBlockyModelCube" id="VoxelBlockyModelCube_wlmbk"]
+color = Color(0.178338, 0.487502, 0, 1)
+
+[sub_resource type="VoxelBlockyModelCube" id="VoxelBlockyModelCube_38sxc"]
+color = Color(0.109001, 0.429782, 0.510764, 0.470588)
 
 [sub_resource type="VoxelBlockyLibrary" id="VoxelBlockyLibrary_2jus3"]
-models = Array[VoxelBlockyModel]([SubResource("VoxelBlockyModelEmpty_86vsr"), SubResource("VoxelBlockyModelCube_wlmbk")])
+models = Array[VoxelBlockyModel]([SubResource("VoxelBlockyModelEmpty_86vsr"), SubResource("VoxelBlockyModelCube_wlmbk"), SubResource("VoxelBlockyModelCube_38sxc")])
 
 [sub_resource type="VoxelMesherBlocky" id="VoxelMesherBlocky_wyrrm"]
 library = SubResource("VoxelBlockyLibrary_2jus3")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eo6ca"]
 
 [sub_resource type="Resource" id="Resource_8bvxp"]
 script = ExtResource("7_heamx")
@@ -76,9 +114,8 @@ script = ExtResource("2_5jpyq")
 tick_speed = 20.0
 
 [node name="VoxelTerrain" type="VoxelTerrain" parent="."]
-generator = SubResource("VoxelGeneratorNoise2D_beyd8")
+generator = SubResource("VoxelGeneratorGraph_522jk")
 mesher = SubResource("VoxelMesherBlocky_wyrrm")
-material_override = SubResource("StandardMaterial3D_eo6ca")
 script = ExtResource("3_kpafy")
 block_library = SubResource("Resource_8bvxp")
 

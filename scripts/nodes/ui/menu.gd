@@ -1,14 +1,16 @@
 class_name Menu
-extends Node2D
+extends Interface
 
 
 signal opened
 signal closed
 
-@export var require_ui: bool = true
 @export var pause_game: bool = true
 @export var show_mouse: bool = true
 @export var use_background: bool = true
+@export var base_window_size: Vector2 = Vector2(1152, 648)
+
+@export_group("Animation")
 @export var animations: Array[Animation]
 
 var animation_player: AnimationPlayer = AnimationPlayer.new()
@@ -18,10 +20,6 @@ var ui: UI
 
 func _ready():
 	ui = get_ui()
-	
-	if require_ui and not ui:
-		push_error(str(self) + " does not have a parent UI node. To avoid errors, this node has been freed.")
-		queue_free()
 	
 	animation_player.add_animation_library("", animation_library)
 	add_child(animation_player)

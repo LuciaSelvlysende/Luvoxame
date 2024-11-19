@@ -75,16 +75,18 @@ func get_update_packet(interface: Interface) -> InterfaceUpdatePacket:
 		interface.margin._get_update_packet_information(update_packet)
 	if interface.anchor:
 		interface.anchor._get_update_packet_information(update_packet)
-
+	
 	for i in 2: for child in interface.filter_children(Interface.ChildFilter.INTERFACE):
 		if interface.size_reference and Math.sum_v2_array(Math.abs_v2_array(interface.size_reference.multipliers))[i]: continue
 		if has_update_packets(child, [i]):
 			update_packet.dependencies.append_array(get_interface_packets(child, [i]))
 		else:
 			update_packet.components = Shcut.erase_array(update_packet.components, [i, i + 2])
+	
 	return update_packet if update_packet.components else null
 
 
+# *
 func has_update_packets(interface: Interface, components: Array[int]) -> bool:
 	for update_packet in update_queue: 
 		if update_packet.interface != interface: continue
@@ -95,24 +97,24 @@ func has_update_packets(interface: Interface, components: Array[int]) -> bool:
 	
 	return not components
 
-
+# *
 func has_all_update_packets() -> bool:
 	for interface in interfaces:
 		if not has_update_packets(interface, [0, 1, 2, 3]): return false
 	return true
 
 
-func merge_update_packets(interface_packets: Array[InterfaceUpdatePacket]) -> void:
-	for interface_packet in interface_packets: 
-		if interface_packet == interface_packets.front(): continue
-		
-		for update_packet in update_queue:
-			if update_packet.has_dependency(interface_packet): break
-			if update_packet != interface_packet: continue
-			
-			var index: int = interface_packets.find(interface_packet)
-			update_queue.erase(interface_packets[index - 1])
-			interface_packet.components += interface_packets[index - 1].components
+#func merge_update_packets(interface_packets: Array[InterfaceUpdatePacket]) -> void:
+	#for interface_packet in interface_packets: 
+		#if interface_packet == interface_packets.front(): continue
+		#
+		#for update_packet in update_queue:
+			#if update_packet.has_dependency(interface_packet): break
+			#if update_packet != interface_packet: continue
+			#
+			#var index: int = interface_packets.find(interface_packet)
+			#update_queue.erase(interface_packets[index - 1])
+			#interface_packet.components += interface_packets[index - 1].components
 
 
 func update() -> void:

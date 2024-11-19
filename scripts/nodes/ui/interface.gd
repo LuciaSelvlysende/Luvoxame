@@ -30,8 +30,6 @@ enum KeepAspectTypes {
 	Y_CONTROLS_X,  ## [param scale.x] will be set to [param scale.y].
 }
 
-const _base_window_size: Vector2 = Vector2(1152, 648)
-
 @export_group("Anchoring")
 @export var origin_preset: OriginPresets  ## Various presets that determine the [origin] of this Interface.
 @export var origin: Vector2 = Vector2.ZERO  ## The origin point used for anchoring. Relative to this Interface's size.
@@ -71,6 +69,7 @@ var size: Vector2 = Vector2.ZERO
 var _margin_adjusted: bool = false
 
 @onready var _window_size: Vector2 = Vector2.ZERO
+@onready var _base_window_size: Vector2 = Vector2(1152, 648)
 
 
 func _ready():
@@ -100,10 +99,19 @@ func filter_children(filter: ChildFilter):
 		ChildFilter.BOTH: return control_children + interface_children
 
 
+func get_menu() -> Menu:
+	var parent: Node = get_parent()
+	
+	while not parent is Menu:
+		parent = parent.get_parent()
+	
+	return parent
+
+
 func get_rect(trim_margin: bool) -> Rect2:
 	var rect: Rect2 = base_rect if trim_margin else full_rect
 	rect *= Transform2D().scaled(scale)
-	rect.position += position #if trim_margin else Vector2.ZERO
+	rect.position += position if trim_margin else Vector2.ZERO
 	return rect
 
 
@@ -113,7 +121,7 @@ func prepare() -> void:
 
 
 func update() -> void:
-	_window_size = get_window().size if _window_size else _base_window_size
+	_window_size = get_window().size
 	
 	_update_size()
 	_update_scale()

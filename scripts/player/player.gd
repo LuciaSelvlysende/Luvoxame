@@ -19,7 +19,7 @@ func _ready():
 	get_tree().root.get_path_to(self)
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
-	position = Vector3(0.5, 10, 0.5)
+	position = Vector3(0.5, 50, 0.5)
 	
 	player_tick_information.current_block = "dirt"
 	player_tick_information.current_variant = "dirt_full"

@@ -15,20 +15,16 @@ var base_size: Vector2
 var reference_nodes: Array[Node]
 
 
-func _initialize(root):
-	for index in reference_nodes.size():
-		if reference_nodes[index]: continue
-		reference_nodes[index] = root.get_window()
-
-
 func get_size(require_current: bool = false) -> Vector2:
 	if not require_current and base_size and update_mode == UpdateModes.CHANGE_SCALE: return base_size
 	
 	var reference_values: Array[Vector2] = []
 	
 	for index in reference_nodes.size():
-		reference_values.append(reference_nodes[index].size as Vector2 * multipliers[index])
-		reference_values[-1] *= reference_nodes[index].scale if reference_nodes[index] is Interface else 1
+		if reference_nodes[index]:
+			reference_values.append(reference_nodes[index].size * reference_nodes[index].scale * multipliers[index])
+		else:
+			reference_values.append(Vector2(1152, 648) * multipliers[index])
 	
 	return Math.sum_v2_array(reference_values)
 

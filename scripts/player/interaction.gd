@@ -24,7 +24,7 @@ enum INTERACTION_MODES {
 var is_initial_placement: bool = true  # Controls which cooldown duration (initial_delay/continuous_delay) is used.
 var midair_placement_enabled: bool = false  # When true, allows placing voxels midair.
 var preview_mode: INTERACTION_MODES  # Controls which preview type (breaking/placing) is shown.
-var raycast: Raycast = Raycast.new()  # Raycast used for interaction. 
+var raycast: Raycast = Raycast.new().precise_setup(Game.physics_space)  # Raycast used for interaction. 
 
 
 func _ready():

@@ -40,6 +40,7 @@ gdscript/warnings/incompatible_ternary=0
 
 [display]
 
+window/size/mode=3
 window/vsync/vsync_mode=0
 
 [editor]

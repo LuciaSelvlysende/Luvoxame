@@ -76,7 +76,7 @@ func replace_v3(vector: Vector3, target_value: float, replace_value: float) -> V
 
 
 ## Checks if a [Vector2] is within a certain range and returns the appropriate [bool].
-func vector2_is_within_range(value: Vector2, range_min: Vector2, range_max: Vector2) -> bool:
+func v2_is_within_range(value: Vector2, range_min: Vector2, range_max: Vector2) -> bool:
 	for i in 2:
 		if abs(value[i] - clamp(value[i], range_min[i], range_max[i])) > 0.0001:
 			return false
@@ -85,7 +85,7 @@ func vector2_is_within_range(value: Vector2, range_min: Vector2, range_max: Vect
 
 
 ## Checks if a [Vector3] is within a certain range and returns the appropriate [bool].
-func vector3_is_within_range(value: Vector3, range_min: Vector3, range_max: Vector3) -> bool:
+func v3_is_within_range(value: Vector3, range_min: Vector3, range_max: Vector3) -> bool:
 	for i in 3:
 		if abs(value[i] - clamp(value[i], range_min[i], range_max[i])) > 0.0001:
 			return false

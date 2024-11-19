@@ -1,4 +1,4 @@
-class_name RaycastBase
+class_name RaycastBasePrecise
 extends Resource
 
 
@@ -12,6 +12,14 @@ extends Resource
 @export var results: Array[Vector3i] = []  ## A list of voxel spaces that the ray passed through.
 @export var collision_point: Vector3  ## The exact point of collision.
 @export var collision_normal: Vector3  ## The normal vector of the collision.
+
+var physics_space: PhysicsDirectSpaceState3D
+
+
+## In order for precise increments to work, call immediately after calling RaycastBase.new().
+func precise_setup(physics_direct_space_state: PhysicsDirectSpaceState3D) -> RaycastBasePrecise:
+	physics_space = physics_direct_space_state
+	return self
 
 
 ## Preforms a raycast, starting at [param origin], extending in [param direction], until the distance it has travelled is greater than or equal to [param length].
@@ -31,11 +39,9 @@ func raycast(origin: Vector3, direction: Vector3, length: float) -> void:
 		if _precise_condition():
 			increment_result = _increment_precise(origin, increment_result)
 		
-		# Set up for next iteration.
 		length -= origin.distance_to(increment_result.position)
 		origin = increment_result.position - increment_result.normal * 0.01
 		
-		# Record results.
 		results.append(origin.floor() as Vector3i)
 		collision_point = increment_result.position
 		collision_normal = increment_result.normal
@@ -64,18 +70,19 @@ func _increment_voxel(origin: Vector3, direction: Vector3):
 			exit_position[j] = origin[j] + distance[i] * direction[j]
 			exit_position[j] = 0 if is_zero_approx(exit_position[j]) else exit_position[j]  # Addresses -0 edge case.
 		
-		if not Math.vector3_is_within_range(exit_position, origin.floor(), origin.ceil()): continue
+		if not _v3_is_within_range(exit_position, origin.floor(), origin.ceil()): continue
 		return IncrementResult.create(exit_position, Vector3(1 if i == 0 else 0, 1 if i == 1 else 0, 1 if i == 2 else 0) * -direction.sign())
 
 
 # Precisily increments the ray by up to one voxel. Will be able to collide with whatever shape occupies that voxel space. 
 # Should be used for "partial blocks", such as stairs or slabs.
 func _increment_precise(origin: Vector3, increment_result: IncrementResult) -> Variant:
+	if not physics_space: return increment_result
 	var ray_parameters: PhysicsRayQueryParameters3D = PhysicsRayQueryParameters3D.new()
 	ray_parameters.from = origin + collision_normal * 0.015
 	ray_parameters.to = increment_result.position
 	
-	var ray_result: Dictionary = Game.physics_space.intersect_ray(ray_parameters)
+	var ray_result: Dictionary = physics_space.intersect_ray(ray_parameters)
 	return increment_result if ray_result.is_empty() else IncrementResult.create(ray_result["position"], ray_result["normal"]) 
 
 
@@ -95,6 +102,16 @@ func _stop_condition() -> bool:
 	#	 If previous result is the same as the result before it, return true. This detects collision from _increment_precise().
 	#	 If previous result is a partial block, return false. This allows _precise_condition to get a chance to check for partial blocks.
 	#	 If previous result is not air, return true, else return false.
+
+
+# Helper function that checks if a [Vector3] is within a certain range and returns the appropriate [bool].
+# If you already have an equivalent helper function, you may use that instead.
+func _v3_is_within_range(value: Vector3, range_min: Vector3, range_max: Vector3) -> bool:
+	for i in 3:
+		if abs(value[i] - clamp(value[i], range_min[i], range_max[i])) > 0.0001:
+			return false
+	
+	return true
 
 
 ## Package for the result of each increment of a raycast.

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dftxcbisvwic5"]
+[gd_scene load_steps=15 format=3 uid="uid://dftxcbisvwic5"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_71n5m"]
 [ext_resource type="PackedScene" uid="uid://diqassb2eblc3" path="res://scenes/world.tscn" id="1_uyy60"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://scripts/ui/ui.gd" id="7_r4xal"]
 [ext_resource type="Texture2D" uid="uid://bvh7iyhap4tlx" path="res://assets/textures/gui/crosshair.png" id="8_v0mou"]
 [ext_resource type="PackedScene" uid="uid://ce27hgsvrniyy" path="res://scenes/menus/pause_menu.tscn" id="9_kbavh"]
+[ext_resource type="Script" path="res://scripts/autoloads/interface_synchronizer.gd" id="10_fqiko"]
 [ext_resource type="PackedScene" uid="uid://cs21mrh4n83vi" path="res://scenes/menus/settings_menu.tscn" id="10_je5kd"]
 [ext_resource type="AudioStream" uid="uid://c01whwwsu4sgy" path="res://assets/audio/music/overworld_1.wav" id="11_hx4m0"]
 
@@ -59,11 +60,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PauseMenu" parent="UI" node_paths=PackedStringArray("settings_destination") instance=ExtResource("9_kbavh")]
+[node name="InterfaceManager" type="CanvasLayer" parent="UI"]
+script = ExtResource("10_fqiko")
+
+[node name="PauseMenu" parent="UI/InterfaceManager" node_paths=PackedStringArray("settings_destination") instance=ExtResource("9_kbavh")]
 unique_name_in_owner = true
 settings_destination = NodePath("../SettingsMenu")
 
-[node name="SettingsMenu" parent="UI" node_paths=PackedStringArray("close_destination") instance=ExtResource("10_je5kd")]
+[node name="SettingsMenu" parent="UI/InterfaceManager" node_paths=PackedStringArray("close_destination") instance=ExtResource("10_je5kd")]
 unique_name_in_owner = true
 close_destination = NodePath("../PauseMenu")
 
@@ -71,4 +75,4 @@ close_destination = NodePath("../PauseMenu")
 process_mode = 3
 stream = ExtResource("11_hx4m0")
 
-[connection signal="reset_world" from="UI/PauseMenu" to="." method="_on_reset_world"]
+[connection signal="reset_world" from="UI/InterfaceManager/PauseMenu" to="." method="_on_reset_world"]

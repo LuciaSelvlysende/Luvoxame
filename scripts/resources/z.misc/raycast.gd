@@ -1,5 +1,5 @@
 class_name Raycast
-extends RaycastBase
+extends RaycastBasePrecise
 
 
 @export var targeted_voxel_position: Vector3  ## The position of the first voxel the ray passed through.

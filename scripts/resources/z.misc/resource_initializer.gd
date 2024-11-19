@@ -1,6 +1,7 @@
 class_name ResourceInitializer
 extends Node
 
+
 ## Helper resource designed to make it easier to work with [Node] properties in a [Resource].
 
 ## Initializing a [Resource] does two things. First, it looks for [NodePath] and [Node] properties
@@ -37,13 +38,13 @@ static func initialize_batch(root: Node, resources: Array) -> void:
 # Also works for NodePaths that point to a resource property.
 static func _initialize_node_path(root: Node, resource: Resource, path_property: Dictionary) -> void:
 	if path_property["type"] != TYPE_NODE_PATH: return
-
+	
 	var node_property_name: StringName = path_property["name"].left(-5)
 	var object: Object
 	
 	# If the target property already has a value, it will not be overwritten.
-	if not resource.get(node_property_name): return
-
+	if resource.get(node_property_name): return
+	
 	# If a NodePath points to a Resource property, it will contain a ":".
 	if ":" in String(resource.get(path_property["name"])):
 		object = root.get_node_and_resource(resource.get(path_property["name"]))[1]
@@ -58,13 +59,12 @@ static func _initialize_node_path(root: Node, resource: Resource, path_property:
 static func _initialize_node_path_array(root: Node, resource: Resource, path_array_property: Dictionary) -> void:
 	if path_array_property["type"] != TYPE_ARRAY: return
 	if resource.get(path_array_property["name"]).get_typed_builtin() != TYPE_NODE_PATH: return
-	
 	var node_array_property_name: StringName = path_array_property["name"].replace("_pathes", "s")
 	var node_array: Array[Node] = []
-
+	
 	# If the target property already has a value, it will not be overwritten.
-	if not resource.get(node_array_property_name): return
-
+	if resource.get(node_array_property_name): return
+	
 	for node_path in resource.get(path_array_property["name"]):
 		node_array.append(root.get_node(node_path) if node_path else null)
 	

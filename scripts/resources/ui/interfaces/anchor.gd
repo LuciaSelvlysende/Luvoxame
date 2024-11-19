@@ -21,12 +21,12 @@ enum Presets {
 @export var termini: Array[Vector2] = [Vector2.ZERO]
 @export var weights: Array[Vector2] = [Vector2.ONE]
 
-var parent: Interface
 var parents: Array
 
 
 func _initialize(_root):
 	termini.resize(presets.size())
+	
 	for index in termini.size():
 		if presets[index] == Presets.USE_PROVIDED: continue
 		termini[index] = apply_preset(presets[index])

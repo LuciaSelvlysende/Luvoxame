@@ -11,6 +11,26 @@ const CORNERS_ARRAY_2D: Array[Vector2] = [
 ]
 
 
+func get_ancestors(node: Node) -> Array[Node]:
+	var parent: Node = node.get_parent()
+	var ancestors: Array[Node] = [parent]
+	
+	while parent != get_tree().root:
+		parent = parent.get_parent()
+		ancestors.append(parent)
+	
+	return ancestors
+
+
+func get_decendents(node: Node):
+	var decendents: Array[Node] = []
+	
+	for child in node.get_children():
+		decendents.append_array(get_decendents(child))
+	
+	return node.get_children() + decendents
+
+
 ## Toggles [param variable] between two states. If the current value is neither of the two provided values, the original value will be returned instead.
 func toggle_variable(variable, value_a = true, value_b = false) -> Variant:
 	if variable == value_a:
@@ -52,3 +72,12 @@ func reversed_array(array: Array) -> Array:
 	var result: Array = array.duplicate()
 	result.reverse()
 	return result
+
+
+func merged_nested_arrays(array: Array[Array]) -> Array:
+	var merged_array: Array
+	
+	for nested_array in array:
+		merged_array += nested_array
+	
+	return merged_array

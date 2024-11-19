@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://cs21mrh4n83vi"]
+[gd_scene load_steps=38 format=3 uid="uid://cs21mrh4n83vi"]
 
 [ext_resource type="Script" path="res://scripts/ui/settings_menu.gd" id="1_oofce"]
 [ext_resource type="Script" path="res://scripts/nodes/ui/interface.gd" id="2_nlmja"]
@@ -20,6 +20,8 @@
 [ext_resource type="Script" path="res://scripts/resources/ui/interfaces/margin.gd" id="11_f7a0m"]
 [ext_resource type="Script" path="res://scripts/resources/ui/interfaces/size_reference.gd" id="12_8w8fy"]
 [ext_resource type="Script" path="res://scripts/ui/settings_list.gd" id="17_j1fjx"]
+[ext_resource type="Script" path="res://scripts/nodes/ui/interface_manager.gd" id="21_sjbsb"]
+[ext_resource type="Script" path="res://scripts/nodes/ui/menu.gd" id="22_4jp7s"]
 
 [sub_resource type="Resource" id="Resource_1yhuo"]
 script = ExtResource("3_sghuv")
@@ -271,6 +273,36 @@ custom_minimum_size = Vector2(168, 24)
 offset_right = 8.0
 offset_bottom = 8.0
 text = "Discard"
+
+[node name="InterfaceManager" type="CanvasLayer" parent="."]
+script = ExtResource("21_sjbsb")
+
+[node name="Menu" type="Node2D" parent="InterfaceManager"]
+script = ExtResource("22_4jp7s")
+
+[node name="Interface" type="Node2D" parent="InterfaceManager/Menu"]
+script = ExtResource("2_nlmja")
+
+[node name="Interface2" type="Node2D" parent="InterfaceManager/Menu"]
+script = ExtResource("2_nlmja")
+
+[node name="Interface3" type="Node2D" parent="InterfaceManager/Menu/Interface2"]
+script = ExtResource("2_nlmja")
+
+[node name="Menu2" type="Node2D" parent="InterfaceManager"]
+script = ExtResource("22_4jp7s")
+
+[node name="Interface2" type="Node2D" parent="InterfaceManager/Menu2"]
+script = ExtResource("2_nlmja")
+
+[node name="Interface3" type="Node2D" parent="InterfaceManager/Menu2/Interface2"]
+script = ExtResource("2_nlmja")
+
+[node name="Menu" type="Node2D" parent="InterfaceManager/Menu2/Interface2/Interface3"]
+script = ExtResource("22_4jp7s")
+
+[node name="Interface" type="Node2D" parent="InterfaceManager/Menu2/Interface2/Interface3/Menu"]
+script = ExtResource("2_nlmja")
 
 [connection signal="opened" from="." to="Settings" method="reset"]
 [connection signal="button_up" from="Bottom/SaveButton/Button" to="." method="_on_save_button"]
