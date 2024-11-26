@@ -189,7 +189,7 @@ anchor = SubResource("Resource_bjqe2")
 script = ExtResource("2_nlmja")
 size_reference = SubResource("Resource_87gnu")
 resize_children = true
-scaling_mode = 1
+scaling_mode = 2
 keep_aspect_type = 1
 scaling_step = Vector2(1, 0)
 

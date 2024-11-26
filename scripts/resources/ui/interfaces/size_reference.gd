@@ -22,7 +22,7 @@ func _initialize(root):
 
 func get_size(require_current: bool = false, testing: bool = false) -> Vector2:
 	if not require_current and base_size and update_mode == UpdateModes.CHANGE_SCALE: return base_size
-	if testing: print(base_size)
+	
 	var reference_values: Array[Vector2] = []
 	
 	for index in reference_nodes.size():
@@ -35,7 +35,6 @@ func get_size(require_current: bool = false, testing: bool = false) -> Vector2:
 
 
 func get_scale(testing: bool = false) -> Vector2:
-	if testing: print(base_size)
 	return get_size(true) / base_size if base_size else get_size().sign()
 
 
