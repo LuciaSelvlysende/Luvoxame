@@ -1,0 +1,43 @@
+[gd_resource type="VoxelGraphFunction" format=3 uid="uid://bgc22eg0pplfh"]
+
+[resource]
+graph_data = {
+"connections": [[6, 0, 7, 0], [5, 0, 6, 2], [4, 0, 5, 0], [3, 0, 5, 1], [2, 0, 6, 1], [1, 0, 6, 0]],
+"nodes": {
+"1": {
+"gui_position": Vector2(1100, 80),
+"name": &"WaterID",
+"type": "CustomInput"
+},
+"2": {
+"gui_position": Vector2(1120, 160),
+"name": &"AirID",
+"type": "CustomInput"
+},
+"3": {
+"gui_position": Vector2(960, 320),
+"name": &"SeaLevel",
+"type": "CustomInput"
+},
+"4": {
+"gui_position": Vector2(1080, 240),
+"type": "InputY"
+},
+"5": {
+"gui_position": Vector2(1180, 240),
+"type": "Subtract"
+},
+"6": {
+"gui_position": Vector2(1340, 80),
+"threshold": 0.0,
+"type": "Select"
+},
+"7": {
+"gui_position": Vector2(1480, 80),
+"type": "OutputType"
+}
+},
+"version": 2
+}
+input_definitions = [["y", "InputY", 0], ["AirID", "CustomInput", 0], ["SeaLevel", "CustomInput", 0], ["WaterID", "CustomInput", 0]]
+output_definitions = [["type", "OutputType", 0]]

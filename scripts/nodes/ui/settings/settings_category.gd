@@ -11,7 +11,6 @@ var id: StringName
 
 
 func _ready():
-	super()
 	button.button_up.connect(_on_category_change)
 
 

@@ -1,19 +1,19 @@
 [gd_resource type="VoxelGraphFunction" load_steps=3 format=3 uid="uid://b34q8d3bxlf4p"]
 
-[sub_resource type="Curve" id="Curve_1w6uo"]
-min_value = -1.0
-_data = [Vector2(0, -1), 0.0, 1.43544, 0, 1, Vector2(0.498592, -0.284303), 0.0, 0.0, 0, 0, Vector2(1, 1), 2.56139, 0.0, 1, 0]
-point_count = 3
-
 [sub_resource type="FastNoise2" id="FastNoise2_kd6wv"]
 noise_type = 2
 period = 30.0001
 remap_enabled = true
 remap_output_min = 0.0
 
+[sub_resource type="Curve" id="Curve_1w6uo"]
+min_value = -1.0
+_data = [Vector2(0, -1), 0.0, 2.0, 0, 1, Vector2(1, 1), 2.0, 0.0, 1, 0]
+point_count = 2
+
 [resource]
 graph_data = {
-"connections": [[10, 0, 6, 2], [5, 0, 10, 0], [13, 0, 7, 0], [17, 0, 19, 0], [19, 0, 16, 1], [6, 0, 12, 0], [7, 0, 10, 1], [8, 0, 7, 1], [9, 0, 13, 0]],
+"connections": [[9, 0, 13, 0], [8, 0, 7, 1], [7, 0, 10, 1], [5, 0, 10, 0], [6, 0, 12, 0], [19, 0, 16, 1], [17, 0, 19, 0], [13, 0, 7, 0], [10, 0, 6, 2]],
 "nodes": {
 "10": {
 "gui_position": Vector2(480, 0),

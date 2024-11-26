@@ -30,6 +30,8 @@ enum KeepAspectTypes {
 	Y_CONTROLS_X,  ## [param scale.x] will be set to [param scale.y].
 }
 
+@export var testing: bool = false
+
 @export_group("Anchoring")
 @export var origin_preset: OriginPresets  ## Various presets that determine the [origin] of this Interface.
 @export var origin: Vector2 = Vector2.ZERO  ## The origin point used for anchoring. Relative to this Interface's size.
@@ -55,7 +57,6 @@ enum KeepAspectTypes {
 @export var do_children_adjustment: bool = false
 @export var trim_margins: bool = true
 @export var trim_hidden: bool = true
-@export var ignore_hidden: bool = false
 @export var ignore_children: Array[Node] = []
 
 @export_group("Updating")
@@ -66,14 +67,9 @@ var base_rect: Rect2 = Rect2()
 var full_rect: Rect2 = Rect2()
 var size: Vector2 = Vector2.ZERO
 
+var manager: InterfaceManager
+
 var _margin_adjusted: bool = false
-
-@onready var _window_size: Vector2 = Vector2.ZERO
-@onready var _base_window_size: Vector2 = Vector2(1152, 648)
-
-
-func _ready():
-	InterfaceSynchronizer.add_interface(self)
 
 
 func _process(_delta):
@@ -86,7 +82,6 @@ func filter_children(filter: ChildFilter):
 	var interface_children: Array[Interface] = []
 	
 	for child in get_children():
-		if ignore_hidden and not child.visible: continue
 		if ignore_children.has(child): continue
 		if child is Control:
 			control_children.append(child)
@@ -111,18 +106,19 @@ func get_menu() -> Menu:
 func get_rect(trim_margin: bool) -> Rect2:
 	var rect: Rect2 = base_rect if trim_margin else full_rect
 	rect *= Transform2D().scaled(scale)
-	rect.position += position if trim_margin else Vector2.ZERO
+	rect.position += position
 	return rect
 
 
-func prepare() -> void:
+func prepare(assign_manager: InterfaceManager = null) -> void:
+	if assign_manager:
+		manager = assign_manager
+	
 	ResourceInitializer.initialize_batch(self, [anchor, auto_anchor, size_reference, margin])
 	_apply_presets()
 
 
 func update() -> void:
-	_window_size = get_window().size
-	
 	_update_size()
 	_update_scale()
 	_update_position()
@@ -167,12 +163,12 @@ func _get_combined_children_size():
 
 
 func _update_position() -> void:
-	position = anchor.get_position(self) - (origin * size * scale) + (anchor_offset * _window_size)
+	position = anchor.get_position() - (origin * size * scale) + (anchor_offset * manager.window_size)
 	_margin_adjusted = false
 
 
 func _update_size() -> void:
-	var reference_size = size_reference.get_size() if size_reference else Vector2.ZERO
+	var reference_size = size_reference.get_size(false, testing) if size_reference else Vector2.ZERO
 	
 	for i in 2:
 		base_rect.size[i] = size_override[i]
@@ -190,7 +186,7 @@ func _update_size() -> void:
 
 
 func _update_scale() -> void:
-	var window_scale: Vector2 = _window_size / _base_window_size
+	var window_scale: Vector2 = manager.window_size / manager.default_window_size
 	var reference_scale: Vector2 = size_reference.get_scale() if size_reference else Vector2.ZERO
 	
 	match keep_aspect_type:

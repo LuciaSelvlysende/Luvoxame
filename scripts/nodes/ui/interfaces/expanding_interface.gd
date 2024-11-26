@@ -8,11 +8,9 @@ extends Interface
 
 
 func _ready():
-	super()
-	
-	base = get_base()
-	expanded = get_expanded()
-	toggle_button = get_toggle_button()
+	base = find_child("Base")
+	expanded = find_child("Expanded")
+	toggle_button = base.find_child("Button").get_child(0)
 	
 	toggle_button.button_up.connect(toggle)
 
@@ -44,4 +42,4 @@ func get_toggle_button() -> Button:
 
 func toggle() -> void:
 	expanded.visible = Shcut.toggle_variable(expanded.visible)
-	InterfaceSynchronizer.update()
+	manager.update()

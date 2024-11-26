@@ -22,11 +22,13 @@ enum Presets {
 @export var weights: Array[Vector2] = [Vector2.ONE]
 
 var parents: Array
+var manager: InterfaceManager
 
 
-func _initialize(_root):
-	termini.resize(presets.size())
+func _initialize(root):
+	manager = root.manager
 	
+	termini.resize(presets.size())
 	for index in termini.size():
 		if presets[index] == Presets.USE_PROVIDED: continue
 		termini[index] = apply_preset(presets[index])
@@ -46,7 +48,7 @@ func apply_preset(preset: Presets) -> Vector2:
 		_: return Vector2.ZERO
 
 
-func get_position(interface: Interface) -> Vector2:
+func get_position() -> Vector2:
 	var positions: Array[Vector2] = []
 	var total_weight: Vector2 = Vector2.ZERO
 	
@@ -54,7 +56,7 @@ func get_position(interface: Interface) -> Vector2:
 		if parents[index] is Interface:
 			positions.append(termini[index] * (parents[index].size * parents[index].scale) + parents[index].position)
 		else:
-			positions.append(termini[index] * interface._window_size)
+			positions.append(termini[index] * manager.window_size)
 		
 		positions[-1] *= weights[index]
 		total_weight += weights[index]
@@ -65,9 +67,5 @@ func get_position(interface: Interface) -> Vector2:
 func _get_update_packet_information(update_packet: InterfaceUpdatePacket):
 	for i in 2: for parent in parents:
 		if not parent or not weights[parents.find(parent)][i]: continue
-		
-		if InterfaceSynchronizer.has_update_packets(parent, [i]):
-			update_packet.dependencies.append_array(InterfaceSynchronizer.get_interface_packets(parent, [i]))
-			continue
-		
+		if not manager.get_missing_components(parent, [i]): continue
 		update_packet.components = Shcut.erase_array(update_packet.components, [i, i + 2])

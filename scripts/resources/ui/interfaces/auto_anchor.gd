@@ -21,8 +21,8 @@ func apply(interfaces: Array[Interface]) -> void:
 	for interface in interfaces: if margin:
 		interface.margin = margin.duplicate()
 	
-	for interface in interfaces: 
-		interface.prepare()
+	#for interface in interfaces: 
+		#interface.prepare()
 
 
 func list(interfaces: Array[Interface]) -> void:

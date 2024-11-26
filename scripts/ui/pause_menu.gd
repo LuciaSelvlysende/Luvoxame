@@ -1,8 +1,6 @@
 extends Menu
 
 
-signal reset_world
-
 @export var settings_destination: Menu
 
 
@@ -18,11 +16,6 @@ func close(ignore_visibility: bool = true):
 
 
 func _on_return_button():
-	close()
-
-
-func _on_reset_button():
-	reset_world.emit()
 	close()
 
 

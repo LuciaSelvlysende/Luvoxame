@@ -45,6 +45,7 @@ func print_queue() -> void:
 		printt(update_packet.components, update_packet.interface.name)
 
 
+# *
 func get_interface_packets(interface: Interface, components: Array[int] = [0, 1, 2, 3]) -> Array[InterfaceUpdatePacket]:
 	var interface_packets: Array[InterfaceUpdatePacket]
 	
@@ -56,6 +57,7 @@ func get_interface_packets(interface: Interface, components: Array[int] = [0, 1,
 	return interface_packets
 
 
+# *
 func get_missing_components(interface: Interface) -> Array[int]:
 	var components: Array[int] = [0, 1, 2, 3]
 	

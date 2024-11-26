@@ -67,18 +67,6 @@ offset_bottom = 24.0
 text = "Return"
 metadata/_edit_use_anchors_ = true
 
-[node name="ResetButton" type="Node2D" parent="Buttons"]
-unique_name_in_owner = true
-script = ExtResource("5_dk67d")
-
-[node name="Button" type="Button" parent="Buttons/ResetButton"]
-texture_filter = 1
-custom_minimum_size = Vector2(168, 24)
-offset_right = 168.0
-offset_bottom = 24.0
-text = "Reset"
-metadata/_edit_use_anchors_ = true
-
 [node name="SettingsButton" type="Node2D" parent="Buttons"]
 unique_name_in_owner = true
 script = ExtResource("5_dk67d")
@@ -123,6 +111,5 @@ vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [connection signal="button_up" from="Buttons/ReturnButton/Button" to="." method="_on_return_button"]
-[connection signal="button_up" from="Buttons/ResetButton/Button" to="." method="_on_reset_button"]
 [connection signal="button_up" from="Buttons/SettingsButton/Button" to="." method="_on_settings_button"]
 [connection signal="button_up" from="Buttons/QuitButton/Button" to="." method="_on_quit_button"]

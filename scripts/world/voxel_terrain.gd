@@ -8,3 +8,4 @@ func _ready() -> void:
 	material_override = Game.voxel_assets.voxel_material
 	
 	Voxels.voxel_tool = get_voxel_tool()
+	

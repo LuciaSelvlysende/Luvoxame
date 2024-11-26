@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://scripts/resources/ui/interfaces/auto_anchor.gd" id="6_rnr7g"]
 [ext_resource type="Script" path="res://scripts/resources/ui/interfaces/size_reference.gd" id="7_2py2f"]
 
-[sub_resource type="Resource" id="Resource_xm0d4"]
+[sub_resource type="Resource" id="Resource_ns2p2"]
 script = ExtResource("5_is88a")
 margin_reference_path = NodePath("Base")
 trim_reference_margin = true
@@ -67,13 +67,14 @@ keep_existing = true
 script = ExtResource("1_hays0")
 label = NodePath("Base/Label/Text")
 setting_displays_parent = NodePath("Expanded/Displays")
-margin = SubResource("Resource_xm0d4")
+margin = SubResource("Resource_ns2p2")
 
 [node name="Base" type="Node2D" parent="."]
 script = ExtResource("2_fvlla")
 
 [node name="Button" type="Node2D" parent="Base"]
 script = ExtResource("2_fvlla")
+testing = true
 size_reference = SubResource("Resource_5antl")
 scaling_mode = 1
 keep_aspect_mode = 3

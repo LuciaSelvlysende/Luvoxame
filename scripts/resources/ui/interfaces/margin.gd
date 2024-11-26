@@ -11,11 +11,13 @@ extends Resource
 
 var margin: Rect2 = Rect2()
 var margin_reference: Interface
+var manager: InterfaceManager
 
 
 func _initialize(root: Node) -> void:
 	margin.position = Vector2(margin_left, margin_top)
 	margin.size = margin.position + Vector2(margin_right, margin_bottom)
+	manager = root.manager
 	
 	if margin_reference: return
 	margin_reference = root
@@ -38,11 +40,6 @@ func apply(interface: Interface):
 
 func _get_update_packet_information(update_packet: InterfaceUpdatePacket):
 	for i in 2:
-		if update_packet.interface == margin_reference: continue
-		if not (margin.position[i] + margin.size[i]): continue
-		
-		if InterfaceSynchronizer.has_update_packets(margin_reference, [i]):
-			update_packet.dependencies.append_array(InterfaceSynchronizer.get_interface_packets(margin_reference, [i]))
-			continue
-		
+		if update_packet.interface == margin_reference or not (margin.position[i] + margin.size[i]): continue
+		if not manager.get_missing_components(margin_reference, [i]): continue
 		update_packet.components = Shcut.erase_array(update_packet.components, [i, i + 2])

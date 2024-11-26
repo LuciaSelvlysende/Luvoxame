@@ -31,7 +31,6 @@ config/icon="res://z.misc/icon.png"
 Shcut="*res://scripts/autoloads/shortcuts.gd"
 Math="*res://scripts/autoloads/math.gd"
 Voxels="*res://scripts/autoloads/voxels.gd"
-InterfaceSynchronizer="*res://scripts/autoloads/interface_synchronizer.gd"
 
 [debug]
 
@@ -50,7 +49,7 @@ movie_writer/fps=30
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/script-ide/plugin.cfg")
+enabled=PackedStringArray("res://addons/notes_tab/plugin.cfg", "res://addons/script-ide/plugin.cfg")
 
 [gui]
 

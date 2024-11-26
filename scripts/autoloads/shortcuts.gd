@@ -59,10 +59,10 @@ func erase_array(array_a: Array, array_b: Array) -> Array:
 	return array_a
 
 
-func has_array(array_a: Array, array_b: Array, includes_all: bool = true) -> bool:
+func has_array(array_a: Array, array_b: Array, has_all: bool = true) -> bool:
 	for element in array_b.duplicate():
 		if array_a.has(element): continue
-		if includes_all: return false
+		if has_all: return false
 		array_b.erase(element)
 	
 	return not array_b.is_empty()
@@ -74,8 +74,8 @@ func reversed_array(array: Array) -> Array:
 	return result
 
 
-func merged_nested_arrays(array: Array[Array]) -> Array:
-	var merged_array: Array
+func merged_nested_arrays(array: Array) -> Array:
+	var merged_array: Array = []
 	
 	for nested_array in array:
 		merged_array += nested_array
