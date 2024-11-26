@@ -17,6 +17,7 @@ func _ready() -> void:
 		add_node(node)
 	
 	create_update_queue()
+	update(default_window_size)
 	update()
 
 
@@ -24,6 +25,7 @@ func _on_new_node(node: Node) -> void:
 	if not node is Interface: return
 	add_node(node)
 	create_update_queue()
+	update(default_window_size)
 	update()
 
 
@@ -75,8 +77,8 @@ func get_packets(interface: Interface, components: Array[int] = [0, 1, 2, 3]) ->
 	return interface_packets
 
 
-func update() -> void:
-	window_size = get_window().size
+func update(override_window_size: Vector2 = Vector2.ZERO) -> void:
+	window_size = override_window_size if override_window_size else get_window().size 
 	
 	for update_packet in update_queue:
 		if not update_packet.interface.update_on_window_resize: continue
