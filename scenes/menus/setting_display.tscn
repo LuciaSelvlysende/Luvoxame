@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://scripts/nodes/ui/interface.gd" id="2_l7ejs"]
 [ext_resource type="Script" path="res://scripts/resources/ui/interfaces/anchor.gd" id="3_vucgu"]
 
-[sub_resource type="Resource" id="Resource_vmona"]
+[sub_resource type="Resource" id="Resource_m7d2k"]
 resource_local_to_scene = true
 script = ExtResource("3_vucgu")
 parent_pathes = Array[NodePath]([NodePath("../Input")])
@@ -23,7 +23,7 @@ margin_top = 0.5
 margin_right = 0.5
 margin_bottom = 0.5
 
-[sub_resource type="Resource" id="Resource_e1vy7"]
+[sub_resource type="Resource" id="Resource_om2t4"]
 resource_local_to_scene = true
 script = ExtResource("3_vucgu")
 parent_pathes = Array[NodePath]([NodePath("../../../Background")])
@@ -31,7 +31,7 @@ presets = Array[int]([7])
 termini = Array[Vector2]([Vector2(0, 0)])
 weights = Array[Vector2]([Vector2(1, 0)])
 
-[node name="SettingDisplay" type="Node2D" node_paths=PackedStringArray("label", "toggle_input", "dropdown_input", "slider_input", "text_line_input")]
+[node name="SettingDisplay" type="Node2D" node_paths=PackedStringArray("label", "toggle_input", "dropdown_input", "slider_input", "text_line_input", "ignore_children")]
 script = ExtResource("1_10gnp")
 label = NodePath("Text/Label")
 toggle_input = NodePath("Input/CheckButton")
@@ -39,15 +39,14 @@ dropdown_input = NodePath("Input/OptionButton")
 slider_input = NodePath("Input/HSlider")
 text_line_input = NodePath("Input/LineEdit")
 trim_margins = false
+ignore_children = [NodePath("MarginReference")]
 
 [node name="Text" type="Node2D" parent="."]
 script = ExtResource("2_l7ejs")
 origin = Vector2(0, 0.5)
-anchor = SubResource("Resource_vmona")
+anchor = SubResource("Resource_m7d2k")
 margin = SubResource("Resource_0o0s6")
 scaling_mode = 1
-keep_aspect_mode = 1
-keep_aspect_type = 1
 scaling_step = Vector2(1, 1)
 
 [node name="Label" type="Label" parent="Text"]
@@ -59,11 +58,9 @@ vertical_alignment = 1
 [node name="Input" type="Node2D" parent="."]
 script = ExtResource("2_l7ejs")
 origin = Vector2(1, 0)
-anchor = SubResource("Resource_e1vy7")
+anchor = SubResource("Resource_om2t4")
 margin = SubResource("Resource_0o0s6")
 scaling_mode = 1
-keep_aspect_mode = 1
-keep_aspect_type = 1
 scaling_step = Vector2(1, 1)
 
 [node name="CheckButton" type="CheckButton" parent="Input"]
@@ -96,5 +93,4 @@ visible = false
 script = ExtResource("2_l7ejs")
 size_override = Vector2(24, 24)
 scaling_mode = 1
-keep_aspect_mode = 1
 scaling_step = Vector2(1, 1)

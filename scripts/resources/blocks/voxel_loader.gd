@@ -98,7 +98,7 @@ static func _generate_rotations(mesh: Mesh, rotations: Array[Quaternion]) -> Arr
 	var rotated_meshes: Array[Mesh] = []
 	
 	for rotation in rotations:
-		var rotated_mesh = Math.rotate_mesh(mesh, rotation, Shcut.eq_v3(0.5))
+		var rotated_mesh = Math.rotate_mesh(mesh, rotation, SC.eq_v3(0.5))
 		rotated_meshes.append(rotated_mesh)
 	
 	return rotated_meshes

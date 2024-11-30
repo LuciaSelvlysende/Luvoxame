@@ -15,8 +15,6 @@ func _on_player_tick():
 	if stuck and _has_overhead_space(desired_height):
 		stuck = false
 		set_height(desired_height, desired_duration)
-	
-	Ticks.updated_nodes.append(name)
 
 
 # Changes the height of the player's collision, alongside intelligently changing other player elements to match.

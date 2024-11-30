@@ -14,9 +14,9 @@ var scroll_mode: SCROLL_MODES
 
 func _ready():
 	# Set default values.
-	Ticks.player_tick_information.current_block = "dirt"
-	Ticks.player_tick_information.current_variant = "dirt_full"
-	Ticks.player_tick_information.current_voxel = 1
+	TickClock.player_tick_information.current_block = "dirt"
+	TickClock.player_tick_information.current_variant = "dirt_full"
+	TickClock.player_tick_information.current_voxel = 1
 
 
 func _unhandled_input(event):

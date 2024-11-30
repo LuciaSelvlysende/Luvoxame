@@ -37,15 +37,15 @@ weights = Array[Vector2]([Vector2(1, 1)])
 
 [sub_resource type="Resource" id="Resource_bjqe2"]
 script = ExtResource("3_sghuv")
-parent_pathes = Array[NodePath]([NodePath("")])
-presets = Array[int]([5])
+parent_pathes = Array[NodePath]([NodePath("../Top")])
+presets = Array[int]([3])
 termini = Array[Vector2]([Vector2(0, 0)])
 weights = Array[Vector2]([Vector2(1, 1)])
 
 [sub_resource type="Resource" id="Resource_87gnu"]
 script = ExtResource("12_8w8fy")
-reference_node_pathes = Array[NodePath]([NodePath(""), NodePath("../../Top"), NodePath("../../Bottom")])
-multipliers = Array[Vector2]([Vector2(0, 1), Vector2(0, -1), Vector2(0, -1)])
+reference_node_pathes = Array[NodePath]([NodePath("../Buttons"), NodePath(""), NodePath("../../Top"), NodePath("../../Bottom")])
+multipliers = Array[Vector2]([Vector2(1, 0), Vector2(0, 1), Vector2(0, -1), Vector2(0, -1)])
 update_mode = 0
 
 [sub_resource type="Resource" id="Resource_ibfn3"]
@@ -54,6 +54,15 @@ parent_pathes = Array[NodePath]([NodePath("../Background")])
 presets = Array[int]([9])
 termini = Array[Vector2]([Vector2(0, 0)])
 weights = Array[Vector2]([Vector2(1, 1)])
+
+[sub_resource type="Resource" id="Resource_54w2w"]
+script = ExtResource("11_f7a0m")
+margin_reference_path = NodePath("")
+trim_reference_margin = true
+margin_left = 0.1
+margin_top = 0.0
+margin_right = 0.1
+margin_bottom = 0.0
 
 [sub_resource type="Resource" id="Resource_2348w"]
 script = ExtResource("11_f7a0m")
@@ -72,15 +81,6 @@ weight = Vector2(1, 1)
 margin = SubResource("Resource_2348w")
 keep_existing = false
 
-[sub_resource type="Resource" id="Resource_54w2w"]
-script = ExtResource("11_f7a0m")
-margin_reference_path = NodePath("")
-trim_reference_margin = true
-margin_left = 0.1
-margin_top = 0.0
-margin_right = 0.1
-margin_bottom = 0.0
-
 [sub_resource type="Resource" id="Resource_pfr81"]
 script = ExtResource("3_sghuv")
 parent_pathes = Array[NodePath]([NodePath("../Categories")])
@@ -94,18 +94,18 @@ reference_node_pathes = Array[NodePath]([NodePath(""), NodePath("../Categories")
 multipliers = Array[Vector2]([Vector2(1, 1), Vector2(-1, 0), Vector2(0, -1), Vector2(0, -1)])
 update_mode = 0
 
+[sub_resource type="Resource" id="Resource_dlo1q"]
+script = ExtResource("12_8w8fy")
+reference_node_pathes = Array[NodePath]([NodePath("..")])
+multipliers = Array[Vector2]([Vector2(1, 0)])
+update_mode = 1
+
 [sub_resource type="Resource" id="Resource_1cynn"]
 script = ExtResource("8_n1at1")
 mode = 0
 direction = 8
 weight = Vector2(1, 1)
 keep_existing = false
-
-[sub_resource type="Resource" id="Resource_dlo1q"]
-script = ExtResource("12_8w8fy")
-reference_node_pathes = Array[NodePath]([NodePath("..")])
-multipliers = Array[Vector2]([Vector2(1, 0)])
-update_mode = 1
 
 [sub_resource type="Resource" id="Resource_hbxyl"]
 script = ExtResource("3_sghuv")
@@ -131,6 +131,9 @@ weights = Array[Vector2]([Vector2(1, 1)])
 [node name="SettingsMenu" type="Node2D"]
 visible = false
 script = ExtResource("1_oofce")
+open_animation = &"open_settings_menu"
+close_animation = &"close_settings_menu"
+reset_animation = &"reset_settings_menu"
 animations = Array[Animation]([ExtResource("2_t7fxx"), ExtResource("3_bayus"), ExtResource("4_7imtq")])
 
 [node name="SettingsManager" type="Node" parent="." node_paths=PackedStringArray("categories_interface", "groups_interface", "settings_menu", "save_button", "discard_button")]
@@ -154,9 +157,8 @@ anchor = SubResource("Resource_1yhuo")
 [node name="Background" type="Node2D" parent="Top"]
 script = ExtResource("2_nlmja")
 scaling_mode = 1
-keep_aspect_mode = 3
-keep_aspect_type = 1
 min_scale = Vector2(0, 1)
+scaling_step = Vector2(0, 1)
 
 [node name="Panel" type="Panel" parent="Top/Background"]
 custom_minimum_size = Vector2(1152, 96)
@@ -168,8 +170,6 @@ script = ExtResource("2_nlmja")
 origin_preset = 1
 anchor = SubResource("Resource_l8gw0")
 scaling_mode = 1
-keep_aspect_mode = 1
-keep_aspect_type = 1
 scaling_step = Vector2(1, 1)
 
 [node name="Text" type="Label" parent="Top/Title"]
@@ -180,22 +180,18 @@ text = "Settings"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Categories" type="Node2D" parent="."]
+[node name="Categories" type="Node2D" parent="." node_paths=PackedStringArray("ignore_children")]
 script = ExtResource("2_nlmja")
-origin_preset = 2
 anchor = SubResource("Resource_bjqe2")
+ignore_children = [NodePath("Buttons")]
 
 [node name="Background" type="Node2D" parent="Categories"]
 script = ExtResource("2_nlmja")
 size_reference = SubResource("Resource_87gnu")
 resize_children = true
-scaling_mode = 2
-keep_aspect_type = 1
-scaling_step = Vector2(1, 0)
 
 [node name="Panel" type="Panel" parent="Categories/Background"]
 modulate = Color(1, 1, 1, 0.74902)
-custom_minimum_size = Vector2(201.6, 456)
 offset_right = 201.6
 offset_bottom = 456.0
 
@@ -203,12 +199,10 @@ offset_bottom = 456.0
 script = ExtResource("2_nlmja")
 origin_preset = 1
 anchor = SubResource("Resource_ibfn3")
-auto_anchor = SubResource("Resource_1yo7x")
 margin = SubResource("Resource_54w2w")
 scaling_mode = 1
-keep_aspect_mode = 1
-keep_aspect_type = 1
 scaling_step = Vector2(1, 1)
+auto_anchor = SubResource("Resource_1yo7x")
 
 [node name="Settings" type="Node2D" parent="." node_paths=PackedStringArray("base_root", "scroll_root")]
 clip_children = 1
@@ -222,21 +216,21 @@ size_reference = SubResource("Resource_y0pgj")
 
 [node name="ScrollRoot" type="Node2D" parent="Settings"]
 script = ExtResource("2_nlmja")
-auto_anchor = SubResource("Resource_1cynn")
 size_reference = SubResource("Resource_dlo1q")
+auto_anchor = SubResource("Resource_1cynn")
 
-[node name="Bottom" type="Node2D" parent="."]
+[node name="Bottom" type="Node2D" parent="." node_paths=PackedStringArray("ignore_children")]
 z_index = 1
 script = ExtResource("2_nlmja")
 origin_preset = 2
 anchor = SubResource("Resource_hbxyl")
+ignore_children = [NodePath("SaveButton"), NodePath("DiscardButton")]
 
 [node name="Background" type="Node2D" parent="Bottom"]
 script = ExtResource("2_nlmja")
 scaling_mode = 1
-keep_aspect_mode = 3
-keep_aspect_type = 1
 min_scale = Vector2(0, 1)
+scaling_step = Vector2(0, 1)
 
 [node name="Panel" type="Panel" parent="Bottom/Background"]
 custom_minimum_size = Vector2(1152, 96)
@@ -248,8 +242,6 @@ script = ExtResource("2_nlmja")
 origin = Vector2(1, 0.5)
 anchor = SubResource("Resource_ji8md")
 scaling_mode = 1
-keep_aspect_mode = 1
-keep_aspect_type = 1
 scaling_step = Vector2(1, 1)
 
 [node name="Button" type="Button" parent="Bottom/SaveButton"]
@@ -263,8 +255,6 @@ script = ExtResource("2_nlmja")
 origin = Vector2(0, 0.5)
 anchor = SubResource("Resource_p55at")
 scaling_mode = 1
-keep_aspect_mode = 1
-keep_aspect_type = 1
 scaling_step = Vector2(1, 1)
 
 [node name="Button" type="Button" parent="Bottom/DiscardButton"]
@@ -274,5 +264,5 @@ offset_bottom = 8.0
 text = "Discard"
 
 [connection signal="opened" from="." to="Settings" method="reset"]
-[connection signal="button_up" from="Bottom/SaveButton/Button" to="." method="_on_save_button"]
-[connection signal="button_up" from="Bottom/DiscardButton/Button" to="." method="_on_cancel_button"]
+[connection signal="button_up" from="Bottom/SaveButton/Button" to="." method="_on_close_button"]
+[connection signal="button_up" from="Bottom/DiscardButton/Button" to="." method="_on_close_button"]

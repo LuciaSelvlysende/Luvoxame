@@ -43,17 +43,18 @@ weights = Array[Vector2]([Vector2(1, 1)])
 [node name="PauseMenu" type="Node2D"]
 visible = false
 script = ExtResource("1_g26mq")
+open_animation = &"open_pause_menu"
+close_animation = &"close_pause_menu"
+reset_animation = &"reset_pause_menu"
 animations = Array[Animation]([ExtResource("2_6lo2q"), ExtResource("3_wwxc0"), ExtResource("4_85710")])
 
 [node name="Buttons" type="Node2D" parent="."]
 script = ExtResource("5_dk67d")
 origin_preset = 1
 anchor = SubResource("Resource_wfiw6")
-auto_anchor = SubResource("Resource_ly0pr")
 scaling_mode = 1
-keep_aspect_mode = 1
-keep_aspect_type = 1
 scaling_step = Vector2(1, 1)
+auto_anchor = SubResource("Resource_ly0pr")
 
 [node name="ReturnButton" type="Node2D" parent="Buttons"]
 unique_name_in_owner = true
@@ -97,8 +98,6 @@ script = ExtResource("5_dk67d")
 origin_preset = 3
 anchor = SubResource("Resource_hnc0p")
 scaling_mode = 1
-keep_aspect_mode = 1
-keep_aspect_type = 1
 scaling_step = Vector2(1, 1)
 
 [node name="Text" type="Label" parent="Title"]

@@ -51,7 +51,7 @@ func get_interface_packets(interface: Interface, components: Array[int] = [0, 1,
 	
 	for update_packet in update_queue:
 		if update_packet.interface != interface: continue
-		if not Shcut.has_array(update_packet.components, components, false): continue
+		if not SC.has_array(update_packet.components, components, false): continue
 		interface_packets.append(update_packet)
 	
 	return interface_packets
@@ -83,7 +83,7 @@ func get_update_packet(interface: Interface) -> InterfaceUpdatePacket:
 		if has_update_packets(child, [i]):
 			update_packet.dependencies.append_array(get_interface_packets(child, [i]))
 		else:
-			update_packet.components = Shcut.erase_array(update_packet.components, [i, i + 2])
+			update_packet.components = SC.erase_array(update_packet.components, [i, i + 2])
 	
 	return update_packet if update_packet.components else null
 

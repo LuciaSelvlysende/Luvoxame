@@ -42,4 +42,4 @@ func _get_update_packet_information(update_packet: InterfaceUpdatePacket):
 	for i in 2:
 		if update_packet.interface == margin_reference or not (margin.position[i] + margin.size[i]): continue
 		if not manager.get_missing_components(margin_reference, [i]): continue
-		update_packet.components = Shcut.erase_array(update_packet.components, [i, i + 2])
+		update_packet.components = SC.erase_array(update_packet.components, [i, i + 2])

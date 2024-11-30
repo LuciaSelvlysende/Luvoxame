@@ -89,9 +89,9 @@ func _safe_walk(body: CharacterBody3D, collision: CollisionShape3D) -> void:
 	var m: float = (collision_size.x / 2) * (1.0 - margin / 2)
 	var n: float = (collision_size.y / 2) * (1.0 - margin)
 	
-	var corners: Array[Vector2] = Math.multiply_v2_array(Shcut.CORNERS_ARRAY_2D, collision_size / 2)
-	var x_positions: Array[Vector2] = Math.multiply_v2_array(Shcut.CORNERS_ARRAY_2D, Vector2(m, n))
-	var z_positions: Array[Vector2] = Math.multiply_v2_array(Shcut.CORNERS_ARRAY_2D, Vector2(n, m))
+	var corners: Array[Vector2] = Math.multiply_v2_array(SC.CORNERS_ARRAY_2D, collision_size / 2)
+	var x_positions: Array[Vector2] = Math.multiply_v2_array(SC.CORNERS_ARRAY_2D, Vector2(m, n))
+	var z_positions: Array[Vector2] = Math.multiply_v2_array(SC.CORNERS_ARRAY_2D, Vector2(n, m))
 	
 	var x_blocks: Array[int] = [0, 0, 0, 0]
 	var z_blocks: Array[int] = [0, 0, 0, 0]

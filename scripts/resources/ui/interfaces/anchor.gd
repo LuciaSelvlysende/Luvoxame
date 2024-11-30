@@ -67,5 +67,5 @@ func get_position() -> Vector2:
 func _get_update_packet_information(update_packet: InterfaceUpdatePacket):
 	for i in 2: for parent in parents:
 		if not parent or not weights[parents.find(parent)][i]: continue
-		if not manager.get_missing_components(parent, [i]): continue
-		update_packet.components = Shcut.erase_array(update_packet.components, [i, i + 2])
+		if not manager.get_missing_components(parent, [i, i + 2]): continue
+		update_packet.components = SC.erase_array(update_packet.components, [i + 2])

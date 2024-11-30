@@ -39,13 +39,11 @@ func _on_player_tick() -> void:
 			preview_break(raycast)
 		INTERACTION_MODES.PLACE:
 			preview_place(raycast)
-	
-	Ticks.updated_nodes.append(name)
 
 
 func _unhandled_input(event):
 	if event.is_action_pressed("setting2"):
-		preview_mode = Shcut.toggle_variable(preview_mode, INTERACTION_MODES.BREAK, INTERACTION_MODES.PLACE)
+		preview_mode = SC.toggle(preview_mode, INTERACTION_MODES.BREAK, INTERACTION_MODES.PLACE)
 
 	if event.is_action_pressed("setting3"):
 		midair_placement_enabled = not midair_placement_enabled
@@ -91,9 +89,9 @@ func place_voxel(raycast: Raycast) -> void:
 		placing_position = get_diagonal_offset(raycast.collision_point, placing_position, 0.125)
 	
 	if Voxels.voxel_tool.get_voxel(placing_position) != Voxels.AIR: return
-	if collides_with_entity(placing_position, Ticks.player_tick_information.current_voxel): return
+	if collides_with_entity(placing_position, TickClock.player_tick_information.current_voxel): return
 	
-	Voxels.voxel_tool.set_voxel(placing_position, Ticks.player_tick_information.current_voxel)
+	Voxels.voxel_tool.set_voxel(placing_position, TickClock.player_tick_information.current_voxel)
 
 
 # Outlines the block the player is looking at.
@@ -102,7 +100,7 @@ func preview_break(raycast: Raycast) -> void:
 	if raycast.targeted_voxel_id == Voxels.AIR: return
 	
 	var variant: BlockVariant = Game.block_library.get_variant(raycast.targeted_variant_id)
-	preview.global_position = raycast.targeted_voxel_position + Shcut.eq_v3(-0.001)
+	preview.global_position = raycast.targeted_voxel_position + SC.eq_v3(-0.001)
 	preview.mesh = variant.get_rotated_mesh_from_voxel(raycast.targeted_voxel_id)
 	preview.material_override = break_preview_material
 	preview.visible = true
@@ -119,12 +117,12 @@ func preview_place(raycast: Raycast) -> void:
 	if Input.is_action_pressed("toggle_diagonal_placement"):
 		preview_position = get_diagonal_offset(raycast.collision_point, preview_position, diagonal_placement_threshold)
 	
-	if collides_with_entity(preview_position, Ticks.player_tick_information.current_voxel): return
+	if collides_with_entity(preview_position, TickClock.player_tick_information.current_voxel): return
 	if Voxels.voxel_tool.get_voxel(preview_position) != Voxels.AIR: return
 	
-	var variant: BlockVariant = Game.block_library.get_variant(Ticks.player_tick_information.current_variant)
-	preview.global_position = Vector3(preview_position) + Shcut.eq_v3(-0.001)
-	preview.mesh = variant.get_rotated_mesh_from_voxel(Ticks.player_tick_information.current_voxel)
+	var variant: BlockVariant = Game.block_library.get_variant(TickClock.player_tick_information.current_variant)
+	preview.global_position = Vector3(preview_position) + SC.eq_v3(-0.001)
+	preview.mesh = variant.get_rotated_mesh_from_voxel(TickClock.player_tick_information.current_voxel)
 	preview.material_override = place_preview_material 
 	preview.visible = true
 
@@ -163,6 +161,6 @@ func get_diagonal_offset(collision_point: Vector3, placement_position: Vector3i,
 # Returns a valid placement location based on the most recent raycast. Returns null if there is no valid placement.
 func get_valid_placement(raycast: Raycast) -> Variant:
 	if raycast.targeted_voxel_id != Voxels.AIR: return raycast.targeted_space_position
-	for result in Shcut.reversed_array(raycast.results): if Voxels.is_supported(result): return result
+	for result in SC.reversed_array(raycast.results): if Voxels.is_supported(result): return result
 	if midair_placement_enabled: return raycast.targeted_space_position
 	return null

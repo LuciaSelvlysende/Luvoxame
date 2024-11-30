@@ -32,7 +32,7 @@ func get_decendents(node: Node):
 
 
 ## Toggles [param variable] between two states. If the current value is neither of the two provided values, the original value will be returned instead.
-func toggle_variable(variable, value_a = true, value_b = false) -> Variant:
+func toggle(variable, value_a = true, value_b = false) -> Variant:
 	if variable == value_a:
 		return value_b
 	

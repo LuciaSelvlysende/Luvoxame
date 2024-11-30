@@ -28,10 +28,7 @@ func _ready():
 
 func _on_player_tick():
 	player_tick_information.transform = transform
-	
-	Ticks.player_tick_information = player_tick_information.duplicate()
-	
-	Ticks.updated_nodes.append(name)
+	TickClock.player_tick_information = player_tick_information.duplicate()
 
 
 func _unhandled_input(event):
@@ -44,12 +41,12 @@ func _unhandled_input(event):
 	
 	# Toggle movement mode.
 	if Input.is_action_just_pressed("setting1"):
-		movement_mode = Shcut.toggle_variable(movement_mode, MOVEMENT_MODES.WALK, MOVEMENT_MODES.FLY)
+		movement_mode = SC.toggle(movement_mode, MOVEMENT_MODES.WALK, MOVEMENT_MODES.FLY)
 	
 	
 	# Toggle toggle crouch.
 	if Input.is_action_just_pressed("setting4"):
-		toggle_crouch = Shcut.toggle_variable(toggle_crouch)
+		toggle_crouch = SC.toggle(toggle_crouch)
 
 
 func _physics_process(delta):

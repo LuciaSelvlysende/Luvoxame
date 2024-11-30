@@ -41,5 +41,5 @@ func get_toggle_button() -> Button:
 
 
 func toggle() -> void:
-	expanded.visible = Shcut.toggle_variable(expanded.visible)
+	expanded.visible = SC.toggle(expanded.visible)
 	manager.update()

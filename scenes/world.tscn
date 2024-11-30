@@ -1,14 +1,9 @@
-[gd_scene load_steps=21 format=3 uid="uid://diqassb2eblc3"]
+[gd_scene load_steps=15 format=3 uid="uid://diqassb2eblc3"]
 
-[ext_resource type="Script" path="res://scripts/world/ticks.gd" id="2_5jpyq"]
+[ext_resource type="Script" path="res://scripts/world/tick_clock.gd" id="2_5jpyq"]
 [ext_resource type="VoxelGraphFunction" uid="uid://b34q8d3bxlf4p" path="res://scripts/resources/generator_graphs/is_solid.tres" id="2_m82op"]
 [ext_resource type="Script" path="res://scripts/world/voxel_terrain.gd" id="3_kpafy"]
 [ext_resource type="VoxelGraphFunction" uid="uid://bgc22eg0pplfh" path="res://scripts/resources/generator_graphs/get_fluid_type.tres" id="3_n38so"]
-[ext_resource type="Script" path="res://scripts/resources/blocks/block.gd" id="3_ypu75"]
-[ext_resource type="Resource" uid="uid://d3ply4bnbol2x" path="res://resources/blocks/dirt.tres" id="4_0uk7a"]
-[ext_resource type="Resource" uid="uid://boaxc7wbupcyp" path="res://resources/blocks/stone.tres" id="5_c4gtn"]
-[ext_resource type="Resource" uid="uid://c87naguy1lpiv" path="res://resources/blocks/wood_planks.tres" id="6_qqa42"]
-[ext_resource type="Script" path="res://scripts/resources/blocks/block_library.gd" id="7_heamx"]
 [ext_resource type="PackedScene" uid="uid://cxl6pil7bqe4h" path="res://scenes/player.tscn" id="8_usu38"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ybnc8"]
@@ -88,10 +83,6 @@ models = Array[VoxelBlockyModel]([SubResource("VoxelBlockyModelEmpty_86vsr"), Su
 [sub_resource type="VoxelMesherBlocky" id="VoxelMesherBlocky_wyrrm"]
 library = SubResource("VoxelBlockyLibrary_2jus3")
 
-[sub_resource type="Resource" id="Resource_8bvxp"]
-script = ExtResource("7_heamx")
-blocks = Array[ExtResource("3_ypu75")]([ExtResource("4_0uk7a"), ExtResource("5_c4gtn"), ExtResource("6_qqa42")])
-
 [node name="World" type="Node3D"]
 
 [node name="Environment" type="Node" parent="."]
@@ -108,7 +99,7 @@ light_angular_distance = 0.5
 shadow_enabled = true
 shadow_opacity = 0.75
 
-[node name="Ticks" type="Timer" parent="."]
+[node name="TickClock" type="Timer" parent="."]
 autostart = true
 script = ExtResource("2_5jpyq")
 tick_speed = 20.0
@@ -117,8 +108,7 @@ tick_speed = 20.0
 generator = SubResource("VoxelGeneratorGraph_522jk")
 mesher = SubResource("VoxelMesherBlocky_wyrrm")
 script = ExtResource("3_kpafy")
-block_library = SubResource("Resource_8bvxp")
 
 [node name="Player" parent="." instance=ExtResource("8_usu38")]
 
-[connection signal="timeout" from="Ticks" to="Ticks" method="_on_tick"]
+[connection signal="timeout" from="TickClock" to="TickClock" method="_on_tick"]

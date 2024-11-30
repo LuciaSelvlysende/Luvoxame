@@ -74,11 +74,8 @@ script = ExtResource("2_fvlla")
 
 [node name="Button" type="Node2D" parent="Base"]
 script = ExtResource("2_fvlla")
-testing = true
 size_reference = SubResource("Resource_5antl")
 scaling_mode = 1
-keep_aspect_mode = 3
-keep_aspect_type = 1
 min_scale = Vector2(0, 1)
 scaling_step = Vector2(0, 1)
 
@@ -94,8 +91,6 @@ origin_preset = 2
 anchor = SubResource("Resource_w0sqc")
 margin = SubResource("Resource_gv8a6")
 scaling_mode = 1
-keep_aspect_mode = 1
-keep_aspect_type = 1
 scaling_step = Vector2(1, 1)
 
 [node name="Text" type="Label" parent="Base/Label"]
@@ -105,11 +100,12 @@ offset_bottom = 32.0
 text = "View Distance"
 vertical_alignment = 1
 
-[node name="Expanded" type="Node2D" parent="."]
+[node name="Expanded" type="Node2D" parent="." node_paths=PackedStringArray("ignore_children")]
 visible = false
 script = ExtResource("2_fvlla")
 origin_preset = 3
 anchor = SubResource("Resource_qorve")
+ignore_children = [NodePath("Displays")]
 
 [node name="Background" type="Node2D" parent="Expanded"]
 script = ExtResource("2_fvlla")

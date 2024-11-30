@@ -1,18 +1,45 @@
 class_name Interface
 extends Node2D
 
+## Base node for an alternative UI system to [Control] nodes.
+##
+## Interfaces handle positioning, sizing, and scaling. "Functional" Control nodes, such as buttons,
+## labels, or sliders are still used, but they should wrapped as a child node of an Interface. 
+## Additionally, Interfaces do not update on their own, and instead rely on an [InterfaceManager] to
+## ensure they update in the right order. [br][br]
+## 
+## [b]Note:[/b] Many units are relative to screen size (or in some cases, the size of other Interfaces).
+## This is because different people may have different screen sizes. For example, [code]Vector2(0, 0)[/code]
+## is the top left corner of the screen, [code]Vector2(1, 1)[/code] is the bottom right corner, and
+## [code]Vector2(0.5, 0.5)[/code] is the center. [br][br]
+##
+## Positioning is handled by [Anchor]s. First, pick an [member origin] point, relative to the
+## Interface's size. Second, pick one or more [member Anchor.termini] points, relative to the corrosponding
+## [member Anchor.parents] size. If the parent is not defined, the screen size is used instead. These
+## two points will then be "glued" together when the Interface updates. [br][br]
+##
+## Sizing is handled in a couple ways. By default, the size of the Interface will be based on the combined
+## size of all it's children. A [SizeReference] can also be used to base the size of the Interface off
+## of one or more [member SizeReference.reference_nodes]. Lastly [member size_override] can be set
+## (in pixels), but this is generally not recommended. [br][br]
+##
+## Scaling is fairly straightforward. [member scaling_mode] controls which components are scaled
+## (x, y, both, or neither). Aspect ratio can be controlled using [member keep_aspect_mode].
+## A [member min_scale], [member max_scale], and [member scaling_step] may also be defined.
+
+
 enum ChildFilter {
-	INTERFACE,  ## Input for [param filter_children]. Only returns [Interface] child nodes.
-	CONTROL,  ## Input for [param filter_children]. Only returns [Control] child nodes.
-	BOTH,  ## Input for [param filter_children]. Returns both [Interface] and [Control] child nodes.
+	INTERFACE,  ## Input for [method filter_children]. Only returns Interface child nodes.
+	CONTROL,  ## Input for [method filter_children]. Only returns Control child nodes.
+	BOTH,  ## Input for [method filter_children]. Returns both Interface and Control child nodes.
 }
 
 enum OriginPresets {
-	USE_PROVIDED,  ## Does not apply any preset. Uses the provided [param origin] instead.
-	CENTER,  ## Centers the origin (sets it to [param Vector2(0.5, 0.5)]).
-	INNER,  ## Sets the origin to [param anchor]s first terminus. This will position this Interface on the "inside" of whatever it is anchored to.
-	OUTER,  ## Sets the origin to [param anchor]s first terminus, but inverts 0's and 1's. This will position this Interface on the "outside" of whatever it is anchored to.
-	BORDER,  ## Sets the origin to [param Vector2(0.5, 0.5)] (same as [param CENTER]). This will position this Interface on the "edge" of whatever it is anchored to.
+	USE_PROVIDED,  ## Does not apply any preset. Uses the provided [member origin] instead.
+	CENTER,  ## Centers the origin (sets it to [code]Vector2(0.5, 0.5)[/code]).
+	INNER,  ## Sets the origin to [member anchor]s first terminus. This will position the Interface on the "inside" of whatever it is anchored to.
+	OUTER,  ## Sets the origin to [member anchor]s first terminus, but inverts 0's and 1's. This will position the Interface on the "outside" of whatever it is anchored to.
+	BORDER,  ## Sets the origin to [code]Vector2(0.5, 0.5)[/code] (same as [constant CENTER]). This will position the Interface on the "edge" of whatever it is anchored to.
 }
 
 enum ScalingModes {
@@ -22,54 +49,49 @@ enum ScalingModes {
 	Y_ONLY,  ## Scaling is enabled on only the y axis.
 }
 
-enum KeepAspectTypes {
+enum KeepAspectModes {
 	DISABLED,  ## Aspect ratio is not maintained.
-	GREATER,  ## The lesser scale component will be set to the greater scale component. For example, a scale of [param Vector2(0.35, 0.87)] will be set to [param Vector2(0.87, 0.87)].
-	LESSER,  ## The greater scale component will be set to the lesser scale component. For example, a scale of [param Vector2(0.35, 0.87)] will be set to [param Vector2(0.35, 0.35)].
-	X_CONTROLS_Y,  ## [param scale.y] will be set to [param scale.x].
-	Y_CONTROLS_X,  ## [param scale.x] will be set to [param scale.y].
+	GREATER,  ## The lesser scale component will be set to the greater scale component. For example, a scale of [code]Vector2(0.35, 0.87)[/code] will be set to [code]Vector2(0.87, 0.87)[/code].
+	LESSER,  ## The greater scale component will be set to the lesser scale component. For example, a scale of [code]Vector2(0.35, 0.87)[/code] will be set to [code]Vector2(0.35, 0.35)[/code].
+	X_CONTROLS_Y,  ## Both scale components will be set to [code]scale.x[/code].
+	Y_CONTROLS_X,  ## Both scale components will be set to [code]scale.y[/code].
 }
 
-@export var testing: bool = false
-
 @export_group("Anchoring")
-@export var origin_preset: OriginPresets  ## Various presets that determine the [origin] of this Interface.
-@export var origin: Vector2 = Vector2.ZERO  ## The origin point used for anchoring. Relative to this Interface's size.
-@export var anchor: Anchor = Anchor.new()  ## The [Anchor] used for anchoring this Interface.
-@export var auto_anchor: AutoAnchor  ## Applies an [Anchor] and optional [Margin] to all Interface children. 
-@export var anchor_offset: Vector2  ## Offsets the position when updating. Useful for animation.
+@export var origin_preset: OriginPresets  ## Various presets that determine the [member origin] of the Interface.
+@export var origin: Vector2 = Vector2.ZERO  ## The origin point used for anchoring. Units are relative to the Interface's size.
+@export var anchor: Anchor = Anchor.new()  ## The [Anchor] used for positioning the Interface. Units are relative to [member Anchor.parent]'s size.
+@export var anchor_offset: Vector2 = Vector2.ZERO ## Offsets the position when updating. Units are relative to screen size. Useful for animation.
 
 @export_group("Sizing")
 @export var size_override: Vector2 = Vector2.ZERO  ## Overrides all other methods of determining size. Units are pixels.
-@export var size_reference: SizeReference  ## Uses a [SizeReference] to base the [size] of this Interface on other Interfaces.
-@export var margin: Margin = Margin.new()  ## The [Margin] used for this Interface.
-@export var resize_children: bool = false
+@export var size_reference: SizeReference  ## Uses a [SizeReference] to base the size of the Interface on other Interfaces.
+@export var margin: Margin = Margin.new()  ## The [Margin] used for the Interface.
+@export var resize_children: bool = false  ## When [code]true[/code], all Control children will have their size set to the Inteface's size.
 
 @export_group("Scaling")
 @export var scaling_mode: ScalingModes  ## Controls which components are scaled.
-@export var keep_aspect_mode: ScalingModes
-@export var keep_aspect_type: KeepAspectTypes
-@export var min_scale: Vector2 = Vector2.ONE
-@export var max_scale: Vector2 = Vector2.INF
-@export var scaling_step: Vector2 = Vector2.ZERO
+@export var keep_aspect_mode: KeepAspectModes  ## Controls how the aspect ratio of the Interface is maintained. See [enum KeepAspectModes].
+@export var min_scale: Vector2 = Vector2.ONE  ## Minimum scale that the Interface will scale to.
+@export var max_scale: Vector2 = Vector2.INF  ## Maximum scale that the Interface will scale to.
+@export var scaling_step: Vector2 = Vector2.ZERO  ## Scale will be snapped to the nearest multiple of [member scaling_step]. Useful for pixel art.
 
 @export_group("Grouping")
-@export var do_children_adjustment: bool = false
-@export var trim_margins: bool = true
-@export var trim_hidden: bool = true
-@export var ignore_children: Array[Node] = []
+@export var auto_anchor: AutoAnchor  ## Applies an [Anchor] and optional [Margin] to all Interface children. 
+@export var trim_margins: bool = true  ## If [code]true[/code], when determining size based on children, the margins of the children will be ignored.
+@export var trim_hidden: bool = true  ## If [code]true[/code], when determining size based on children, hidden children will be ignored.
+@export var ignore_children: Array[Node] = []  ## Excludes specific nodes from the result of [method filter_children].
 
 @export_group("Updating")
-@export var update_on_window_resize: bool = true
-@export var update_continually: bool = false
+@export var update_continually: bool = false  ## When [code]true[/code], the Interface will update on each process frame. Useful for animation.
 
-var base_rect: Rect2 = Rect2()
-var full_rect: Rect2 = Rect2()
-var size: Vector2 = Vector2.ZERO
+var base_rect: Rect2 = Rect2()  ## The [Rect2] that contains the Interface, excluding the Interface's [member margin].
+var full_rect: Rect2 = Rect2()  ## The [Rect2] that contains the Interface, including the Interface's [member margin].
+var size: Vector2 = Vector2.ZERO  ## The size of the Interface, equivalent to [member full_rect].size.
 
-var manager: InterfaceManager
+var manager: InterfaceManager  ## The [InterfaceManager] responsible for handling the Interface. Among other things, controls when the Interface updates.
 
-var _margin_adjusted: bool = false
+var _margin_adjusted: bool = false  # Used to prevent applying the margin multiple times.
 
 
 func _process(_delta):
@@ -77,6 +99,7 @@ func _process(_delta):
 		update()
 
 
+## Filters the result of [method Node.get_children] based on [param filter]. Also excludes any nodes specified by [member ignore_children].
 func filter_children(filter: ChildFilter):
 	var control_children: Array[Control] = []
 	var interface_children: Array[Interface] = []
@@ -94,15 +117,7 @@ func filter_children(filter: ChildFilter):
 		ChildFilter.BOTH: return control_children + interface_children
 
 
-func get_menu() -> Menu:
-	var parent: Node = get_parent()
-	
-	while not parent is Menu:
-		parent = parent.get_parent()
-	
-	return parent
-
-
+## Returns the position and size of the Interface. If [param trim_margin] is [code]true[/code], [member base_rect] will be used instead of [member full_rect].
 func get_rect(trim_margin: bool) -> Rect2:
 	var rect: Rect2 = base_rect if trim_margin else full_rect
 	rect *= Transform2D().scaled(scale)
@@ -110,65 +125,52 @@ func get_rect(trim_margin: bool) -> Rect2:
 	return rect
 
 
+## Sets up the Interface so that it is ready to update. Calling [method update] before [method prepare] will crash the game.
 func prepare(assign_manager: InterfaceManager = null) -> void:
 	if assign_manager:
 		manager = assign_manager
 	
 	ResourceInitializer.initialize_batch(self, [anchor, auto_anchor, size_reference, margin])
-	_apply_presets()
-
-
-func update() -> void:
-	_update_size()
-	_update_scale()
-	_update_position()
-	_adjust_children()
-
-
-func _apply_presets() -> void:
+	
 	if auto_anchor:
 		auto_anchor.apply(filter_children(ChildFilter.INTERFACE))
 	
 	match origin_preset:
-		OriginPresets.CENTER: origin = Shcut.eq_v2(0.5)
+		OriginPresets.CENTER: origin = SC.eq_v2(0.5)
 		OriginPresets.INNER: origin = anchor.termini[0]
-		OriginPresets.OUTER: origin = Vector2(Shcut.toggle_variable(anchor.termini[0].x, 0, 1), Shcut.toggle_variable(anchor.termini[0].y, 0, 1))
-		OriginPresets.BORDER: origin = Shcut.eq_v2(0.5)
+		OriginPresets.OUTER: origin = Vector2(SC.toggle(anchor.termini[0].x, 0, 1), SC.toggle(anchor.termini[0].y, 0, 1))
+		OriginPresets.BORDER: origin = SC.eq_v2(0.5)
 
 
-func _adjust_children() -> void:
-	if not do_children_adjustment: return
-	
-	var adjust_amount: Vector2 = Vector2.ZERO
-	
-	for i in 2: for child in filter_children(ChildFilter.INTERFACE):
-		if child.global_position[i] >= global_position[i]: continue
-		if global_position[i] - child.global_position[i] < adjust_amount[i]: continue
-		adjust_amount[i] = global_position[i] - child.global_position[i]
-	
-	for child in filter_children(ChildFilter.BOTH):
-		child.position += adjust_amount
-
-
-func _get_combined_children_size():
-	var rect_a: Rect2
-	var rect_b: Rect2
-	
-	for child in filter_children(ChildFilter.BOTH):
-		if trim_hidden and not child.visible: continue
-		rect_b = child.get_rect() if child is Control else child.get_rect(trim_margins)
-		rect_a = rect_b if child == filter_children(ChildFilter.BOTH).front() else rect_a.merge(rect_b)
-	
-	return rect_a.size
-
-
-func _update_position() -> void:
-	position = anchor.get_position() - (origin * size * scale) + (anchor_offset * manager.window_size)
+## Update the size, scale, and position of the Interface. Called by [member manager] when the Interface is added and whenever the screen size is changed.
+func update() -> void:
+	_update_size()
+	_update_scale()
+	_update_position()
 	_margin_adjusted = false
 
 
+# Helper funciton for _update_size().
+func _get_combined_children_size():
+	var rect: Rect2
+	var child_rect: Rect2
+	
+	for child in filter_children(ChildFilter.BOTH):
+		if trim_hidden and not child.visible: continue
+		child_rect = child.get_rect(trim_margins) if child is Interface else Rect2(Vector2.ZERO, child.size)
+		rect = child_rect if child == filter_children(ChildFilter.BOTH).front() else rect.merge(child_rect)
+	
+	return rect.size
+
+
+# Helper funciton for update().
+func _update_position() -> void:
+	position = anchor.get_position() - (origin * size * scale) + (anchor_offset * manager.window_size)
+
+
+# Helper funciton for update().
 func _update_size() -> void:
-	var reference_size = size_reference.get_size(false, testing) if size_reference else Vector2.ZERO
+	var reference_size = size_reference.get_size() if size_reference else Vector2.ZERO
 	
 	for i in 2:
 		base_rect.size[i] = size_override[i]
@@ -185,23 +187,21 @@ func _update_size() -> void:
 		child.size = size
 
 
+# Helper funciton for update().
 func _update_scale() -> void:
 	var window_scale: Vector2 = manager.window_size / manager.default_window_size
 	var reference_scale: Vector2 = size_reference.get_scale() if size_reference else Vector2.ZERO
 	
-	match keep_aspect_type:
-		KeepAspectTypes.DISABLED: scale = window_scale
-		KeepAspectTypes.GREATER: scale = Shcut.eq_v2(window_scale.x) if window_scale.x > window_scale.y else Shcut.eq_v2(window_scale.y)
-		KeepAspectTypes.LESSER: scale = Shcut.eq_v2(window_scale.x) if window_scale.x < window_scale.y else Shcut.eq_v2(window_scale.y)
-		KeepAspectTypes.X_CONTROLS_Y: scale.y = window_scale.x
-		KeepAspectTypes.Y_CONTROLS_X: scale.x = window_scale.y
-	
 	match keep_aspect_mode:
-		ScalingModes.DISABLED: scale = window_scale
-		ScalingModes.X_ONLY: scale.y = window_scale.y
-		ScalingModes.Y_ONLY: scale.x = window_scale.x
+		KeepAspectModes.DISABLED: scale = window_scale
+		KeepAspectModes.X_CONTROLS_Y: scale.y = window_scale.x
+		KeepAspectModes.Y_CONTROLS_X: scale.x = window_scale.y
+		KeepAspectModes.GREATER: 
+			scale = SC.eq_v2(window_scale.x) if window_scale.x > window_scale.y else SC.eq_v2(window_scale.y)
+		KeepAspectModes.LESSER:
+			scale = SC.eq_v2(window_scale.x) if window_scale.x < window_scale.y else SC.eq_v2(window_scale.y)
 	
-	for i in 2: if not [0.0, NAN].has(reference_scale[i]):
+	for i in 2: if reference_scale[i]:
 		scale[i] = reference_scale[i]
 	
 	match scaling_mode:
