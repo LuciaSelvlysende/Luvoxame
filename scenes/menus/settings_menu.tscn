@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://scripts/resources/ui/interfaces/anchor.gd" id="3_sghuv"]
 [ext_resource type="Animation" uid="uid://hvre5qf2ucya" path="res://resources/animations/reset_settings_menu.res" id="4_7imtq"]
 [ext_resource type="Script" path="res://scripts/nodes/ui/settings/settings_manager.gd" id="5_lrdmq"]
-[ext_resource type="Script" path="res://scripts/resources/ui/settings_library.gd" id="6_dmkum"]
+[ext_resource type="Script" path="res://scripts/resources/ui/settings/settings_library.gd" id="6_dmkum"]
 [ext_resource type="PackedScene" uid="uid://opot2fac0e0c" path="res://scenes/menus/settings_category.tscn" id="6_e0mt1"]
 [ext_resource type="Resource" uid="uid://dxlik03af85ix" path="res://resources/settings_libraries/player.tres" id="8_1y35p"]
 [ext_resource type="Script" path="res://scripts/resources/ui/interfaces/auto_anchor.gd" id="8_n1at1"]
@@ -140,7 +140,7 @@ animations = Array[Animation]([ExtResource("2_t7fxx"), ExtResource("3_bayus"), E
 script = ExtResource("5_lrdmq")
 settings_libraries = Array[ExtResource("6_dmkum")]([ExtResource("10_b7iei"), ExtResource("8_q8jkl"), ExtResource("8_qxumk"), ExtResource("8_1y35p"), ExtResource("10_ovanq")])
 categories_interface = NodePath("../Categories/Buttons")
-groups_interface = NodePath("../Settings")
+groups_interface = NodePath("../SettingsList")
 category_scene = ExtResource("6_e0mt1")
 group_scene = ExtResource("9_2kglf")
 display_scene = ExtResource("10_jq3ne")
@@ -204,7 +204,7 @@ scaling_mode = 1
 scaling_step = Vector2(1, 1)
 auto_anchor = SubResource("Resource_1yo7x")
 
-[node name="Settings" type="Node2D" parent="." node_paths=PackedStringArray("base_root", "scroll_root")]
+[node name="SettingsList" type="Node2D" parent="." node_paths=PackedStringArray("base_root", "scroll_root")]
 clip_children = 1
 script = ExtResource("17_j1fjx")
 base_root = NodePath("ScrollRoot")
@@ -214,7 +214,7 @@ scroll_speed = 2.0
 anchor = SubResource("Resource_pfr81")
 size_reference = SubResource("Resource_y0pgj")
 
-[node name="ScrollRoot" type="Node2D" parent="Settings"]
+[node name="ScrollRoot" type="Node2D" parent="SettingsList"]
 script = ExtResource("2_nlmja")
 size_reference = SubResource("Resource_dlo1q")
 auto_anchor = SubResource("Resource_1cynn")
@@ -263,6 +263,5 @@ offset_right = 8.0
 offset_bottom = 8.0
 text = "Discard"
 
-[connection signal="opened" from="." to="Settings" method="reset"]
 [connection signal="button_up" from="Bottom/SaveButton/Button" to="." method="_on_close_button"]
 [connection signal="button_up" from="Bottom/DiscardButton/Button" to="." method="_on_close_button"]

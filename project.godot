@@ -31,6 +31,7 @@ config/icon="res://z.misc/icon.png"
 SC="*res://scripts/autoloads/shortcuts.gd"
 Math="*res://scripts/autoloads/math.gd"
 Voxels="*res://scripts/autoloads/voxels.gd"
+Vectors="*res://scripts/autoloads/vectors.gd"
 
 [debug]
 

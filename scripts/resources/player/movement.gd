@@ -2,6 +2,8 @@ class_name Movement
 extends Resource
 
 ## A [Resource] that can be used to add movement to a [CharacterBody3D].
+##
+## I'll revisit the documentation of this later, as I may rework this script at some point.
 
 
 @export var enabled: bool = true  ## Controls whether or not any movement functions can be used.
@@ -42,14 +44,17 @@ func move(body: CharacterBody3D, collision: CollisionShape3D, delta) -> void:
 		vDirection = -1
 	
 	var direction: Vector3 = (body.transform.basis * Vector3(hDirection.x, vDirection, hDirection.y)).normalized()
+	#print(Vector3(hDirection.x, vDirection, hDirection.y)).normalized()body.transform.basis, direction)
 	
 	_apply_modifiers(body)
 	
 	if direction:
 		body.velocity.x = Math.exp_decay(body.velocity.x, direction.x * speed.x * _speed_modifier.x, inertia.x * _inertia_modifier.x, delta)
+		body.velocity.x = Math.exp_decay(body.velocity.x, direction.x * speed.x * _speed_modifier.x, inertia.x * _inertia_modifier.x, delta)
 		body.velocity.y = Math.exp_decay(body.velocity.y, direction.y * speed.y * _speed_modifier.y, inertia.y * _inertia_modifier.y, delta)
 		body.velocity.z = Math.exp_decay(body.velocity.z, direction.z * speed.z * _speed_modifier.z, inertia.z * _inertia_modifier.z, delta)
 	else:
+		body.velocity.x = Math.exp_decay(body.velocity.x, 0, inertia.x * _inertia_modifier.x, delta)
 		body.velocity.x = Math.exp_decay(body.velocity.x, 0, inertia.x * _inertia_modifier.x, delta)
 		body.velocity.y = Math.exp_decay(body.velocity.y, 0, inertia.y * _inertia_modifier.y, delta)
 		body.velocity.z = Math.exp_decay(body.velocity.z, 0, inertia.z * _inertia_modifier.z, delta)
@@ -89,9 +94,9 @@ func _safe_walk(body: CharacterBody3D, collision: CollisionShape3D) -> void:
 	var m: float = (collision_size.x / 2) * (1.0 - margin / 2)
 	var n: float = (collision_size.y / 2) * (1.0 - margin)
 	
-	var corners: Array[Vector2] = Math.multiply_v2_array(SC.CORNERS_ARRAY_2D, collision_size / 2)
-	var x_positions: Array[Vector2] = Math.multiply_v2_array(SC.CORNERS_ARRAY_2D, Vector2(m, n))
-	var z_positions: Array[Vector2] = Math.multiply_v2_array(SC.CORNERS_ARRAY_2D, Vector2(n, m))
+	var corners: Array[Vector2] = Vectors.multiply_array(SC.CORNERS_ARRAY_2D, collision_size / 2)
+	var x_positions: Array[Vector2] = Vectors.multiply_array(SC.CORNERS_ARRAY_2D, Vector2(m, n))
+	var z_positions: Array[Vector2] = Vectors.multiply_array(SC.CORNERS_ARRAY_2D, Vector2(n, m))
 	
 	var x_blocks: Array[int] = [0, 0, 0, 0]
 	var z_blocks: Array[int] = [0, 0, 0, 0]
@@ -109,8 +114,8 @@ func _safe_walk(body: CharacterBody3D, collision: CollisionShape3D) -> void:
 		if Voxels.voxel_tool.get_voxel(blockPosition.floor()) != 0:
 			corners[i] = Vector2.ZERO
 	
-	if x_blocks.count(0) == 4 and Math.sum_v2_array(corners).y * body.velocity.z > 0:
+	if x_blocks.count(0) == 4 and Vectors.sum_array(corners).y * body.velocity.z > 0:
 		body.velocity.z = 0
 	
-	if z_blocks.count(0) == 4 and Math.sum_v2_array(corners).x * body.velocity.x > 0:
+	if z_blocks.count(0) == 4 and Vectors.sum_array(corners).x * body.velocity.x > 0:
 		body.velocity.x = 0

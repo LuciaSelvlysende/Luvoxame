@@ -35,10 +35,9 @@ func _ready():
 		SettingsGroup.create(setting, self)
 		SettingDisplay.create(setting, self)
 	
-	groups_interface.change_category(categories[0])
-	
 	if not get_tree().root.is_node_ready(): await get_tree().root.ready
 	ResourceInitializer.initialize_batch(get_tree().root, settings_libraries)
+	groups_interface.change_category(categories[0])
 
 
 func _on_load() -> void:

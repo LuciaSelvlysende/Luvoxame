@@ -1,15 +1,17 @@
 class_name Game
 extends Node3D
 
-## Root node of the game. Will be expanded upon later.
+## Root node of the game. 
+##
+## Stores information used throughout the game. Will be expanded upon later.
 
 
 @export var world_scene: PackedScene  ## The scene that is used to load the [member world]. Will be expanded upon later.
-@export var default_block_library: BlockLibrary  ## The default block library that is loaded initially. Support will eventually be added for custom block libraries.
+@export var default_block_library: BlockLibrary  ## The default [BlockLibrary] that is loaded initially. Support will eventually be added for custom block libraries.
 
-static var block_library: BlockLibrary  ## The block library used by the game.
+static var block_library: BlockLibrary  ## The [BlockLibrary] used by the game.
 static var physics_space: PhysicsDirectSpaceState3D  ## Provides access to the world's physics space.
-static var voxel_assets: VoxelAssets  ## The assets used by [VoxelTerrain]s and a few other nodes.
+static var voxel_assets: VoxelLoader.VoxelAssets  ## The assets used by [VoxelTerrain]s and a few other nodes.
 static var world: Node3D ## The root node of the current world scene.
 
 

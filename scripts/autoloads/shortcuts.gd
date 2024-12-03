@@ -11,6 +11,7 @@ const CORNERS_ARRAY_2D: Array[Vector2] = [
 ]
 
 
+## Returns ALL parents of the specified [param Node].
 func get_ancestors(node: Node) -> Array[Node]:
 	var parent: Node = node.get_parent()
 	var ancestors: Array[Node] = [parent]
@@ -21,7 +22,7 @@ func get_ancestors(node: Node) -> Array[Node]:
 	
 	return ancestors
 
-
+## Returns ALL children, grandchildren, etc. of the specified [param Node].
 func get_decendents(node: Node):
 	var decendents: Array[Node] = []
 	
@@ -42,16 +43,7 @@ func toggle(variable, value_a = true, value_b = false) -> Variant:
 	return variable
 
 
-## Returns a [Vector2] where all components are equal to the provided [param value].
-func eq_v2(value: float) -> Vector2:
-	return Vector2(value, value)
-
-
-## Returns a [Vector3] where all components are equal to the provided [param value].
-func eq_v3(value: float) -> Vector3:
-	return Vector3(value, value, value)
-
-
+## Erases all values of [array_b] from [param array_a] if present.
 func erase_array(array_a: Array, array_b: Array) -> Array:
 	for element in array_b:
 		array_a.erase(element)
@@ -59,6 +51,7 @@ func erase_array(array_a: Array, array_b: Array) -> Array:
 	return array_a
 
 
+## If [param has_all] is [code]true[/code], checks if array_a has [b]all[/b] values of [param array_b]. Otherwise, checks if array_a has [b]any[/b] values of [param array_b].
 func has_array(array_a: Array, array_b: Array, has_all: bool = true) -> bool:
 	for element in array_b.duplicate():
 		if array_a.has(element): continue
@@ -68,12 +61,14 @@ func has_array(array_a: Array, array_b: Array, has_all: bool = true) -> bool:
 	return not array_b.is_empty()
 
 
+## Equivalent to [method Array.reverse], but actually returns the reversed array.
 func reversed_array(array: Array) -> Array:
 	var result: Array = array.duplicate()
 	result.reverse()
 	return result
 
 
+## Merges an Array of Arrays into a single Array. The type of [param array] should be Array of Arrays, but for whatever reason that causes errors.
 func merged_nested_arrays(array: Array) -> Array:
 	var merged_array: Array = []
 	

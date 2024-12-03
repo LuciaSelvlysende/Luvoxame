@@ -1,6 +1,13 @@
 class_name OrthagonalBasis
 extends Resource
 
+## Utility resource for creating a [Basis] that has been rotated/reflected orthagonally (rotated by multiples of 90 degrees).
+##
+## There are 48 orthagonal bases (6 permutations of components * 8 permutations of signs). These can
+## be obtained from [method get_basis], by providing the desired components permutation and signs
+## permutation.
+
+
 const XYZ: int = 0
 const XZY: int = 1
 const YXZ: int = 2
@@ -38,6 +45,7 @@ const sign_permutations: Array[Vector3] = [
 ]
 
 
+## Returns the [Basis] specified by [param component_index] and [param sign_index]. These are indicies in [constant component_permutations] and [constant sign_permutations].
 static func get_basis(component_index: int, sign_index: int) -> Basis:
 	var basis: Basis = component_permutations[component_index]
 	

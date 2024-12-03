@@ -1,7 +1,12 @@
+class_name PauseMenuScript_Lvx
 extends Menu
 
+## Script for the pause menu.
+##
+## Responsible for handling button inputs within the pause menu.
 
-@export var settings_destination: Menu
+
+@export var settings_destination: Menu  ## The [Menu] that is opened by pressing the settings button.
 
 
 func _on_return_button():

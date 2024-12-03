@@ -31,7 +31,7 @@ func get_size(require_current: bool = false) -> Vector2:
 		else:
 			reference_values.append(manager.window_size * multipliers[index])
 	
-	return Math.sum_v2_array(reference_values)
+	return Vectors.sum_array(reference_values)
 
 
 func get_scale() -> Vector2:

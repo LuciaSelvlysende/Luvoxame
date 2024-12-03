@@ -7,10 +7,11 @@ extends Node
 const AIR: int = 0  ## Index of air in a voxel library.
 
 var block_library: BlockLibrary = BlockLibrary.new() ## Stores information about all [Block]s in the game.
-var voxel_assets: VoxelAssets  ## Stores assets that can be used by a [VoxelTerrain] node.
-var voxel_tool: VoxelTool  ## Provides access to a VoxelTool.
+var voxel_assets: VoxelLoader.VoxelAssets  ## Stores assets that can be used by a [VoxelTerrain] node.
+var voxel_tool: VoxelTool  ## Provides access to a [VoxelTool].
 
 
+## Shortcut function that checks if an position is air.
 func is_air(position: Vector3i) -> bool:
 	return voxel_tool.get_voxel(position) == AIR
 

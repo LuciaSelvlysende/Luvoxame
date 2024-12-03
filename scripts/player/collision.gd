@@ -1,28 +1,31 @@
+class_name PlayerCollisionScript_Lvx
 extends CollisionShape3D
 
+## Script for the players collision shape.
+
+
 # Used if the player tries to uncrouch, but can't. These store the needed information to uncrouch when possible.
-var stuck: bool = false
-var desired_height: float = 0
-var desired_duration: float = 0
+var _stuck: bool = false
+var _desired_height: float = 0
+var _desired_duration: float = 0
 
 
 func _physics_process(_delta):
-	# Prevent the player's collision shape from rotating with the player.
-	global_rotation = Vector3.ZERO
+	global_rotation = Vector3.ZERO  # Prevent the player's collision shape from rotating with the player.
 
 
 func _on_player_tick():
-	if stuck and _has_overhead_space(desired_height):
-		stuck = false
-		set_height(desired_height, desired_duration)
+	if _stuck and _has_overhead_space(_desired_height):
+		_stuck = false
+		set_height(_desired_height, _desired_duration)
 
 
-# Changes the height of the player's collision, alongside intelligently changing other player elements to match.
+## Changes the height of the player's collision, alongside intelligently changing other player elements to match.
 func set_height(height, transition_duration) -> void:
 	if not _has_overhead_space(height):
-		stuck = true
-		desired_height = height
-		desired_duration = transition_duration
+		_stuck = true
+		_desired_height = height
+		_desired_duration = transition_duration
 		return
 	
 	var inital_height: float = shape.size.y
@@ -57,6 +60,7 @@ func set_height(height, transition_duration) -> void:
 	%Animations.play("crouch")
 
 
+# Helper function for set_height().
 func _has_overhead_space(height: float) -> bool:
 	var collision_parameters: PhysicsShapeQueryParameters3D = PhysicsShapeQueryParameters3D.new()
 	

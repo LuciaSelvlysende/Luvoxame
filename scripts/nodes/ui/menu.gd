@@ -1,6 +1,11 @@
 class_name Menu
 extends Interface
 
+## Handles opening and closing branches of [Interface]s.
+##
+## Part of the functionality for opening and closing Menus is handled by [UIScript_Lvx]. It might be
+## a good idea to rearrange that in the future.
+
 
 signal opened
 signal closed
@@ -16,31 +21,34 @@ signal closed
 @export var reset_animation: StringName
 @export var animations: Array[Animation]
 
-var animation_player: AnimationPlayer = AnimationPlayer.new()
-var animation_library: AnimationLibrary = AnimationLibrary.new()
+var _animation_player: AnimationPlayer = AnimationPlayer.new()
+var _animation_library: AnimationLibrary = AnimationLibrary.new()
 
 
+# Add animations.
 func _ready():
-	animation_player.add_animation_library("", animation_library)
-	add_child(animation_player)
+	_animation_player.add_animation_library("", _animation_library)
+	add_child(_animation_player)
 	
 	for animation in animations:
 		var animation_name = animation.resource_path.get_file().get_basename()
-		animation_library.add_animation(animation_name, animation)
+		_animation_library.add_animation(animation_name, animation)
 
 
+## Visually closes the menu. More functionality may be desired.
 func close() -> void:
 	if close_animation and reset_animation:
-		animation_player.play(close_animation)
-		animation_player.queue(reset_animation)
+		_animation_player.play(close_animation)
+		_animation_player.queue(reset_animation)
 	
 	visible = true if close_animation and reset_animation else false
 	closed.emit()
 
 
+## Visually opens the menu. More functionality may be desired.
 func open() -> void:
 	if open_animation:
-		animation_player.play(open_animation)
+		_animation_player.play(open_animation)
 	
 	visible = true
 	opened.emit()

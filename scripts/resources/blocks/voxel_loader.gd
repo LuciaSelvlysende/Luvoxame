@@ -98,7 +98,7 @@ static func _generate_rotations(mesh: Mesh, rotations: Array[Quaternion]) -> Arr
 	var rotated_meshes: Array[Mesh] = []
 	
 	for rotation in rotations:
-		var rotated_mesh = Math.rotate_mesh(mesh, rotation, SC.eq_v3(0.5))
+		var rotated_mesh = Math.rotate_mesh(mesh, rotation, Vectors.eq3(0.5))
 		rotated_meshes.append(rotated_mesh)
 	
 	return rotated_meshes
@@ -109,3 +109,11 @@ static func _get_atlas_size(block_library: BlockLibrary) -> Vector2i:
 	var textures: Array[Image] = block_library.get_all_textures()
 	var atlas_size: Vector2i = Vector2i(textures.size(), 1)
 	return atlas_size
+
+
+## All assets that a [VoxelLoader] can create, bundled into one [Resource].
+class VoxelAssets:
+	var atlas_image: Image  ## The image that is used to make a texture atlas for [param voxel_material].
+	var voxel_material: StandardMaterial3D  ## The default [Material] used for voxels by a [VoxelTerrain] node.
+	var voxel_library: VoxelBlockyLibrary  ## The [VoxelBlockyLibrary] used by [param voxel_mesher].
+	var voxel_mesher: VoxelMesherBlocky  ## The [VoxelMesher] used by a [VoxelTerrain] node.

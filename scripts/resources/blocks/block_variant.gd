@@ -42,7 +42,7 @@ var voxel_ids: Array[int]  ## The voxel indicies in the most recently made [Voxe
 func get_rotated_mesh_from_voxel(voxel_id: int) -> Mesh:
 	var index: int = voxel_ids.find(voxel_id)
 	var rotation: Quaternion = rotations[index]
-	return Math.rotate_mesh(base_mesh, rotation, SC.eq_v3(0.5))
+	return Math.rotate_mesh(base_mesh, rotation, Vectors.eq3(0.5))
 
 
 ## Returns the [ConcavePolygonShape3D] of the provided voxel.
@@ -101,8 +101,8 @@ func _generate_collision_shapes() -> void:
 	for rotation in rotations:
 		var mesh: Mesh
 		if collision_use_mesh == true:
-			mesh = Math.rotate_mesh(base_mesh, rotation, SC.eq_v3(0.5))
+			mesh = Math.rotate_mesh(base_mesh, rotation, Vectors.eq3(0.5))
 		else:
-			mesh = Math.rotate_mesh(collision_mesh, rotation, SC.eq_v3(0.5))
+			mesh = Math.rotate_mesh(collision_mesh, rotation, Vectors.eq3(0.5))
 		
 		collision_shapes.append(mesh.create_trimesh_shape())

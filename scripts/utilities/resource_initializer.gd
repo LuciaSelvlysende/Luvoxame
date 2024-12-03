@@ -1,7 +1,7 @@
 class_name ResourceInitializer
 extends Node
 
-## Helper resource designed to make it easier to work with [Node] properties in a [Resource].
+## Utility resource designed to make it easier to work with [Node] properties in a [Resource].
 ##
 ## Initializing a [Resource] does two things. First, it looks for [NodePath] and [Node] properties
 ## (or [NodePath]/[Node] [Array]s) with almost matching names. The difference should be "_path" at the end

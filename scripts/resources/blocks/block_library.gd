@@ -4,7 +4,7 @@ extends Resource
 ## A [Resource] that stores [Block]s.
 
 
-# List of all attributes that a [BlockVariant] can have. Attributes are simple properties that a [BlockVariant] either has, or doesn't have.
+## List of all attributes that a [BlockVariant] can have. Attributes are simple properties that a [BlockVariant] either has, or doesn't have.
 enum ATTRIBUTES {
 	PARTIAL
 }

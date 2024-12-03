@@ -2,6 +2,13 @@ class_name TickClock
 extends Timer
 
 ## Runs certain game processes at a specified rate and order.
+##
+## Each tick, certain processes are preformed, directed by the [member subticks] dictionary. Currently,
+## only the player has processes that update once per tick, but this will be changed in Indev 1.3, with
+## the addition of block updates. [br][br]
+##
+## Some of these per-tick processes involves storing information that is updated once per tick. This
+## is handled by various "TickInformation" resources, such as [member player_tick_information].
 
 
 @export var tick_speed: float  ## Number of ticks per second. Certain game processes will run faster/slower at higher/lower ticks per second.
@@ -21,3 +28,12 @@ func _ready():
 func _on_tick():
 	for subtick in subticks:
 		get_tree().call_group(subtick, subticks[subtick])
+
+
+## Stores information about the player that is updated once per tick.
+class PlayerTickInformation:
+	var transform: Transform3D  ## The [Transform3D] of the [Player].
+	var raycast: Raycast  ## The last raycast preformed, updated each player tick.
+	var current_block: StringName = "dirt" ## The id of the currently selected [Block].
+	var current_variant: StringName = "dirt_full"  ## The id of the currently selected [BlockVariant].
+	var current_voxel: int = 1 ## The id of the currently selected voxel.

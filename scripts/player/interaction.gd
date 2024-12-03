@@ -1,7 +1,10 @@
+class_name PlayerInteractionScript_Lvx
 extends Node3D
 
+## Script that handles player interaction with voxels.
 
-# Controls what type of interaction is used.
+
+## Controls what type of interaction is used.
 enum INTERACTION_MODES {
 	BREAK,
 	PLACE,
@@ -10,7 +13,7 @@ enum INTERACTION_MODES {
 @export_range(0, 25, 1, "or_greater") var interaction_range: float  ## The maximum range the player can interact with things.
 @export_range(0, 1, 0.05, "or_greater") var initial_delay: float  ## The delay between placing the first voxel and the second.
 @export_range(0, 1, 0.05, "or_greater") var continuous_delay: float  ## The delay between placing the second voxel and the third, and all subsequent voxels.
-@export_range(0, 0.375, 0.0625) var diagonal_placement_threshold: float  ## 
+@export_range(0, 0.375, 0.0625) var diagonal_placement_threshold: float  ## The distance from the edge that will allow diagonal placement.
 
 @export_group("Materials")
 @export var break_preview_material: StandardMaterial3D  ## Sets the base material used for the block outline. [param albedo_texture] will be overridden upon loading the game.
@@ -21,10 +24,10 @@ enum INTERACTION_MODES {
 @export var cooldown: Timer  ## Used to control how fast voxels can be placed.
 @export var preview: MeshInstance3D  ## Used to display a preview for what will be placed/broken.
 
-var is_initial_placement: bool = true  # Controls which cooldown duration (initial_delay/continuous_delay) is used.
-var midair_placement_enabled: bool = false  # When true, allows placing voxels midair.
-var preview_mode: INTERACTION_MODES  # Controls which preview type (breaking/placing) is shown.
-var raycast: Raycast = Raycast.new().precise_setup(Game.physics_space)  # Raycast used for interaction. 
+var is_initial_placement: bool = true  ## Controls which cooldown duration (initial_delay/continuous_delay) is used.
+var midair_placement_enabled: bool = false  ## When true, allows placing voxels midair.
+var preview_mode: INTERACTION_MODES  ## Controls which preview type (breaking/placing) is shown.
+var raycast: Raycast = Raycast.new().precise_setup(Game.physics_space)  ## Raycast used for interaction. 
 
 
 func _ready():
@@ -60,7 +63,7 @@ func _process(_delta):
 		interact(INTERACTION_MODES.PLACE)
 
 
-# Interacts (breaks/places) based on the provided interaction mode.
+## Interacts (breaks/places) based on the provided interaction mode.
 func interact(interaction_mode: INTERACTION_MODES):
 	if not is_initial_placement and not cooldown.is_stopped(): return
 	raycast.raycast(global_position, camera.get_direction_vector(), interaction_range)
@@ -73,14 +76,14 @@ func interact(interaction_mode: INTERACTION_MODES):
 	is_initial_placement = false
 
 
-# Breaks a voxel if possible.
+## Breaks a voxel if possible.
 func break_voxel(raycast: Raycast) -> void:
 	if raycast.targeted_voxel_id == Voxels.AIR: return
 	
 	Voxels.voxel_tool.set_voxel(raycast.targeted_voxel_position, Voxels.AIR)
 
 
-# Places a voxel if possible.
+## Places a voxel if possible.
 func place_voxel(raycast: Raycast) -> void:
 	var placing_position = get_valid_placement(raycast)
 	if placing_position == null: return
@@ -94,19 +97,19 @@ func place_voxel(raycast: Raycast) -> void:
 	Voxels.voxel_tool.set_voxel(placing_position, TickClock.player_tick_information.current_voxel)
 
 
-# Outlines the block the player is looking at.
+## Outlines the block the player is looking at.
 func preview_break(raycast: Raycast) -> void:
 	preview.visible = false
 	if raycast.targeted_voxel_id == Voxels.AIR: return
 	
 	var variant: BlockVariant = Game.block_library.get_variant(raycast.targeted_variant_id)
-	preview.global_position = raycast.targeted_voxel_position + SC.eq_v3(-0.001)
+	preview.global_position = raycast.targeted_voxel_position + Vectors.eq3(-0.001)
 	preview.mesh = variant.get_rotated_mesh_from_voxel(raycast.targeted_voxel_id)
 	preview.material_override = break_preview_material
 	preview.visible = true
 
 
-# Creates a preview for what the player would place if they tried to place a block.
+## Creates a preview for what the player would place if they tried to place a block.
 func preview_place(raycast: Raycast) -> void:
 	preview.visible = false
 	
@@ -121,13 +124,13 @@ func preview_place(raycast: Raycast) -> void:
 	if Voxels.voxel_tool.get_voxel(preview_position) != Voxels.AIR: return
 	
 	var variant: BlockVariant = Game.block_library.get_variant(TickClock.player_tick_information.current_variant)
-	preview.global_position = Vector3(preview_position) + SC.eq_v3(-0.001)
+	preview.global_position = Vector3(preview_position) + Vectors.eq3(-0.001)
 	preview.mesh = variant.get_rotated_mesh_from_voxel(TickClock.player_tick_information.current_voxel)
 	preview.material_override = place_preview_material 
 	preview.visible = true
 
 
-# Checks if a potential voxel placement would collide with the player.
+## Checks if a potential voxel placement would collide with the player.
 func collides_with_entity(placement_position: Vector3, voxel_id: int) -> bool:
 	var collision_parameters = PhysicsShapeQueryParameters3D.new()
 	
@@ -137,7 +140,7 @@ func collides_with_entity(placement_position: Vector3, voxel_id: int) -> bool:
 	return not Game.physics_space.intersect_shape(collision_parameters).is_empty()
 
 
-# Offsets a placement position depending on the exact collision point.
+## Offsets a placement position depending on the exact collision point.
 func get_diagonal_offset(collision_point: Vector3, placement_position: Vector3i, threshold: float) -> Vector3:
 	var x_voxel_bounds: Vector2 = Vector2(floor(collision_point.x), ceil(collision_point.x)) + Vector2(threshold, -threshold)
 	var y_voxel_bounds: Vector2 = Vector2(floor(collision_point.y), ceil(collision_point.y)) + Vector2(threshold, -threshold)
@@ -158,7 +161,7 @@ func get_diagonal_offset(collision_point: Vector3, placement_position: Vector3i,
 	return placement_position + diagonal_offset
 
 
-# Returns a valid placement location based on the most recent raycast. Returns null if there is no valid placement.
+## Returns a valid placement location based on the most recent raycast. Returns null if there is no valid placement.
 func get_valid_placement(raycast: Raycast) -> Variant:
 	if raycast.targeted_voxel_id != Voxels.AIR: return raycast.targeted_space_position
 	for result in SC.reversed_array(raycast.results): if Voxels.is_supported(result): return result

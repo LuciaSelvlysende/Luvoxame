@@ -1,9 +1,9 @@
 [gd_scene load_steps=15 format=3 uid="uid://diqassb2eblc3"]
 
 [ext_resource type="Script" path="res://scripts/world/tick_clock.gd" id="2_5jpyq"]
-[ext_resource type="VoxelGraphFunction" uid="uid://b34q8d3bxlf4p" path="res://scripts/resources/generator_graphs/is_solid.tres" id="2_m82op"]
+[ext_resource type="VoxelGraphFunction" uid="uid://b34q8d3bxlf4p" path="res://resources/generator_graphs/is_solid.tres" id="2_m82op"]
 [ext_resource type="Script" path="res://scripts/world/voxel_terrain.gd" id="3_kpafy"]
-[ext_resource type="VoxelGraphFunction" uid="uid://bgc22eg0pplfh" path="res://scripts/resources/generator_graphs/get_fluid_type.tres" id="3_n38so"]
+[ext_resource type="VoxelGraphFunction" uid="uid://bgc22eg0pplfh" path="res://resources/generator_graphs/get_fluid_type.tres" id="3_n38so"]
 [ext_resource type="PackedScene" uid="uid://cxl6pil7bqe4h" path="res://scenes/player.tscn" id="8_usu38"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ybnc8"]

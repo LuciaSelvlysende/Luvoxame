@@ -33,6 +33,12 @@ _data = {
 [node name="Player" type="CharacterBody3D" groups=["PlayerTick"]]
 script = ExtResource("1_bkqlw")
 movement_modes = Array[ExtResource("2_eom8f")]([ExtResource("2_h03gv"), ExtResource("3_jwqfj")])
+up = &"up"
+down = &"down"
+right = &"right"
+left = &"left"
+backward = &"backward"
+forward = &"forward"
 
 [node name="Camera" type="Camera3D" parent="." node_paths=PackedStringArray("player")]
 unique_name_in_owner = true

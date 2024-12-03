@@ -136,10 +136,10 @@ func prepare(assign_manager: InterfaceManager = null) -> void:
 		auto_anchor.apply(filter_children(ChildFilter.INTERFACE))
 	
 	match origin_preset:
-		OriginPresets.CENTER: origin = SC.eq_v2(0.5)
+		OriginPresets.CENTER: origin = Vectors.eq2(0.5)
 		OriginPresets.INNER: origin = anchor.termini[0]
 		OriginPresets.OUTER: origin = Vector2(SC.toggle(anchor.termini[0].x, 0, 1), SC.toggle(anchor.termini[0].y, 0, 1))
-		OriginPresets.BORDER: origin = SC.eq_v2(0.5)
+		OriginPresets.BORDER: origin = Vectors.eq2(0.5)
 
 
 ## Update the size, scale, and position of the Interface. Called by [member manager] when the Interface is added and whenever the screen size is changed.
@@ -197,9 +197,9 @@ func _update_scale() -> void:
 		KeepAspectModes.X_CONTROLS_Y: scale.y = window_scale.x
 		KeepAspectModes.Y_CONTROLS_X: scale.x = window_scale.y
 		KeepAspectModes.GREATER: 
-			scale = SC.eq_v2(window_scale.x) if window_scale.x > window_scale.y else SC.eq_v2(window_scale.y)
+			scale = Vectors.eq2(window_scale.x) if window_scale.x > window_scale.y else Vectors.eq2(window_scale.y)
 		KeepAspectModes.LESSER:
-			scale = SC.eq_v2(window_scale.x) if window_scale.x < window_scale.y else SC.eq_v2(window_scale.y)
+			scale = Vectors.eq2(window_scale.x) if window_scale.x < window_scale.y else Vectors.eq2(window_scale.y)
 	
 	for i in 2: if reference_scale[i]:
 		scale[i] = reference_scale[i]

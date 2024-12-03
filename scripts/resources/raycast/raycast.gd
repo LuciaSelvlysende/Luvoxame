@@ -1,6 +1,10 @@
 class_name Raycast
 extends RaycastBasePrecise
 
+## Specialized raycaster for Luvoxame.
+##
+## Interprets information from the raycast results, making the information easier to access.
+
 
 @export var targeted_voxel_position: Vector3  ## The position of the first voxel the ray passed through.
 @export var targeted_voxel_id: int  ## The id of the first voxel the ray passed through.
@@ -28,6 +32,7 @@ func _stop_condition() -> bool:
 	return false
 
 
+## Performs the interpretation of the raycast result.
 func interpret() -> void:
 	var voxel_id: int = Voxels.voxel_tool.get_voxel(results.back())
 	

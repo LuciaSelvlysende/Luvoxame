@@ -61,7 +61,7 @@ func get_position() -> Vector2:
 		positions[-1] *= weights[index]
 		total_weight += weights[index]
 	
-	return Math.sum_v2_array(positions) / Math.replace_v2(total_weight, 0, 1)
+	return Vectors.sum_array(positions) / Vectors.replace(total_weight, 0, 1)
 
 
 func _get_update_packet_information(update_packet: InterfaceUpdatePacket):
