@@ -1,9 +1,9 @@
 [gd_scene load_steps=8 format=3 uid="uid://dfl2yw0v06h6e"]
 
-[ext_resource type="Script" path="res://scripts/nodes/ui/settings/setting_display.gd" id="1_10gnp"]
-[ext_resource type="Script" path="res://scripts/resources/ui/interfaces/margin.gd" id="2_d2fnb"]
-[ext_resource type="Script" path="res://scripts/nodes/ui/interface.gd" id="2_l7ejs"]
-[ext_resource type="Script" path="res://scripts/resources/ui/interfaces/anchor.gd" id="3_vucgu"]
+[ext_resource type="Script" path="res://scripts/!nodes/ui/interfaces/setting_display.gd" id="1_10gnp"]
+[ext_resource type="Script" path="res://scripts/!resources/ui/interfaces/margin.gd" id="2_d2fnb"]
+[ext_resource type="Script" path="res://scripts/!nodes/ui/interface.gd" id="2_l7ejs"]
+[ext_resource type="Script" path="res://scripts/!resources/ui/interfaces/anchor.gd" id="3_vucgu"]
 
 [sub_resource type="Resource" id="Resource_m7d2k"]
 resource_local_to_scene = true

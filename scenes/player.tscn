@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://cxl6pil7bqe4h"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_bkqlw"]
-[ext_resource type="Script" path="res://scripts/resources/player/movement.gd" id="2_eom8f"]
+[ext_resource type="Script" path="res://scripts/!resources/player/movement.gd" id="2_eom8f"]
 [ext_resource type="Resource" uid="uid://24ytiv60m2y2" path="res://resources/player/movement_walk.tres" id="2_h03gv"]
 [ext_resource type="Script" path="res://scripts/player/interaction.gd" id="3_7rik1"]
 [ext_resource type="Resource" uid="uid://dn4y5dxhggkbo" path="res://resources/player/movement_fly.tres" id="3_jwqfj"]
@@ -33,6 +33,7 @@ _data = {
 [node name="Player" type="CharacterBody3D" groups=["PlayerTick"]]
 script = ExtResource("1_bkqlw")
 movement_modes = Array[ExtResource("2_eom8f")]([ExtResource("2_h03gv"), ExtResource("3_jwqfj")])
+do_movement = false
 up = &"up"
 down = &"down"
 right = &"right"

@@ -1,7 +1,7 @@
 class_name PlayerInventoryScript_Lvx
 extends Node
 
-## Script for the player's inventory. Currently only handles voxel selection for placement.
+## Script for the player's inventory. Currently only handles voxel selection for placement. Will be reworked in Indev 1.2.2.
 
 
 ## Controls what is being cycled through.

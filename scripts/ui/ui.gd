@@ -14,7 +14,7 @@ var active_menu: Node  ## The menu that is currently being displayed.
 
 func _unhandled_input(event):
 	if event.is_action_pressed("toggle_fullscreen"):
-		SC.toggle(get_window().mode, Window.MODE_WINDOWED, Window.MODE_FULLSCREEN)
+		get_window().mode = SC.toggle(get_window().mode, Window.MODE_WINDOWED, Window.MODE_FULLSCREEN)
 	
 	if event.is_action_pressed("escape"):
 		if not active_menu:

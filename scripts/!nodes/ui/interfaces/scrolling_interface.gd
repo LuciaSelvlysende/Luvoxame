@@ -21,14 +21,15 @@ func _ready():
 	scroll_root = filter_children(ChildFilter.INTERFACE).front()
 
 
+# Determine the position that scroll_root will be moved towards.
 func _input(event):
-	# Determine the position that scroll_root will be moved towards.
 	if not (event.is_action_pressed("cycleUp") or event.is_action_pressed("cycleDown")): return
 	_scroll_direction = int(event.is_action_pressed("cycleUp")) - int(event.is_action_pressed("cycleDown"))
 	_scroll_destination = scroll_root.anchor_offset[scroll_axis] + _scroll_direction * scroll_amount / 100
 	_current_step = SCROLL_STEPS
 
 
+# Move scroll_root each frame.
 func _process(delta):
 	if _current_step == 0: return
 	_current_step -= 1

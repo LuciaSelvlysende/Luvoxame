@@ -1,6 +1,11 @@
 class_name Setting
 extends Resource
 
+## A [Resource] that facilitates in-game modification of [Object] properties.
+##
+## [Setting]s handle modifictaion of [member property] of [member object]. [Setting]s are organized
+## into [SettingsCategory]s and [SettingsGroup]s.
+
 
 @export var property: StringName  ## The name of the property of [member object] that is modified by the Setting.
 @export var type: SettingDisplay.InputTypes  ## The type of input that the Setting uses. See [enum SettingDisplay.InputTypes].

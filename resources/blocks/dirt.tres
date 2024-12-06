@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Block" load_steps=6 format=3 uid="uid://d3ply4bnbol2x"]
 
-[ext_resource type="Script" path="res://scripts/resources/blocks/block.gd" id="1_wd3jl"]
-[ext_resource type="Script" path="res://scripts/resources/blocks/block_variant.gd" id="2_bq8tv"]
+[ext_resource type="Script" path="res://scripts/!resources/blocks/block.gd" id="1_wd3jl"]
+[ext_resource type="Script" path="res://scripts/!resources/blocks/block_variant.gd" id="2_bq8tv"]
 [ext_resource type="ArrayMesh" uid="uid://4by480xqwb82" path="res://assets/models/full.obj" id="2_npova"]
 [ext_resource type="Image" uid="uid://dont3njw54nsf" path="res://assets/textures/blocks/dirt.png" id="3_xng1u"]
 

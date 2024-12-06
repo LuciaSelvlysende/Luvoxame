@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Movement" load_steps=5 format=3 uid="uid://24ytiv60m2y2"]
 
-[ext_resource type="Script" path="res://scripts/resources/player/movement.gd" id="2_3mwe8"]
-[ext_resource type="Script" path="res://scripts/resources/player/movement_modifier.gd" id="2_q44ej"]
+[ext_resource type="Script" path="res://scripts/!resources/player/movement.gd" id="2_3mwe8"]
+[ext_resource type="Script" path="res://scripts/!resources/player/movement_modifier.gd" id="2_q44ej"]
 
 [sub_resource type="Resource" id="Resource_8rte0"]
 script = ExtResource("2_q44ej")

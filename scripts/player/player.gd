@@ -1,7 +1,7 @@
 class_name PlayerScript_Lvx
 extends Entity
 
-## Primary script for the player. Handles movement.
+## Primary script for the player. Handles movement. Will be reworked in Indev 1.5.
 
 
 enum MOVEMENT_MODES {
@@ -20,7 +20,7 @@ var crouching: bool = false  ## Whether or not the player is crouching.
 func _ready():
 	get_tree().root.get_path_to(self)
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	position = Vector3(0.5, 10, 0.5)
+	position = Vector3(0.5, 25, 0.5)
 
 
 func _on_player_tick():
@@ -71,4 +71,4 @@ func _physics_process(delta):
 				crouching = false
 	
 	# Walking/Flying.
-	#movement_modes[movement_mode].move(self, %PlayerCollision, delta)
+	movement_modes[movement_mode].move(self, %PlayerCollision, delta)

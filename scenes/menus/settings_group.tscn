@@ -1,11 +1,11 @@
 [gd_scene load_steps=14 format=3 uid="uid://clmuxfihy0ad1"]
 
-[ext_resource type="Script" path="res://scripts/nodes/ui/settings/settings_group.gd" id="1_hays0"]
-[ext_resource type="Script" path="res://scripts/nodes/ui/interface.gd" id="2_fvlla"]
-[ext_resource type="Script" path="res://scripts/resources/ui/interfaces/anchor.gd" id="3_26goj"]
-[ext_resource type="Script" path="res://scripts/resources/ui/interfaces/margin.gd" id="5_is88a"]
-[ext_resource type="Script" path="res://scripts/resources/ui/interfaces/auto_anchor.gd" id="6_rnr7g"]
-[ext_resource type="Script" path="res://scripts/resources/ui/interfaces/size_reference.gd" id="7_2py2f"]
+[ext_resource type="Script" path="res://scripts/!nodes/ui/interfaces/settings_group.gd" id="1_hays0"]
+[ext_resource type="Script" path="res://scripts/!nodes/ui/interface.gd" id="2_fvlla"]
+[ext_resource type="Script" path="res://scripts/!resources/ui/interfaces/anchor.gd" id="3_26goj"]
+[ext_resource type="Script" path="res://scripts/!resources/ui/interfaces/margin.gd" id="5_is88a"]
+[ext_resource type="Script" path="res://scripts/!resources/ui/interfaces/auto_anchor.gd" id="6_rnr7g"]
+[ext_resource type="Script" path="res://scripts/!resources/ui/interfaces/size_reference.gd" id="7_2py2f"]
 
 [sub_resource type="Resource" id="Resource_ns2p2"]
 script = ExtResource("5_is88a")
@@ -60,13 +60,11 @@ resource_local_to_scene = true
 script = ExtResource("6_rnr7g")
 mode = 0
 direction = 8
-weight = Vector2(0, 1)
-keep_existing = true
 
-[node name="SettingsGroup" type="Node2D" node_paths=PackedStringArray("label", "setting_displays_parent")]
+[node name="SettingsGroup" type="Node2D" node_paths=PackedStringArray("label", "displays_parent")]
 script = ExtResource("1_hays0")
 label = NodePath("Base/Label/Text")
-setting_displays_parent = NodePath("Expanded/Displays")
+displays_parent = NodePath("Expanded/Displays")
 margin = SubResource("Resource_ns2p2")
 
 [node name="Base" type="Node2D" parent="."]

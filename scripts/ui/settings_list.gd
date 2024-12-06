@@ -24,7 +24,7 @@ func add_category(category: SettingsCategory) -> void:
 	if category_roots.keys().has(category.id): return
 	category_roots[category.id] = base_root.duplicate()
 	add_child(category_roots[category.id])
-	category.change_category.connect(change_category)
+	category.changed_category.connect(change_category)
 
 
 ## Swaps the active category to the specififed [param category]. This is done by simply toggling visibility, and letting [member Interface.trim_hidden] do it's thing.

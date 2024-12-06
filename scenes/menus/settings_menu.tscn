@@ -1,24 +1,24 @@
 [gd_scene load_steps=36 format=3 uid="uid://cs21mrh4n83vi"]
 
 [ext_resource type="Script" path="res://scripts/ui/settings_menu.gd" id="1_oofce"]
-[ext_resource type="Script" path="res://scripts/nodes/ui/interface.gd" id="2_nlmja"]
-[ext_resource type="Animation" uid="uid://dab4rvjs5ayk" path="res://resources/animations/open_settings_menu.res" id="2_t7fxx"]
-[ext_resource type="Animation" uid="uid://d3kuj30f8yfft" path="res://resources/animations/close_settings_menu.res" id="3_bayus"]
-[ext_resource type="Script" path="res://scripts/resources/ui/interfaces/anchor.gd" id="3_sghuv"]
-[ext_resource type="Animation" uid="uid://hvre5qf2ucya" path="res://resources/animations/reset_settings_menu.res" id="4_7imtq"]
-[ext_resource type="Script" path="res://scripts/nodes/ui/settings/settings_manager.gd" id="5_lrdmq"]
-[ext_resource type="Script" path="res://scripts/resources/ui/settings/settings_library.gd" id="6_dmkum"]
+[ext_resource type="Script" path="res://scripts/!nodes/ui/interface.gd" id="2_nlmja"]
+[ext_resource type="Animation" uid="uid://dab4rvjs5ayk" path="res://resources/animations/menus/settings_menu/open_settings_menu.res" id="2_t7fxx"]
+[ext_resource type="Animation" uid="uid://d3kuj30f8yfft" path="res://resources/animations/menus/settings_menu/close_settings_menu.res" id="3_bayus"]
+[ext_resource type="Script" path="res://scripts/!resources/ui/interfaces/anchor.gd" id="3_sghuv"]
+[ext_resource type="Animation" uid="uid://hvre5qf2ucya" path="res://resources/animations/menus/settings_menu/reset_settings_menu.res" id="4_7imtq"]
+[ext_resource type="Script" path="res://scripts/!nodes/ui/settings_manager.gd" id="5_lrdmq"]
+[ext_resource type="Script" path="res://scripts/!resources/ui/settings/settings_library.gd" id="6_dmkum"]
 [ext_resource type="PackedScene" uid="uid://opot2fac0e0c" path="res://scenes/menus/settings_category.tscn" id="6_e0mt1"]
 [ext_resource type="Resource" uid="uid://dxlik03af85ix" path="res://resources/settings_libraries/player.tres" id="8_1y35p"]
-[ext_resource type="Script" path="res://scripts/resources/ui/interfaces/auto_anchor.gd" id="8_n1at1"]
+[ext_resource type="Script" path="res://scripts/!resources/ui/interfaces/auto_anchor.gd" id="8_n1at1"]
 [ext_resource type="Resource" uid="uid://h41eobswm5yi" path="res://resources/settings_libraries/environment.tres" id="8_q8jkl"]
 [ext_resource type="Resource" uid="uid://co6dk4dsx0u4" path="res://resources/settings_libraries/audio.tres" id="8_qxumk"]
 [ext_resource type="PackedScene" uid="uid://clmuxfihy0ad1" path="res://scenes/menus/settings_group.tscn" id="9_2kglf"]
 [ext_resource type="Resource" uid="uid://f04xospd5q7q" path="res://resources/settings_libraries/sky_light.tres" id="10_b7iei"]
 [ext_resource type="PackedScene" uid="uid://dfl2yw0v06h6e" path="res://scenes/menus/setting_display.tscn" id="10_jq3ne"]
 [ext_resource type="Resource" uid="uid://capn3o6w0dicm" path="res://resources/settings_libraries/interaction.tres" id="10_ovanq"]
-[ext_resource type="Script" path="res://scripts/resources/ui/interfaces/margin.gd" id="11_f7a0m"]
-[ext_resource type="Script" path="res://scripts/resources/ui/interfaces/size_reference.gd" id="12_8w8fy"]
+[ext_resource type="Script" path="res://scripts/!resources/ui/interfaces/margin.gd" id="11_f7a0m"]
+[ext_resource type="Script" path="res://scripts/!resources/ui/interfaces/size_reference.gd" id="12_8w8fy"]
 [ext_resource type="Script" path="res://scripts/ui/settings_list.gd" id="17_j1fjx"]
 
 [sub_resource type="Resource" id="Resource_1yhuo"]
@@ -77,9 +77,7 @@ margin_bottom = 0.1
 script = ExtResource("8_n1at1")
 mode = 0
 direction = 8
-weight = Vector2(1, 1)
 margin = SubResource("Resource_2348w")
-keep_existing = false
 
 [sub_resource type="Resource" id="Resource_pfr81"]
 script = ExtResource("3_sghuv")
@@ -104,8 +102,6 @@ update_mode = 1
 script = ExtResource("8_n1at1")
 mode = 0
 direction = 8
-weight = Vector2(1, 1)
-keep_existing = false
 
 [sub_resource type="Resource" id="Resource_hbxyl"]
 script = ExtResource("3_sghuv")
@@ -139,11 +135,11 @@ animations = Array[Animation]([ExtResource("2_t7fxx"), ExtResource("3_bayus"), E
 [node name="SettingsManager" type="Node" parent="." node_paths=PackedStringArray("categories_interface", "groups_interface", "settings_menu", "save_button", "discard_button")]
 script = ExtResource("5_lrdmq")
 settings_libraries = Array[ExtResource("6_dmkum")]([ExtResource("10_b7iei"), ExtResource("8_q8jkl"), ExtResource("8_qxumk"), ExtResource("8_1y35p"), ExtResource("10_ovanq")])
-categories_interface = NodePath("../Categories/Buttons")
-groups_interface = NodePath("../SettingsList")
 category_scene = ExtResource("6_e0mt1")
 group_scene = ExtResource("9_2kglf")
 display_scene = ExtResource("10_jq3ne")
+categories_interface = NodePath("../Categories/Buttons")
+groups_interface = NodePath("../SettingsList")
 settings_menu = NodePath("..")
 save_button = NodePath("../Bottom/SaveButton/Button")
 discard_button = NodePath("../Bottom/DiscardButton/Button")

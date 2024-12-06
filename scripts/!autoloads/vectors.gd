@@ -5,6 +5,8 @@ extends Node
 
 ## Returns [param vector] where each component has been converted to a numerical boolean (0 if 0, 1 if anything else). [param invert] will swap the the results, similar to the "not" keyword.
 func bool(vector, invert: bool = false) -> Variant:
+	if not _is_vector(vector): return vector
+	
 	if invert and vector is Vector2 or vector is Vector2i:
 		return Vector2.ONE - vector.sign().abs()
 	if invert and vector is Vector3 or vector is Vector3i:
@@ -27,6 +29,8 @@ func eq3(value: float) -> Vector3:
 
 ##
 func map(vector, from_min, from_max, to_min = null, to_max = null) -> Variant:
+	if not _is_vector(vector): return vector
+	
 	# Assign default values for to_min and to_max based on type.
 	if vector is Vector2 or vector is Vector2i:
 		to_min = Vector2.ZERO
@@ -38,10 +42,18 @@ func map(vector, from_min, from_max, to_min = null, to_max = null) -> Variant:
 		to_min = Vector4.ZERO
 		to_max = Vector4.ONE
 	
-	if to_min == null or to_max == null: return vector
-	
 	var fractional_distance = (vector - from_min) / (from_max - from_min)
 	return fractional_distance * (to_max - to_min) + to_min
+
+
+func max(vector, absolute_value: bool = false) -> float:
+	if not _is_vector(vector): return vector
+	return vector[(vector.abs() if absolute_value else vector).max_axis_index()]
+
+
+func min(vector, absolute_value: bool = false) -> float:
+	if not _is_vector(vector): return vector
+	return vector[(vector.abs() if absolute_value else vector).min_axis_index()]
 
 
 ## Replaces all occurances of [param target_value] in [param vector] with [param replace_value].
@@ -106,3 +118,14 @@ func sum_array(array: Array) -> Variant:
 		sum += vector
 	
 	return sum
+
+
+# --------------------------------------------------------------------------------------------------
+# PRIVATE METHODS
+# --------------------------------------------------------------------------------------------------
+
+func _is_vector(vector) -> bool:
+	if vector is Vector2 or vector is Vector2i: return true
+	if vector is Vector3 or vector is Vector3i: return true
+	if vector is Vector4 or vector is Vector4i: return true
+	return false

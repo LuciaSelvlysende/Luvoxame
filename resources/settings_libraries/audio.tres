@@ -1,12 +1,12 @@
 [gd_resource type="Resource" script_class="SettingsLibrary" load_steps=5 format=3 uid="uid://co6dk4dsx0u4"]
 
-[ext_resource type="Script" path="res://scripts/resources/ui/settings/settings_library.gd" id="1_a7806"]
-[ext_resource type="Script" path="res://scripts/resources/ui/settings/setting.gd" id="2_uvv1a"]
+[ext_resource type="Script" path="res://scripts/!resources/ui/settings/settings_library.gd" id="1_a7806"]
+[ext_resource type="Script" path="res://scripts/!resources/ui/settings/setting.gd" id="2_uvv1a"]
 
 [sub_resource type="Resource" id="Resource_6ggu6"]
 script = ExtResource("2_uvv1a")
 property = &"playing"
-type = null
+type = 0
 name_override = "Enabled"
 category_id = &"Audio"
 group_id = &"Music"

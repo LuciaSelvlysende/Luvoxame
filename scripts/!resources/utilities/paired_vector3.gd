@@ -1,6 +1,8 @@
 class_name PairedVector3
 extends Resource
 
+## WIP
+
 
 @export var x: Vector3 = Vector3.ZERO
 @export var y: Vector3 = Vector3.ZERO

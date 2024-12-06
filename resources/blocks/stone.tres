@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Block" load_steps=10 format=3 uid="uid://boaxc7wbupcyp"]
 
-[ext_resource type="Script" path="res://scripts/resources/blocks/block.gd" id="1_pahpg"]
-[ext_resource type="Script" path="res://scripts/resources/blocks/block_variant.gd" id="2_muj10"]
+[ext_resource type="Script" path="res://scripts/!resources/blocks/block.gd" id="1_pahpg"]
+[ext_resource type="Script" path="res://scripts/!resources/blocks/block_variant.gd" id="2_muj10"]
 [ext_resource type="ArrayMesh" uid="uid://4by480xqwb82" path="res://assets/models/full.obj" id="2_vkgj3"]
 [ext_resource type="Image" uid="uid://ctagwgcyjffo2" path="res://assets/textures/blocks/stone.png" id="4_76ie2"]
 [ext_resource type="ArrayMesh" uid="uid://cj0n2i85r6i51" path="res://assets/models/stair.obj" id="5_i0sdp"]

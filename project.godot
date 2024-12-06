@@ -28,10 +28,10 @@ config/icon="res://z.misc/icon.png"
 
 [autoload]
 
-SC="*res://scripts/autoloads/shortcuts.gd"
-Math="*res://scripts/autoloads/math.gd"
-Voxels="*res://scripts/autoloads/voxels.gd"
-Vectors="*res://scripts/autoloads/vectors.gd"
+SC="*res://scripts/!autoloads/shortcuts.gd"
+Math="*res://scripts/!autoloads/math.gd"
+Voxels="*res://scripts/!autoloads/voxels.gd"
+Vectors="*res://scripts/!autoloads/vectors.gd"
 
 [debug]
 
@@ -40,6 +40,7 @@ gdscript/warnings/incompatible_ternary=0
 
 [display]
 
+window/size/mode=3
 window/vsync/vsync_mode=0
 
 [editor]

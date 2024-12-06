@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Block" load_steps=10 format=3 uid="uid://c87naguy1lpiv"]
 
-[ext_resource type="Script" path="res://scripts/resources/blocks/block.gd" id="1_wf83v"]
-[ext_resource type="Script" path="res://scripts/resources/blocks/block_variant.gd" id="2_axksl"]
+[ext_resource type="Script" path="res://scripts/!resources/blocks/block.gd" id="1_wf83v"]
+[ext_resource type="Script" path="res://scripts/!resources/blocks/block_variant.gd" id="2_axksl"]
 [ext_resource type="ArrayMesh" uid="uid://4by480xqwb82" path="res://assets/models/full.obj" id="2_uto0x"]
 [ext_resource type="Image" uid="uid://ctdn1un7vw6fp" path="res://assets/textures/blocks/wood_planks.png" id="4_07vms"]
 [ext_resource type="ArrayMesh" uid="uid://cj0n2i85r6i51" path="res://assets/models/stair.obj" id="5_hwbkx"]

@@ -151,7 +151,7 @@ func get_diagonal_offset(collision_point: Vector3, placement_position: Vector3i,
 	diagonal_offset.y = int(collision_point.y > y_voxel_bounds.y) - int(collision_point.y < y_voxel_bounds.x)
 	diagonal_offset.z = int(collision_point.z > z_voxel_bounds.y) - int(collision_point.z < z_voxel_bounds.x)
 	
-	for i in 3:
+	for i in 3:  # Checks to ensure the new position is a valid placement position.
 		var isolated_offset: Vector3i = Vector3i.ZERO
 		isolated_offset[i] = diagonal_offset[i]
 		

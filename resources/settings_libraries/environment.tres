@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="SettingsLibrary" load_steps=4 format=3 uid="uid://h41eobswm5yi"]
 
-[ext_resource type="Script" path="res://scripts/resources/ui/settings/settings_library.gd" id="1_4pgry"]
-[ext_resource type="Script" path="res://scripts/resources/ui/settings/setting.gd" id="2_wfxod"]
+[ext_resource type="Script" path="res://scripts/!resources/ui/settings/settings_library.gd" id="1_4pgry"]
+[ext_resource type="Script" path="res://scripts/!resources/ui/settings/setting.gd" id="2_wfxod"]
 
 [sub_resource type="Resource" id="Resource_8xrjs"]
 script = ExtResource("2_wfxod")
