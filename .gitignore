@@ -15,6 +15,8 @@ data_*/
 mono_crash.*.json
 
 # Addons
-addons/script-ide/
 /addons/script-ide
+/addons/notes_tab
+
+# Other
 /gitignore
