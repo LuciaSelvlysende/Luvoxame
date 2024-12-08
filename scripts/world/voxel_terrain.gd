@@ -1,4 +1,4 @@
-class_name VoxelTerrainScript_Lvx
+class_name VoxelTerrain_Lvx
 extends VoxelTerrain
 
 ## Script for the main [VoxelTerrain]. Pretty barebones at the moment.

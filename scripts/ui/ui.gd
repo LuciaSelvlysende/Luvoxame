@@ -1,4 +1,4 @@
-class_name UIScript_Lvx
+class_name UI_Lvx
 extends InterfaceManager
 
 ## A more advanced [InterfaceManager] specialized for Luvoxame.

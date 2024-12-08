@@ -1,8 +1,9 @@
 class_name SettingDisplay
 extends Interface
 
-## Skipping documentation for this one, since it will be completely reworked next update (in1.2.1).
 
+signal load_display_value(load_value)
+signal input_selected(type: InputTypes, property_info: Dictionary)
 
 enum InputTypes {
 	TOGGLE,
@@ -12,57 +13,31 @@ enum InputTypes {
 }
 
 @export var label: Label
-@export var toggle_input: CheckButton
-@export var dropdown_input: OptionButton
-@export var slider_input: HSlider
-@export var text_line_input: LineEdit
 
-var setting: Setting
+var setting: Setting:
+	set(value):
+		setting = value
+		label.text = setting.get_display_name()
+
+var _type_selected: bool = false
 
 
-static func create(setting: Setting, manager: SettingsManager) -> void:
-	# Set up display.
-	setting.display = manager.display_scene.instantiate()
-	setting.display.setting = setting
-	setting.display.label.text = setting.get_display_name()
-	setting.display.connect_input(setting.type)
+func _load_display_value(value) -> void:
+	if not _type_selected: select_type()
+	load_display_value.emit(value)
+
+
+func _on_input(value) -> void:
+	setting.unconfirmed_value = value
+
+
+func select_type() -> void:
+	var property_info: Dictionary = setting.get_property_info()
 	
-	# Add display.
-	setting.group.add_display(setting.display)
-
-
-func connect_input(input_type: InputTypes) -> void:
-	match input_type:
-		InputTypes.TOGGLE:
-			toggle_input.toggled.connect(update_setting_value)
-			toggle_input.visible = true
-		InputTypes.DROPDOWN:
-			dropdown_input.item_selected.connect(update_setting_value)
-			dropdown_input.visible = true
-		InputTypes.SLIDER:
-			slider_input.drag_ended.connect(update_setting_value)
-			slider_input.visible = true
-		InputTypes.TEXT_LINE:
-			text_line_input.text_submitted.connect(update_setting_value)
-			text_line_input.visible = true
-
-
-func update_setting_value(parameter) -> void:
-	match setting.type:
-		InputTypes.SLIDER: setting.unconfirmed_value = slider_input.value
-		_: setting.unconfirmed_value = parameter
-
-
-func update_display_value(value) -> void:
-	match setting.type:
-		InputTypes.TOGGLE: toggle_input.button_pressed = value
-		InputTypes.DROPDOWN: dropdown_input.selected = value
-		InputTypes.TEXT_LINE: text_line_input.text = value
-		InputTypes.SLIDER:
-			var slider_info: Array = setting.get_slider_info()
-			slider_input.value = value
-			slider_input.min_value = slider_info[0]
-			slider_input.max_value = slider_info[1]
-			slider_input.step = slider_info[2]
-			slider_input.allow_lesser = slider_info[3]
-			slider_input.allow_greater = slider_info[4]
+	match property_info.type:
+		TYPE_BOOL: 
+			input_selected.emit(InputTypes.TOGGLE, property_info)
+		TYPE_FLOAT, TYPE_INT: 
+			input_selected.emit(InputTypes.SLIDER, property_info)
+		TYPE_STRING, TYPE_STRING_NAME: 
+			input_selected.emit(InputTypes.TEXT_LINE, property_info)

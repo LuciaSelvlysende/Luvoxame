@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="SettingsLibrary" load_steps=5 format=3 uid="uid://dxlik03af85ix"]
+
+[ext_resource type="Script" path="res://scripts/!resources/settings/settings_library.gd" id="1_nc561"]
+[ext_resource type="Script" path="res://scripts/!resources/settings/setting.gd" id="2_pfdr0"]
+
+[sub_resource type="Resource" id="Resource_0fgwl"]
+script = ExtResource("2_pfdr0")
+property = &"toggle_crouch"
+type = 0
+name_override = ""
+subdivision_ids = Array[StringName]([&"input", &"movement"])
+
+[sub_resource type="Resource" id="Resource_aynvj"]
+script = ExtResource("2_pfdr0")
+property = &"sensitivity"
+type = 2
+name_override = ""
+subdivision_ids = Array[StringName]([&"input", &"mouse"])
+
+[resource]
+script = ExtResource("1_nc561")
+object_path = NodePath("Game/World/Player")
+settings = Array[ExtResource("2_pfdr0")]([SubResource("Resource_0fgwl"), SubResource("Resource_aynvj")])

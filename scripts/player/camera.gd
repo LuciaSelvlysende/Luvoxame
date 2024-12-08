@@ -1,4 +1,4 @@
-class_name PlayerCameraScript_Lvx
+class_name PlayerCamera_Lvx
 extends Camera3D
 
 ## Script for the players camera.

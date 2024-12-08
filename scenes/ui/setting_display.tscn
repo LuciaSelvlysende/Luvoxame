@@ -1,0 +1,169 @@
+[gd_scene load_steps=17 format=3 uid="uid://dfl2yw0v06h6e"]
+
+[ext_resource type="Script" path="res://scripts/!nodes/ui/interfaces/setting_display.gd" id="1_ntl45"]
+[ext_resource type="Script" path="res://scripts/!nodes/ui/interface.gd" id="2_24ohc"]
+[ext_resource type="Script" path="res://scripts/!resources/ui/interfaces/anchor.gd" id="3_ujgvh"]
+[ext_resource type="Script" path="res://scripts/!resources/ui/interfaces/margin.gd" id="4_d008l"]
+[ext_resource type="Script" path="res://scripts/ui/Display Inputs/toggle_input.gd" id="5_o6bek"]
+[ext_resource type="Script" path="res://scripts/ui/Display Inputs/dropdown_input.gd" id="6_aw2h5"]
+[ext_resource type="Script" path="res://scripts/ui/Display Inputs/text_line_input.gd" id="8_2tagn"]
+[ext_resource type="Script" path="res://scripts/ui/Display Inputs/number_input.gd" id="10_1j7ao"]
+[ext_resource type="Script" path="res://scripts/ui/Display Inputs/number_input_slider.gd" id="11_lonql"]
+[ext_resource type="Script" path="res://scripts/ui/Display Inputs/number_input_box.gd" id="12_nm100"]
+
+[sub_resource type="Resource" id="Resource_7fxkd"]
+script = ExtResource("4_d008l")
+margin_reference_path = NodePath("MarginReference")
+trim_reference_margin = true
+margin_left = 0.25
+margin_top = 0.25
+margin_right = 0.25
+margin_bottom = 0.25
+
+[sub_resource type="Resource" id="Resource_m7d2k"]
+resource_local_to_scene = true
+script = ExtResource("3_ujgvh")
+parent_pathes = Array[NodePath]([NodePath("../Input")])
+presets = Array[int]([9])
+termini = Array[Vector2]([Vector2(0, 0)])
+weights = Array[Vector2]([Vector2(0, 1)])
+
+[sub_resource type="Resource" id="Resource_0o0s6"]
+resource_local_to_scene = true
+script = ExtResource("4_d008l")
+margin_reference_path = NodePath("../MarginReference")
+trim_reference_margin = true
+margin_left = 0.25
+margin_top = 0.25
+margin_right = 0.25
+margin_bottom = 0.25
+
+[sub_resource type="Resource" id="Resource_om2t4"]
+resource_local_to_scene = true
+script = ExtResource("3_ujgvh")
+parent_pathes = Array[NodePath]([NodePath("../../../Background")])
+presets = Array[int]([7])
+termini = Array[Vector2]([Vector2(0, 0)])
+weights = Array[Vector2]([Vector2(1, 0)])
+
+[sub_resource type="Resource" id="Resource_5271t"]
+script = ExtResource("3_ujgvh")
+parent_pathes = Array[NodePath]([NodePath("../Slider")])
+presets = Array[int]([7])
+termini = Array[Vector2]([Vector2(0, 0)])
+weights = Array[Vector2]([Vector2(1, 1)])
+
+[sub_resource type="Resource" id="Resource_upyip"]
+script = ExtResource("4_d008l")
+margin_reference_path = NodePath("")
+trim_reference_margin = true
+margin_left = 0.1
+margin_top = 0.0
+margin_right = 0.0
+margin_bottom = 0.0
+
+[node name="SettingDisplay" type="Node2D" node_paths=PackedStringArray("label", "ignore_children")]
+script = ExtResource("1_ntl45")
+label = NodePath("Text/Label")
+margin = SubResource("Resource_7fxkd")
+trim_margins = false
+ignore_children = [NodePath("MarginReference")]
+
+[node name="Text" type="Node2D" parent="."]
+script = ExtResource("2_24ohc")
+origin = Vector2(0, 0.5)
+anchor = SubResource("Resource_m7d2k")
+margin = SubResource("Resource_0o0s6")
+scaling_mode = 1
+keep_aspect_mode = 1
+scaling_step = Vector2(1, 1)
+
+[node name="Label" type="Label" parent="Text"]
+offset_right = 40.0
+offset_bottom = 16.0
+text = "Test"
+vertical_alignment = 1
+
+[node name="Input" type="Node2D" parent="."]
+script = ExtResource("2_24ohc")
+origin = Vector2(1, 0)
+anchor = SubResource("Resource_om2t4")
+margin = SubResource("Resource_0o0s6")
+scaling_mode = 1
+keep_aspect_mode = 1
+scaling_step = Vector2(1, 1)
+
+[node name="ToggleInput" type="CheckButton" parent="Input"]
+visible = false
+offset_right = 44.0
+offset_bottom = 24.0
+script = ExtResource("5_o6bek")
+
+[node name="NumberInput" type="Node2D" parent="Input" node_paths=PackedStringArray("slider", "box")]
+script = ExtResource("10_1j7ao")
+input_type = 2
+slider = NodePath("Slider/HSlider")
+box = NodePath("Box/SpinBox")
+
+[node name="Slider" type="Node2D" parent="Input/NumberInput"]
+script = ExtResource("2_24ohc")
+
+[node name="HSlider" type="HSlider" parent="Input/NumberInput/Slider"]
+custom_minimum_size = Vector2(120, 0)
+offset_right = 120.0
+offset_bottom = 16.0
+script = ExtResource("11_lonql")
+
+[node name="Box" type="Node2D" parent="Input/NumberInput"]
+script = ExtResource("2_24ohc")
+origin_preset = 3
+anchor = SubResource("Resource_5271t")
+margin = SubResource("Resource_upyip")
+
+[node name="SpinBox" type="SpinBox" parent="Input/NumberInput/Box"]
+offset_right = 48.0
+offset_bottom = 22.0
+alignment = 2
+select_all_on_focus = true
+script = ExtResource("12_nm100")
+
+[node name="DropdownInput" type="OptionButton" parent="Input"]
+visible = false
+offset_right = 32.0
+offset_bottom = 20.0
+item_count = 2
+popup/item_0/text = "Test I"
+popup/item_1/text = "Test II"
+popup/item_1/id = 1
+script = ExtResource("6_aw2h5")
+input_type = 1
+
+[node name="TextLineInput" type="LineEdit" parent="Input"]
+visible = false
+offset_right = 48.0
+offset_bottom = 24.0
+script = ExtResource("8_2tagn")
+input_type = 3
+
+[node name="MarginReference" type="Node2D" parent="."]
+visible = false
+script = ExtResource("2_24ohc")
+size_override = Vector2(24, 24)
+scaling_mode = 1
+scaling_step = Vector2(1, 1)
+
+[connection signal="input_selected" from="." to="Input/ToggleInput" method="_on_input_selected"]
+[connection signal="input_selected" from="." to="Input/NumberInput" method="_on_input_selected"]
+[connection signal="input_selected" from="." to="Input/DropdownInput" method="_on_input_selected"]
+[connection signal="input_selected" from="." to="Input/TextLineInput" method="_on_input_selected"]
+[connection signal="load_display_value" from="." to="Input/ToggleInput" method="_on_load_value"]
+[connection signal="load_display_value" from="." to="Input/NumberInput" method="_on_load_value"]
+[connection signal="load_display_value" from="." to="Input/DropdownInput" method="_on_load_value"]
+[connection signal="load_display_value" from="." to="Input/TextLineInput" method="_on_load_value"]
+[connection signal="toggled" from="Input/ToggleInput" to="." method="_on_input"]
+[connection signal="value_changed" from="Input/NumberInput/Slider/HSlider" to="." method="_on_input"]
+[connection signal="value_changed" from="Input/NumberInput/Slider/HSlider" to="Input/NumberInput/Box/SpinBox" method="_on_slider_input"]
+[connection signal="value_changed" from="Input/NumberInput/Box/SpinBox" to="." method="_on_input"]
+[connection signal="value_changed" from="Input/NumberInput/Box/SpinBox" to="Input/NumberInput/Slider/HSlider" method="_on_box_input"]
+[connection signal="item_selected" from="Input/DropdownInput" to="." method="_on_input"]
+[connection signal="text_submitted" from="Input/TextLineInput" to="." method="_on_input"]

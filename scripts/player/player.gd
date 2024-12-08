@@ -1,16 +1,17 @@
-class_name PlayerScript_Lvx
+class_name Player_Lvx
 extends Entity
 
 ## Primary script for the player. Handles movement. Will be reworked in Indev 1.5.
 
 
-enum MOVEMENT_MODES {
+enum MovementModes {
 	WALK,
 	FLY,
 }
 
-@export var movement_modes: Array[Movement]  ## Different modes for how the player moves.
-@export var movement_mode = MOVEMENT_MODES.WALK  ## Sets the default movement mode, but is still toggleable in-game.
+@export var walk_resource: Movement
+@export var fly_resource: Movement
+@export var movement_mode = MovementModes.WALK  ## Sets the default movement mode, but is still toggleable in-game.
 @export var sensitivity: float = 50.0  ## Mouse sensitivity.
 @export var toggle_crouch: bool = false  ## If enabled, will be the default, but is still toggleable in-game.
 
@@ -36,7 +37,7 @@ func _unhandled_input(event):
 	
 	# Toggle movement mode.
 	if Input.is_action_just_pressed("setting1"):
-		movement_mode = SC.toggle(movement_mode, MOVEMENT_MODES.WALK, MOVEMENT_MODES.FLY)
+		movement_mode = SC.toggle(movement_mode, MovementModes.WALK, MovementModes.FLY)
 	
 	# Toggle toggle crouch.
 	if Input.is_action_just_pressed("setting4"):
@@ -46,29 +47,33 @@ func _unhandled_input(event):
 func _physics_process(delta):
 	# Jump.
 	if Input.is_action_pressed("up"):
-		movement_modes[movement_mode].jump(self)
+		walk_resource.jump(self)
 	
 	if toggle_crouch == false:
 		if Input.is_action_just_pressed("crouch"):
 			%PlayerCollision.set_height(1.45, 0.1)
-			movement_modes[movement_mode].safe_walk = true
+			walk_resource.safe_walk = true
 			crouching = true
 		
 		if Input.is_action_just_released("crouch"):
 			%PlayerCollision.set_height(1.95, 0.1)
-			movement_modes[movement_mode].safe_walk = false
+			walk_resource.safe_walk = false
 			crouching = false
 	
 	if toggle_crouch == true:
 		if Input.is_action_just_pressed("crouch"):
 			if crouching == false:
 				%PlayerCollision.set_height(1.45, 0.1)
-				movement_modes[movement_mode].safe_walk = true
+				walk_resource.safe_walk = true
 				crouching = true
 			else:
 				%PlayerCollision.set_height(1.95, 0.1)
-				movement_modes[movement_mode].safe_walk = false
+				walk_resource.safe_walk = false
 				crouching = false
 	
 	# Walking/Flying.
-	movement_modes[movement_mode].move(self, %PlayerCollision, delta)
+	match movement_mode:
+		MovementModes.WALK:
+			walk_resource.move(self, %PlayerCollision, delta)
+		MovementModes.FLY:
+			fly_resource.move(self, %PlayerCollision, delta)

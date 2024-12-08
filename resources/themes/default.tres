@@ -1,7 +1,32 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://t3isi7ybcs74"]
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://t3isi7ybcs74"]
 
-[ext_resource type="FontFile" uid="uid://ccra6nx18fu30" path="res://assets/misc/OrdinaryBasis.ttf" id="1_480ed"]
+[ext_resource type="FontFile" uid="uid://cpo5la27eij4x" path="res://assets/fonts/HelvetiPixel.ttf" id="1_0t8ih"]
+[ext_resource type="Texture2D" uid="uid://cuftmkjvboggo" path="res://assets/textures/ui/on.png" id="1_epivb"]
+[ext_resource type="Texture2D" uid="uid://b1fm1s85nknyv" path="res://assets/textures/ui/off.png" id="2_xdt5d"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lk1v6"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 0.75)
+draw_center = false
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="ImageTexture" id="ImageTexture_6biw6"]
 
 [resource]
-default_font = ExtResource("1_480ed")
+default_font = ExtResource("1_0t8ih")
 default_font_size = 16
+Button/styles/focus = SubResource("StyleBoxFlat_lk1v6")
+CheckButton/icons/checked = ExtResource("1_epivb")
+CheckButton/icons/unchecked = ExtResource("2_xdt5d")
+SpinBox/icons/updown = SubResource("ImageTexture_6biw6")

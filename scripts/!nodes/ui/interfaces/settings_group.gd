@@ -14,24 +14,13 @@ extends ExpandingInterface
 @export var displays_parent: Interface  ## The parent node for [SettingDisplay]s.
 
 var category: SettingsCategory  ## The [SettingsCategory] that the group falls under.
-var id: StringName  ## The id of the group. Primarily used to check if a group already exists, in order to prevent duplicate groups.
 
+var id: StringName:  ## The id of the group. Primarily used to check if a group already exists, in order to prevent duplicate groups.
+	set(value):
+		label.text = value.capitalize()
+		id = value
 
-## Creates a fully functional [SettingsGroup]. A [SettingsGroup] made with [method Object.new()] will not work properly.
-static func create(setting: Setting, manager: SettingsManager) -> void:
-	# Check if the category already exists.
-	setting.group = setting.category.get_group(setting.group_id)
-	if setting.group: return
-	
-	# Set up group.
-	setting.group = manager.group_scene.instantiate()
-	setting.group.id = setting.group_id
-	setting.group.label.text = setting.group_id.capitalize()
-	setting.group.category = setting.category
-	
-	# Add group.
-	setting.category.groups.append(setting.group)
-	manager.groups_interface.add_group(setting.group)
+var parent_subdivisions: Array[Node] = []
 
 
 ## Adds a [SettingDisplay] as a child node of [member displays_parent].

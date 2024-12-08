@@ -3,7 +3,7 @@ extends Interface
 
 ## Handles opening and closing branches of [Interface]s.
 ##
-## Part of the functionality for opening and closing Menus is handled by [UIScript_Lvx]. It might be
+## Part of the functionality for opening and closing Menus is handled by [UI_Lvx]. It might be
 ## a good idea to rearrange that in the future.
 
 

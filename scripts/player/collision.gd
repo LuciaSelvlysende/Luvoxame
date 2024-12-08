@@ -1,4 +1,4 @@
-class_name PlayerCollisionScript_Lvx
+class_name PlayerCollision_Lvx
 extends CollisionShape3D
 
 ## Script for the players collision shape.

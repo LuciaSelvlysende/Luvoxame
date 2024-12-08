@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="SettingsLibrary" load_steps=3 format=3 uid="uid://bsoxvsoedjgdi"]
+
+[ext_resource type="Script" path="res://scripts/!resources/settings/settings_library.gd" id="1_gf75v"]
+[ext_resource type="Script" path="res://scripts/!resources/settings/setting.gd" id="2_xencc"]
+
+[resource]
+script = ExtResource("1_gf75v")
+object_path = NodePath("Game/World/Player/Camera")
+settings = Array[ExtResource("2_xencc")]([])

@@ -1,4 +1,4 @@
-class_name SettingsListScript_Lvx
+class_name SettingsList_Lvx
 extends ScrollingInterface
 
 ## Script for list of settings in the settings menu.
@@ -11,6 +11,25 @@ extends ScrollingInterface
 @export var base_root: Interface  ## The root node used for [member ScrollingInterface.scroll_root]. Is duplicated for each category.
 
 var category_roots: Dictionary = {}  ## Keys are [SettingsCategory] ids and values are scroll roots, duplicated from [member base_root].
+
+
+func _add_subdivision(subdivision: Node) -> void:
+	var category: SettingsCategory = subdivision.parent_subdivisions[0]
+	
+	if not category_roots.keys().has(category.id):
+		category_roots[category.id] = base_root.duplicate()
+		add_child(category_roots[category.id])
+		category.changed_category.connect(change_category)
+	
+	category_roots[category.id].add_child(subdivision)
+
+
+func _on_menu_open() -> void:
+	for category_root in category_roots.values():
+		category_root.hide()
+	
+	scroll_root = category_roots.values()[0]
+	scroll_root.show()
 
 
 ## Attempts to add a category for the group. Then the group is added to the right category, either an already existing one, or one that was just created.

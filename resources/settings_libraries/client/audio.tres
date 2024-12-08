@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="SettingsLibrary" load_steps=5 format=3 uid="uid://co6dk4dsx0u4"]
+
+[ext_resource type="Script" path="res://scripts/!resources/settings/settings_library.gd" id="1_a7806"]
+[ext_resource type="Script" path="res://scripts/!resources/settings/setting.gd" id="2_uvv1a"]
+
+[sub_resource type="Resource" id="Resource_6ggu6"]
+script = ExtResource("2_uvv1a")
+property = &"playing"
+type = 0
+name_override = "Enabled"
+subdivision_ids = Array[StringName]([&"audio", &"music"])
+
+[sub_resource type="Resource" id="Resource_o11cf"]
+script = ExtResource("2_uvv1a")
+property = &"volume_db"
+type = 2
+name_override = "Volume"
+subdivision_ids = Array[StringName]([&"audio", &"music"])
+
+[resource]
+script = ExtResource("1_a7806")
+object_path = NodePath("Game/Music")
+settings = Array[ExtResource("2_uvv1a")]([SubResource("Resource_6ggu6"), SubResource("Resource_o11cf")])

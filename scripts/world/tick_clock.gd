@@ -11,7 +11,13 @@ extends Timer
 ## is handled by various "TickInformation" resources, such as [member player_tick_information].
 
 
-@export var tick_speed: float  ## Number of ticks per second. Certain game processes will run faster/slower at higher/lower ticks per second.
+@export_range(0, 100) var tick_speed: float:  ## Number of ticks per second. Certain game processes will run faster/slower at higher/lower ticks per second.
+	set(value):
+		wait_time = 1 / value
+		if time_left > wait_time:
+			stop()
+			start()
+		tick_speed = value
 
 static var player_tick_information: PlayerTickInformation = PlayerTickInformation.new()  ## Stores information about the Player that updates once per tick.
 
@@ -19,10 +25,6 @@ static var player_tick_information: PlayerTickInformation = PlayerTickInformatio
 var subticks = {
 	PlayerTick = "_on_player_tick",
 }
-
-
-func _ready():
-	wait_time = 1 / tick_speed
 
 
 func _on_tick():

@@ -1,0 +1,248 @@
+[gd_scene load_steps=39 format=3 uid="uid://cs21mrh4n83vi"]
+
+[ext_resource type="Script" path="res://scripts/ui/settings_menu.gd" id="1_oofce"]
+[ext_resource type="Script" path="res://scripts/!nodes/ui/interface.gd" id="2_nlmja"]
+[ext_resource type="Animation" uid="uid://dab4rvjs5ayk" path="res://resources/animations/menus/settings_menu/open_settings_menu.res" id="2_t7fxx"]
+[ext_resource type="Animation" uid="uid://d3kuj30f8yfft" path="res://resources/animations/menus/settings_menu/close_settings_menu.res" id="3_bayus"]
+[ext_resource type="Script" path="res://scripts/!resources/ui/interfaces/anchor.gd" id="3_sghuv"]
+[ext_resource type="Animation" uid="uid://hvre5qf2ucya" path="res://resources/animations/menus/settings_menu/reset_settings_menu.res" id="4_7imtq"]
+[ext_resource type="Script" path="res://scripts/!nodes/settings_manager.gd" id="5_lrdmq"]
+[ext_resource type="Script" path="res://scripts/!resources/settings/settings_library.gd" id="6_dmkum"]
+[ext_resource type="PackedScene" uid="uid://opot2fac0e0c" path="res://scenes/ui/settings_category.tscn" id="6_e0mt1"]
+[ext_resource type="Resource" uid="uid://dxlik03af85ix" path="res://resources/settings_libraries/client/player.tres" id="8_1y35p"]
+[ext_resource type="Script" path="res://scripts/!resources/ui/interfaces/auto_anchor.gd" id="8_n1at1"]
+[ext_resource type="Resource" uid="uid://h41eobswm5yi" path="res://resources/settings_libraries/client/environment.tres" id="8_q8jkl"]
+[ext_resource type="Resource" uid="uid://co6dk4dsx0u4" path="res://resources/settings_libraries/client/audio.tres" id="8_qxumk"]
+[ext_resource type="PackedScene" uid="uid://clmuxfihy0ad1" path="res://scenes/ui/settings_group.tscn" id="9_2kglf"]
+[ext_resource type="Resource" uid="uid://f04xospd5q7q" path="res://resources/settings_libraries/client/sky_light.tres" id="10_b7iei"]
+[ext_resource type="PackedScene" uid="uid://dfl2yw0v06h6e" path="res://scenes/ui/setting_display.tscn" id="10_jq3ne"]
+[ext_resource type="Resource" uid="uid://capn3o6w0dicm" path="res://resources/settings_libraries/client/interaction.tres" id="10_ovanq"]
+[ext_resource type="Script" path="res://scripts/!resources/ui/interfaces/margin.gd" id="11_f7a0m"]
+[ext_resource type="Resource" uid="uid://3nwxryo1f6yt" path="res://resources/settings_libraries/server/tick_clock.tres" id="12_1acb1"]
+[ext_resource type="Script" path="res://scripts/!resources/ui/interfaces/size_reference.gd" id="12_8w8fy"]
+[ext_resource type="Script" path="res://scripts/ui/settings_list.gd" id="17_j1fjx"]
+[ext_resource type="Script" path="res://scripts/ui/category_buttons.gd" id="18_w7dx1"]
+[ext_resource type="PackedScene" uid="uid://ck1mnq1wjsx4b" path="res://scenes/ui/default_button.tscn" id="23_t80dd"]
+
+[sub_resource type="Resource" id="Resource_1yhuo"]
+script = ExtResource("3_sghuv")
+parent_pathes = Array[NodePath]([NodePath("")])
+presets = Array[int]([6])
+termini = Array[Vector2]([Vector2(0, 0)])
+weights = Array[Vector2]([Vector2(1, 1)])
+
+[sub_resource type="Resource" id="Resource_l8gw0"]
+script = ExtResource("3_sghuv")
+parent_pathes = Array[NodePath]([NodePath("../Background")])
+presets = Array[int]([9])
+termini = Array[Vector2]([Vector2(0, 0)])
+weights = Array[Vector2]([Vector2(1, 1)])
+
+[sub_resource type="Resource" id="Resource_bjqe2"]
+script = ExtResource("3_sghuv")
+parent_pathes = Array[NodePath]([NodePath("../Top")])
+presets = Array[int]([3])
+termini = Array[Vector2]([Vector2(0, 0)])
+weights = Array[Vector2]([Vector2(1, 1)])
+
+[sub_resource type="Resource" id="Resource_dqs4w"]
+script = ExtResource("12_8w8fy")
+reference_node_pathes = Array[NodePath]([NodePath("../Buttons"), NodePath(""), NodePath("../../Top"), NodePath("../../Bottom")])
+multipliers = Array[Vector2]([Vector2(1, 0), Vector2(0, 1), Vector2(0, -1), Vector2(0, -1)])
+update_mode = 0
+
+[sub_resource type="Resource" id="Resource_5cfkd"]
+script = ExtResource("3_sghuv")
+parent_pathes = Array[NodePath]([NodePath("../Background")])
+presets = Array[int]([9])
+termini = Array[Vector2]([Vector2(0, 0)])
+weights = Array[Vector2]([Vector2(1, 1)])
+
+[sub_resource type="Resource" id="Resource_x2pq6"]
+script = ExtResource("11_f7a0m")
+margin_reference_path = NodePath("")
+trim_reference_margin = true
+margin_left = 0.1
+margin_top = 0.0
+margin_right = 0.1
+margin_bottom = 0.0
+
+[sub_resource type="Resource" id="Resource_pxn86"]
+script = ExtResource("11_f7a0m")
+margin_reference_path = NodePath("")
+trim_reference_margin = true
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 0.0
+margin_bottom = 0.1
+
+[sub_resource type="Resource" id="Resource_vb7cs"]
+script = ExtResource("8_n1at1")
+mode = 0
+direction = 8
+margin = SubResource("Resource_pxn86")
+
+[sub_resource type="Resource" id="Resource_pfr81"]
+script = ExtResource("3_sghuv")
+parent_pathes = Array[NodePath]([NodePath("../Categories")])
+presets = Array[int]([2])
+termini = Array[Vector2]([Vector2(0, 0)])
+weights = Array[Vector2]([Vector2(1, 1)])
+
+[sub_resource type="Resource" id="Resource_y0pgj"]
+script = ExtResource("12_8w8fy")
+reference_node_pathes = Array[NodePath]([NodePath(""), NodePath("../Categories"), NodePath("../Top"), NodePath("../Bottom")])
+multipliers = Array[Vector2]([Vector2(1, 1), Vector2(-1, 0), Vector2(0, -1), Vector2(0, -1)])
+update_mode = 0
+
+[sub_resource type="Resource" id="Resource_dlo1q"]
+script = ExtResource("12_8w8fy")
+reference_node_pathes = Array[NodePath]([NodePath("..")])
+multipliers = Array[Vector2]([Vector2(1, 0)])
+update_mode = 1
+
+[sub_resource type="Resource" id="Resource_1cynn"]
+script = ExtResource("8_n1at1")
+mode = 0
+direction = 8
+
+[sub_resource type="Resource" id="Resource_hbxyl"]
+script = ExtResource("3_sghuv")
+parent_pathes = Array[NodePath]([NodePath("")])
+presets = Array[int]([8])
+termini = Array[Vector2]([Vector2(0, 0)])
+weights = Array[Vector2]([Vector2(1, 1)])
+
+[sub_resource type="Resource" id="Resource_ji8md"]
+script = ExtResource("3_sghuv")
+parent_pathes = Array[NodePath]([NodePath("../Background")])
+presets = Array[int]([0])
+termini = Array[Vector2]([Vector2(0.4, 0.5)])
+weights = Array[Vector2]([Vector2(1, 1)])
+
+[sub_resource type="Resource" id="Resource_p55at"]
+script = ExtResource("3_sghuv")
+parent_pathes = Array[NodePath]([NodePath("../Background")])
+presets = Array[int]([0])
+termini = Array[Vector2]([Vector2(0.6, 0.5)])
+weights = Array[Vector2]([Vector2(1, 1)])
+
+[node name="SettingsMenu" type="Node2D"]
+visible = false
+script = ExtResource("1_oofce")
+open_animation = &"open_settings_menu"
+close_animation = &"close_settings_menu"
+reset_animation = &"reset_settings_menu"
+animations = Array[Animation]([ExtResource("2_t7fxx"), ExtResource("3_bayus"), ExtResource("4_7imtq")])
+
+[node name="SettingsManager" type="Node" parent="." node_paths=PackedStringArray("subdivision_parents")]
+script = ExtResource("5_lrdmq")
+settings_libraries = Array[ExtResource("6_dmkum")]([ExtResource("10_b7iei"), ExtResource("8_q8jkl"), ExtResource("8_qxumk"), ExtResource("8_1y35p"), ExtResource("10_ovanq"), ExtResource("12_1acb1")])
+display_scene = ExtResource("10_jq3ne")
+subdivision_scenes = Array[PackedScene]([ExtResource("6_e0mt1"), ExtResource("9_2kglf")])
+subdivision_parents = [NodePath("../Categories/Buttons"), NodePath("../SettingsList")]
+
+[node name="Top" type="Node2D" parent="."]
+z_index = 1
+script = ExtResource("2_nlmja")
+origin_preset = 2
+anchor = SubResource("Resource_1yhuo")
+
+[node name="Background" type="Node2D" parent="Top"]
+script = ExtResource("2_nlmja")
+scaling_mode = 1
+min_scale = Vector2(0, 1)
+scaling_step = Vector2(0, 1)
+
+[node name="Panel" type="Panel" parent="Top/Background"]
+custom_minimum_size = Vector2(1152, 96)
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Title" type="Node2D" parent="Top"]
+script = ExtResource("2_nlmja")
+origin_preset = 1
+anchor = SubResource("Resource_l8gw0")
+scaling_mode = 1
+keep_aspect_mode = 1
+scaling_step = Vector2(1, 1)
+
+[node name="Text" type="Label" parent="Top/Title"]
+custom_minimum_size = Vector2(0, 32)
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Settings"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Categories" type="Node2D" parent="." node_paths=PackedStringArray("ignore_children")]
+script = ExtResource("2_nlmja")
+anchor = SubResource("Resource_bjqe2")
+ignore_children = [NodePath("Buttons")]
+
+[node name="Background" type="Node2D" parent="Categories"]
+script = ExtResource("2_nlmja")
+size_reference = SubResource("Resource_dqs4w")
+resize_children = true
+
+[node name="Panel" type="Panel" parent="Categories/Background"]
+modulate = Color(1, 1, 1, 0.74902)
+offset_right = 201.6
+offset_bottom = 456.0
+
+[node name="Buttons" type="Node2D" parent="Categories"]
+script = ExtResource("18_w7dx1")
+origin_preset = 1
+anchor = SubResource("Resource_5cfkd")
+margin = SubResource("Resource_x2pq6")
+auto_anchor = SubResource("Resource_vb7cs")
+
+[node name="SettingsList" type="Node2D" parent="." node_paths=PackedStringArray("base_root", "scroll_root")]
+clip_children = 1
+script = ExtResource("17_j1fjx")
+base_root = NodePath("ScrollRoot")
+scroll_root = NodePath("ScrollRoot")
+scroll_amount = 10.0
+scroll_speed = 2.0
+anchor = SubResource("Resource_pfr81")
+size_reference = SubResource("Resource_y0pgj")
+
+[node name="ScrollRoot" type="Node2D" parent="SettingsList"]
+script = ExtResource("2_nlmja")
+size_reference = SubResource("Resource_dlo1q")
+auto_anchor = SubResource("Resource_1cynn")
+
+[node name="Bottom" type="Node2D" parent="." node_paths=PackedStringArray("ignore_children")]
+z_index = 1
+script = ExtResource("2_nlmja")
+origin_preset = 2
+anchor = SubResource("Resource_hbxyl")
+ignore_children = [NodePath("SaveButton"), NodePath("DiscardButton")]
+
+[node name="Background" type="Node2D" parent="Bottom"]
+script = ExtResource("2_nlmja")
+scaling_mode = 1
+min_scale = Vector2(0, 1)
+scaling_step = Vector2(0, 1)
+
+[node name="Panel" type="Panel" parent="Bottom/Background"]
+custom_minimum_size = Vector2(1152, 96)
+offset_right = 1152.0
+offset_bottom = 96.0
+
+[node name="SaveButton" parent="Bottom" instance=ExtResource("23_t80dd")]
+text = "Save"
+origin = Vector2(1, 0.5)
+anchor = SubResource("Resource_ji8md")
+
+[node name="DiscardButton" parent="Bottom" instance=ExtResource("23_t80dd")]
+text = "Discard"
+origin = Vector2(0, 0.5)
+anchor = SubResource("Resource_p55at")
+
+[connection signal="opened" from="." to="SettingsManager" method="_on_open"]
+[connection signal="opened" from="." to="SettingsList" method="_on_menu_open"]
+[connection signal="pressed" from="Bottom/SaveButton" to="." method="_on_close_button"]
+[connection signal="pressed" from="Bottom/SaveButton" to="SettingsManager" method="_on_save"]
+[connection signal="pressed" from="Bottom/DiscardButton" to="." method="_on_close_button"]
+[connection signal="pressed" from="Bottom/DiscardButton" to="SettingsManager" method="_on_discard"]

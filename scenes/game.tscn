@@ -8,10 +8,10 @@
 [ext_resource type="Resource" uid="uid://c87naguy1lpiv" path="res://resources/blocks/wood_planks.tres" id="5_gb8ov"]
 [ext_resource type="Script" path="res://scripts/!resources/blocks/block_library.gd" id="6_tpeah"]
 [ext_resource type="Script" path="res://scripts/ui/ui.gd" id="7_r4xal"]
-[ext_resource type="Texture2D" uid="uid://bvh7iyhap4tlx" path="res://assets/textures/gui/crosshair.png" id="8_v0mou"]
-[ext_resource type="PackedScene" uid="uid://ce27hgsvrniyy" path="res://scenes/menus/pause_menu.tscn" id="9_kbavh"]
+[ext_resource type="Texture2D" uid="uid://bvh7iyhap4tlx" path="res://assets/textures/ui/crosshair.png" id="8_v0mou"]
+[ext_resource type="PackedScene" uid="uid://ce27hgsvrniyy" path="res://scenes/ui/menus/pause_menu.tscn" id="9_kbavh"]
 [ext_resource type="Script" path="res://scripts/ui/ui_background.gd" id="10_cejru"]
-[ext_resource type="PackedScene" uid="uid://cs21mrh4n83vi" path="res://scenes/menus/settings_menu.tscn" id="10_je5kd"]
+[ext_resource type="PackedScene" uid="uid://cs21mrh4n83vi" path="res://scenes/ui/menus/settings_menu.tscn" id="10_je5kd"]
 [ext_resource type="AudioStream" uid="uid://c01whwwsu4sgy" path="res://assets/audio/music/overworld_1.wav" id="11_hx4m0"]
 
 [sub_resource type="Resource" id="Resource_mslo1"]

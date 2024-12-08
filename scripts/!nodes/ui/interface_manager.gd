@@ -143,6 +143,7 @@ func _create_update_packet(interface: Interface) -> InterfaceUpdatePacket:
 	for i in 2: for child in interface.filter_children(Interface.ChildFilter.INTERFACE):
 		# The multiple operations on size_reference.multipliers is to convert it to a boolean.
 		if interface.size_reference and Vectors.sum_array(Vectors.abs_array(interface.size_reference.multipliers))[i]: continue
+		if interface.size_override[i]: continue
 		if not get_missing_components(child, [i, i + 2]): continue
 		update_packet.components = SC.erase_array(update_packet.components, [i, i + 2])
 	

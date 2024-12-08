@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="SettingsLibrary" load_steps=5 format=3 uid="uid://f04xospd5q7q"]
+
+[ext_resource type="Script" path="res://scripts/!resources/settings/settings_library.gd" id="1_sa01r"]
+[ext_resource type="Script" path="res://scripts/!resources/settings/setting.gd" id="2_fdn6v"]
+
+[sub_resource type="Resource" id="Resource_dhuul"]
+script = ExtResource("2_fdn6v")
+property = &"shadow_enabled"
+type = 0
+name_override = "Enabled"
+subdivision_ids = Array[StringName]([&"graphics", &"shadows"])
+
+[sub_resource type="Resource" id="Resource_mimkb"]
+script = ExtResource("2_fdn6v")
+property = &"shadow_opacity"
+type = 2
+name_override = "Opacity"
+subdivision_ids = Array[StringName]([&"graphics", &"shadows"])
+
+[resource]
+script = ExtResource("1_sa01r")
+object_path = NodePath("Game/World/Environment/SkyLight")
+settings = Array[ExtResource("2_fdn6v")]([SubResource("Resource_dhuul"), SubResource("Resource_mimkb")])

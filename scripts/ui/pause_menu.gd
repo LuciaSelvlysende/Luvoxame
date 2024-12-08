@@ -1,4 +1,4 @@
-class_name PauseMenuScript_Lvx
+class_name PauseMenu_Lvx
 extends Menu
 
 ## Script for the pause menu.

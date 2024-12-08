@@ -1,4 +1,4 @@
-class_name UIBackgroundScript_Lvx
+class_name UIBackground_Lvx
 extends Panel
 
 ## The default background used while a [Menu] is opened.

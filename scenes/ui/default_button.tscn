@@ -1,0 +1,47 @@
+[gd_scene load_steps=8 format=3 uid="uid://ck1mnq1wjsx4b"]
+
+[ext_resource type="Script" path="res://scripts/!nodes/ui/interface.gd" id="1_a5ncc"]
+[ext_resource type="Script" path="res://scripts/ui/default_button.gd" id="1_hjqf8"]
+[ext_resource type="Texture2D" uid="uid://dwfis4bt0gggs" path="res://assets/textures/ui/button.png" id="3_ptkap"]
+[ext_resource type="Texture2D" uid="uid://xcu4sy1esbc3" path="res://assets/textures/ui/button_hovered.png" id="4_gbn1x"]
+[ext_resource type="Texture2D" uid="uid://dgxuxq0cfym44" path="res://assets/textures/ui/button_pressed.png" id="4_h0fem"]
+[ext_resource type="Script" path="res://scripts/!resources/ui/interfaces/anchor.gd" id="4_jr2o2"]
+
+[sub_resource type="Resource" id="Resource_sogbg"]
+script = ExtResource("4_jr2o2")
+parent_pathes = Array[NodePath]([NodePath("../Button")])
+presets = Array[int]([6])
+termini = Array[Vector2]([Vector2(0, 0)])
+weights = Array[Vector2]([Vector2(1, 1)])
+
+[node name="DefaultButton" type="Node2D" node_paths=PackedStringArray("label")]
+script = ExtResource("1_hjqf8")
+label = NodePath("Text/Label")
+scaling_mode = 1
+keep_aspect_mode = 1
+scaling_step = Vector2(1, 1)
+
+[node name="Button" type="Node2D" parent="."]
+script = ExtResource("1_a5ncc")
+
+[node name="TextureButton" type="TextureButton" parent="Button"]
+offset_right = 168.0
+offset_bottom = 25.0
+texture_normal = ExtResource("3_ptkap")
+texture_pressed = ExtResource("4_h0fem")
+texture_hover = ExtResource("4_gbn1x")
+
+[node name="Text" type="Node2D" parent="."]
+script = ExtResource("1_a5ncc")
+origin_preset = 2
+anchor = SubResource("Resource_sogbg")
+
+[node name="Label" type="Label" parent="Text"]
+custom_minimum_size = Vector2(168, 22)
+offset_right = 40.0
+offset_bottom = 14.0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="button_down" from="Button/TextureButton" to="." method="_on_button_down"]
+[connection signal="button_up" from="Button/TextureButton" to="." method="_on_button_up"]

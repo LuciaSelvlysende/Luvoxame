@@ -1,4 +1,4 @@
-class_name SettingsMenuScript_Lvx
+class_name SettingsMenu_Lvx
 extends Menu
 
 ## Script for the SettingsMenu, does almost nothing.

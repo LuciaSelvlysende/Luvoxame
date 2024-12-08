@@ -1,4 +1,4 @@
-class_name PlayerInteractionScript_Lvx
+class_name PlayerInteraction_Lvx
 extends Node3D
 
 ## Script that handles player interaction with voxels.
