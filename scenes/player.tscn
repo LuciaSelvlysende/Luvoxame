@@ -49,7 +49,6 @@ player = NodePath("..")
 
 [node name="VoxelViewer" type="VoxelViewer" parent="Camera"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.637772, 0)
-view_distance = 256
 
 [node name="Interaction" type="Node3D" parent="Camera" node_paths=PackedStringArray("camera", "cooldown", "preview") groups=["PlayerTick"]]
 script = ExtResource("3_7rik1")

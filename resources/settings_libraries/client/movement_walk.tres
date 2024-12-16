@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="SettingsLibrary" load_steps=4 format=3 uid="uid://dgyjvqbqscnne"]
+
+[ext_resource type="Script" path="res://scripts/!resources/settings/settings_library.gd" id="1_x062o"]
+[ext_resource type="Script" path="res://scripts/!resources/settings/setting.gd" id="2_6vt7b"]
+
+[sub_resource type="Resource" id="Resource_vgp7a"]
+script = ExtResource("2_6vt7b")
+property = &"speed"
+type = 4
+name_override = ""
+subdivision_ids = Array[StringName]([&"gameplay", &"player_movement"])
+
+[resource]
+script = ExtResource("1_x062o")
+object_path = NodePath("Game/World/Player:walk_resource")
+settings = Array[ExtResource("2_6vt7b")]([SubResource("Resource_vgp7a")])

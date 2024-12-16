@@ -12,6 +12,7 @@ signal pressed
 
 @export_group("Node Connections")
 @export var label: Label
+@export var button: BaseButton
 
 
 func _on_button_up() -> void:
@@ -21,3 +22,11 @@ func _on_button_up() -> void:
 
 func _on_button_down() -> void:
 	label.position += Vector2.DOWN
+
+
+func disable() -> void:
+	button.disabled = true
+
+
+func enable() -> void:
+	button.disabled = false

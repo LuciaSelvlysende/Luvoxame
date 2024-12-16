@@ -1,0 +1,43 @@
+[gd_resource type="Resource" script_class="Block" load_steps=10 format=3 uid="uid://bivb1uijuvo2q"]
+
+[ext_resource type="Script" path="res://scripts/!resources/blocks/block.gd" id="1_6rd5l"]
+[ext_resource type="Script" path="res://scripts/!resources/blocks/block_variant.gd" id="2_alj1x"]
+[ext_resource type="ArrayMesh" uid="uid://4by480xqwb82" path="res://assets/models/full.obj" id="3_xeith"]
+[ext_resource type="Image" uid="uid://kcf7mrb0cbxj" path="res://assets/textures/blocks/cobblestone.png" id="4_gbb60"]
+[ext_resource type="ArrayMesh" uid="uid://c4vi5xe73r357" path="res://assets/models/slab.obj" id="5_hdvij"]
+[ext_resource type="ArrayMesh" uid="uid://cj0n2i85r6i51" path="res://assets/models/stair.obj" id="6_07o24"]
+
+[sub_resource type="Resource" id="Resource_qf8gd"]
+script = ExtResource("2_alj1x")
+id = &"full"
+textures = Array[Image]([ExtResource("4_gbb60")])
+base_mesh = ExtResource("3_xeith")
+collision_use_mesh = true
+rotations = Array[Quaternion]([])
+rotation_preset = 0
+attributes = Array[int]([])
+
+[sub_resource type="Resource" id="Resource_eytqf"]
+script = ExtResource("2_alj1x")
+id = &"slab"
+textures = Array[Image]([ExtResource("4_gbb60")])
+base_mesh = ExtResource("5_hdvij")
+collision_use_mesh = true
+rotations = Array[Quaternion]([])
+rotation_preset = 3
+attributes = Array[int]([0])
+
+[sub_resource type="Resource" id="Resource_50ek0"]
+script = ExtResource("2_alj1x")
+id = &"stair"
+textures = Array[Image]([ExtResource("4_gbb60")])
+base_mesh = ExtResource("6_07o24")
+collision_use_mesh = true
+rotations = Array[Quaternion]([])
+rotation_preset = 4
+attributes = Array[int]([0])
+
+[resource]
+script = ExtResource("1_6rd5l")
+id = &"cobblestone"
+variants = Array[ExtResource("2_alj1x")]([SubResource("Resource_qf8gd"), SubResource("Resource_eytqf"), SubResource("Resource_50ek0")])

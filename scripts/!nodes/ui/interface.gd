@@ -57,6 +57,8 @@ enum KeepAspectModes {
 	Y_CONTROLS_X,  ## Both scale components will be set to [code]scale.y[/code].
 }
 
+@export var testing: bool = false
+
 @export_group("Anchoring")
 @export var origin_preset: OriginPresets  ## Various presets that determine the [member origin] of the Interface.
 @export var origin: Vector2 = Vector2.ZERO  ## The origin point used for anchoring. Units are relative to the Interface's size.
@@ -158,6 +160,10 @@ func _get_combined_children_size():
 	for child in filter_children(ChildFilter.BOTH):
 		if trim_hidden and not child.visible: continue
 		child_rect = child.get_rect(trim_margins) if child is Interface else Rect2(Vector2.ZERO, child.size)
+		
+		if child is Interface and child._margin_adjusted:
+			child_rect.position -= base_rect.position
+		
 		rect = child_rect if child == filter_children(ChildFilter.BOTH).front() else rect.merge(child_rect)
 	
 	return rect.size
@@ -196,7 +202,7 @@ func _update_scale() -> void:
 		KeepAspectModes.DISABLED: scale = window_scale
 		KeepAspectModes.X_CONTROLS_Y: scale.y = window_scale.x
 		KeepAspectModes.Y_CONTROLS_X: scale.x = window_scale.y
-		KeepAspectModes.GREATER: 
+		KeepAspectModes.GREATER:
 			scale = Vectors.eq2(window_scale.x) if window_scale.x > window_scale.y else Vectors.eq2(window_scale.y)
 		KeepAspectModes.LESSER:
 			scale = Vectors.eq2(window_scale.x) if window_scale.x < window_scale.y else Vectors.eq2(window_scale.y)

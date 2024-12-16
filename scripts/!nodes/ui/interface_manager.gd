@@ -15,7 +15,7 @@ extends CanvasLayer
 @export var default_window_size: Vector2 = Vector2(1152, 648)  ## The window size that UI is designed for. Window scale is based on this.
 @export var min_window_size: Vector2 = Vector2.ZERO  ## Sets [member Window.min_size].
 
-var interfaces: Dictionary = {}  ## Stores all [Interface]s the InterfaceManager is responsible for, organized by [Menu].
+var interfaces: Array[Interface]
 var update_queue: Array[InterfaceUpdatePacket] = []  ## Stores the order in which Interfaces should update.
 var window_size: Vector2 = Vector2.ZERO  ## The current window size, equal to [member Window.size].
 
@@ -30,27 +30,18 @@ func _ready() -> void:
 	get_viewport().size_changed.connect(update)
 	
 	for node in SC.get_decendents(self):
-		add_node(node)
+		if not node is Interface: continue
+		interfaces.append(node)
+		node.prepare(self)
 	
 	prepare()
 
 
 func _on_new_node(node: Node) -> void:
 	if not node is Interface: return
-	add_node(node)
-	prepare()
-
-
-## If compatible, adds a node to [param interfaces].
-func add_node(node: Node) -> void:
-	if not node is Interface: return
-	
-	if node is Menu:
-		_add_menu(node)
-	else:
-		_add_interface(node)
-	
+	interfaces.append(node)
 	node.prepare(self)
+	prepare()
 
 
 ## Addes [InterfaceUpdatePacket]s to [member update_queue] in the right order. 
@@ -58,16 +49,11 @@ func create_update_queue() -> void:
 	while not _is_queue_complete(): 
 		var previous_update_queue: Array[InterfaceUpdatePacket] = update_queue.duplicate()
 		
-		for interface in get_interfaces_array():
+		for interface in interfaces:
 			update_queue.append(_create_update_packet(interface))
 			update_queue.erase(null)  # Sometimes an update packet is invalid and returns null.
 		
 		if update_queue == previous_update_queue: break  # Prevents infinite loops.
-
-
-## Returns an array of all [Interface]s in the [param interfaces], including [Menu]s.
-func get_interfaces_array() -> Array:
-	return interfaces.keys() + SC.merged_nested_arrays(interfaces.values())
 
 
 ## Checks if [member update_queue] has all [param components] for [param interface].
@@ -94,39 +80,24 @@ func get_packets(interface: Interface, components: Array[int] = [0, 1, 2, 3]) ->
 ## Sets up the InterfaceManager. Should be called at the start of the game and when a new Interface is added.
 func prepare() -> void:
 	create_update_queue()
-	update(default_window_size)  # Interfaces need to update at the default window size once to be fully set up.
+	update([], default_window_size)  # Interfaces need to update at the default window size once to be fully set up.
 	update()
 
 
 ## Updates all [Interface]s that the InterfaceManager is responsible for.
-func update(override_window_size: Vector2 = Vector2.ZERO) -> void:
+func update(target_interfaces: Array[Interface] = [], override_window_size: Vector2 = Vector2.ZERO) -> void:
 	window_size = override_window_size if override_window_size else window.size 
 	
 	for update_packet in update_queue:
+		if target_interfaces and not target_interfaces.has(update_packet.interface): continue
 		update_packet.interface.update()
 	
 	# Set base_size for size references. While this isn't an intuitive place to
 	# do it, this seems to be the best option.
-	for interface in get_interfaces_array():
+	for interface in interfaces:
 		if not interface.size_reference: continue
 		if interface.size_reference.base_size: continue
 		interface.size_reference.base_size = interface.size
-
-
-# Helper function for add_node().
-func _add_interface(interface: Interface) -> void:
-	for ancestor in SC.reversed_array(SC.get_ancestors(interface)):
-		if not interfaces.keys().has(ancestor) or interfaces[ancestor].has(interface): continue
-		interfaces[ancestor].append(interface)
-
-
-# Helper function for add_node().
-func _add_menu(menu: Menu) -> void:
-	interfaces[menu] = []
-	
-	for decendent in SC.get_decendents(menu):
-		if not decendent is Interface: continue
-		interfaces[menu].append(decendent)
 
 
 # Helper function for create_update_queue().
@@ -152,7 +123,7 @@ func _create_update_packet(interface: Interface) -> InterfaceUpdatePacket:
 
 # Helper function for create_update_queue().
 func _is_queue_complete() -> bool:
-	for interface in get_interfaces_array():
+	for interface in interfaces:
 		if get_missing_components(interface, [0, 1, 2, 3]): return false
 	
 	return true

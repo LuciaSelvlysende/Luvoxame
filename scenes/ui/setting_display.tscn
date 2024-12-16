@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dfl2yw0v06h6e"]
+[gd_scene load_steps=34 format=3 uid="uid://dfl2yw0v06h6e"]
 
 [ext_resource type="Script" path="res://scripts/!nodes/ui/interfaces/setting_display.gd" id="1_ntl45"]
 [ext_resource type="Script" path="res://scripts/!nodes/ui/interface.gd" id="2_24ohc"]
@@ -7,18 +7,13 @@
 [ext_resource type="Script" path="res://scripts/ui/Display Inputs/toggle_input.gd" id="5_o6bek"]
 [ext_resource type="Script" path="res://scripts/ui/Display Inputs/dropdown_input.gd" id="6_aw2h5"]
 [ext_resource type="Script" path="res://scripts/ui/Display Inputs/text_line_input.gd" id="8_2tagn"]
+[ext_resource type="Script" path="res://scripts/ui/Display Inputs/vector_input.gd" id="9_pb62y"]
 [ext_resource type="Script" path="res://scripts/ui/Display Inputs/number_input.gd" id="10_1j7ao"]
+[ext_resource type="Texture2D" uid="uid://cyumclro66ts7" path="res://assets/textures/ui/text_box_micro.png" id="10_pqp1y"]
 [ext_resource type="Script" path="res://scripts/ui/Display Inputs/number_input_slider.gd" id="11_lonql"]
 [ext_resource type="Script" path="res://scripts/ui/Display Inputs/number_input_box.gd" id="12_nm100"]
-
-[sub_resource type="Resource" id="Resource_7fxkd"]
-script = ExtResource("4_d008l")
-margin_reference_path = NodePath("MarginReference")
-trim_reference_margin = true
-margin_left = 0.25
-margin_top = 0.25
-margin_right = 0.25
-margin_bottom = 0.25
+[ext_resource type="Script" path="res://scripts/ui/Display Inputs/input_input.gd" id="13_1vru3"]
+[ext_resource type="PackedScene" uid="uid://ck1mnq1wjsx4b" path="res://scenes/ui/default_button.tscn" id="14_dv8by"]
 
 [sub_resource type="Resource" id="Resource_m7d2k"]
 resource_local_to_scene = true
@@ -33,10 +28,10 @@ resource_local_to_scene = true
 script = ExtResource("4_d008l")
 margin_reference_path = NodePath("../MarginReference")
 trim_reference_margin = true
-margin_left = 0.25
-margin_top = 0.25
-margin_right = 0.25
-margin_bottom = 0.25
+margin_left = 0.5
+margin_top = 0.2
+margin_right = 0.5
+margin_bottom = 0.2
 
 [sub_resource type="Resource" id="Resource_om2t4"]
 resource_local_to_scene = true
@@ -46,12 +41,19 @@ presets = Array[int]([7])
 termini = Array[Vector2]([Vector2(0, 0)])
 weights = Array[Vector2]([Vector2(1, 0)])
 
+[sub_resource type="Resource" id="Resource_w4qm5"]
+script = ExtResource("3_ujgvh")
+parent_pathes = Array[NodePath]([NodePath("../Box")])
+presets = Array[int]([9])
+termini = Array[Vector2]([Vector2(0, 0)])
+weights = Array[Vector2]([Vector2(0, 1)])
+
 [sub_resource type="Resource" id="Resource_5271t"]
 script = ExtResource("3_ujgvh")
 parent_pathes = Array[NodePath]([NodePath("../Slider")])
 presets = Array[int]([7])
 termini = Array[Vector2]([Vector2(0, 0)])
-weights = Array[Vector2]([Vector2(1, 1)])
+weights = Array[Vector2]([Vector2(1, 0)])
 
 [sub_resource type="Resource" id="Resource_upyip"]
 script = ExtResource("4_d008l")
@@ -62,12 +64,115 @@ margin_top = 0.0
 margin_right = 0.0
 margin_bottom = 0.0
 
+[sub_resource type="Resource" id="Resource_yi1hn"]
+script = ExtResource("3_ujgvh")
+parent_pathes = Array[NodePath]([NodePath("../LabelBox")])
+presets = Array[int]([9])
+termini = Array[Vector2]([Vector2(0, 0)])
+weights = Array[Vector2]([Vector2(1, 1)])
+
+[sub_resource type="Resource" id="Resource_fe2pp"]
+script = ExtResource("3_ujgvh")
+parent_pathes = Array[NodePath]([NodePath("../LabelBox")])
+presets = Array[int]([0])
+termini = Array[Vector2]([Vector2(0.958, 0.5)])
+weights = Array[Vector2]([Vector2(1, 1)])
+
+[sub_resource type="Resource" id="Resource_kg065"]
+script = ExtResource("4_d008l")
+margin_reference_path = NodePath("../../../MarginReference")
+trim_reference_margin = true
+margin_left = 0.125
+margin_top = 0.0
+margin_right = 0.0
+margin_bottom = 0.0
+
+[sub_resource type="Resource" id="Resource_yufw3"]
+script = ExtResource("3_ujgvh")
+parent_pathes = Array[NodePath]([NodePath("../LabelBox")])
+presets = Array[int]([9])
+termini = Array[Vector2]([Vector2(0, 0)])
+weights = Array[Vector2]([Vector2(1, 1)])
+
+[sub_resource type="Resource" id="Resource_drd2x"]
+script = ExtResource("3_ujgvh")
+parent_pathes = Array[NodePath]([NodePath("../LabelBox")])
+presets = Array[int]([0])
+termini = Array[Vector2]([Vector2(0.958, 0.5)])
+weights = Array[Vector2]([Vector2(1, 1)])
+
+[sub_resource type="Resource" id="Resource_ea5p7"]
+script = ExtResource("3_ujgvh")
+parent_pathes = Array[NodePath]([NodePath("../X")])
+presets = Array[int]([7])
+termini = Array[Vector2]([Vector2(0, 0)])
+weights = Array[Vector2]([Vector2(1, 0)])
+
+[sub_resource type="Resource" id="Resource_e8y0m"]
+script = ExtResource("4_d008l")
+margin_reference_path = NodePath("../../../MarginReference")
+trim_reference_margin = true
+margin_left = 0.125
+margin_top = 0.0
+margin_right = 0.0
+margin_bottom = 0.0
+
+[sub_resource type="Resource" id="Resource_01yxx"]
+script = ExtResource("3_ujgvh")
+parent_pathes = Array[NodePath]([NodePath("../LabelBox")])
+presets = Array[int]([9])
+termini = Array[Vector2]([Vector2(0, 0)])
+weights = Array[Vector2]([Vector2(1, 1)])
+
+[sub_resource type="Resource" id="Resource_4fmil"]
+script = ExtResource("3_ujgvh")
+parent_pathes = Array[NodePath]([NodePath("../LabelBox")])
+presets = Array[int]([0])
+termini = Array[Vector2]([Vector2(0.958, 0.5)])
+weights = Array[Vector2]([Vector2(1, 1)])
+
+[sub_resource type="Resource" id="Resource_1x6ql"]
+script = ExtResource("3_ujgvh")
+parent_pathes = Array[NodePath]([NodePath("../Y")])
+presets = Array[int]([7])
+termini = Array[Vector2]([Vector2(0, 0)])
+weights = Array[Vector2]([Vector2(1, 0)])
+
+[sub_resource type="Resource" id="Resource_s0ggt"]
+script = ExtResource("4_d008l")
+margin_reference_path = NodePath("../../../MarginReference")
+trim_reference_margin = true
+margin_left = 0.125
+margin_top = 0.0
+margin_right = 0.0
+margin_bottom = 0.0
+
+[sub_resource type="Resource" id="Resource_qawjs"]
+script = ExtResource("3_ujgvh")
+parent_pathes = Array[NodePath]([NodePath("../LabelBox")])
+presets = Array[int]([9])
+termini = Array[Vector2]([Vector2(0, 0)])
+weights = Array[Vector2]([Vector2(1, 1)])
+
+[sub_resource type="Resource" id="Resource_1ip7j"]
+script = ExtResource("3_ujgvh")
+parent_pathes = Array[NodePath]([NodePath("../LabelBox")])
+presets = Array[int]([0])
+termini = Array[Vector2]([Vector2(0.958, 0.5)])
+weights = Array[Vector2]([Vector2(1, 1)])
+
 [node name="SettingDisplay" type="Node2D" node_paths=PackedStringArray("label", "ignore_children")]
 script = ExtResource("1_ntl45")
 label = NodePath("Text/Label")
-margin = SubResource("Resource_7fxkd")
 trim_margins = false
 ignore_children = [NodePath("MarginReference")]
+
+[node name="MarginReference" type="Node2D" parent="."]
+visible = false
+script = ExtResource("2_24ohc")
+size_override = Vector2(24, 24)
+scaling_mode = 1
+scaling_step = Vector2(1, 1)
 
 [node name="Text" type="Node2D" parent="."]
 script = ExtResource("2_24ohc")
@@ -79,10 +184,11 @@ keep_aspect_mode = 1
 scaling_step = Vector2(1, 1)
 
 [node name="Label" type="Label" parent="Text"]
-offset_right = 40.0
-offset_bottom = 16.0
+offset_right = 21.0
+offset_bottom = 14.0
 text = "Test"
 vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="Input" type="Node2D" parent="."]
 script = ExtResource("2_24ohc")
@@ -95,11 +201,23 @@ scaling_step = Vector2(1, 1)
 
 [node name="ToggleInput" type="CheckButton" parent="Input"]
 visible = false
-offset_right = 44.0
+offset_right = 48.0
 offset_bottom = 24.0
 script = ExtResource("5_o6bek")
 
+[node name="DropdownInput" type="OptionButton" parent="Input"]
+visible = false
+offset_right = 64.0
+offset_bottom = 22.0
+item_count = 2
+popup/item_0/text = "Test I"
+popup/item_1/text = "Test II"
+popup/item_1/id = 1
+script = ExtResource("6_aw2h5")
+input_type = 1
+
 [node name="NumberInput" type="Node2D" parent="Input" node_paths=PackedStringArray("slider", "box")]
+visible = false
 script = ExtResource("10_1j7ao")
 input_type = 2
 slider = NodePath("Slider/HSlider")
@@ -107,36 +225,29 @@ box = NodePath("Box/SpinBox")
 
 [node name="Slider" type="Node2D" parent="Input/NumberInput"]
 script = ExtResource("2_24ohc")
+origin = Vector2(0, 0.5)
+anchor = SubResource("Resource_w4qm5")
 
 [node name="HSlider" type="HSlider" parent="Input/NumberInput/Slider"]
 custom_minimum_size = Vector2(120, 0)
 offset_right = 120.0
 offset_bottom = 16.0
 script = ExtResource("11_lonql")
+metadata/_edit_use_anchors_ = true
 
 [node name="Box" type="Node2D" parent="Input/NumberInput"]
 script = ExtResource("2_24ohc")
-origin_preset = 3
+testing = true
 anchor = SubResource("Resource_5271t")
 margin = SubResource("Resource_upyip")
 
 [node name="SpinBox" type="SpinBox" parent="Input/NumberInput/Box"]
 offset_right = 48.0
-offset_bottom = 22.0
+offset_bottom = 24.0
 alignment = 2
 select_all_on_focus = true
 script = ExtResource("12_nm100")
-
-[node name="DropdownInput" type="OptionButton" parent="Input"]
-visible = false
-offset_right = 32.0
-offset_bottom = 20.0
-item_count = 2
-popup/item_0/text = "Test I"
-popup/item_1/text = "Test II"
-popup/item_1/id = 1
-script = ExtResource("6_aw2h5")
-input_type = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="TextLineInput" type="LineEdit" parent="Input"]
 visible = false
@@ -145,25 +256,186 @@ offset_bottom = 24.0
 script = ExtResource("8_2tagn")
 input_type = 3
 
-[node name="MarginReference" type="Node2D" parent="."]
+[node name="VectorInput" type="Node2D" parent="Input" node_paths=PackedStringArray("input_w", "input_x", "input_y", "input_z")]
 visible = false
+script = ExtResource("9_pb62y")
+input_type = 4
+input_w = NodePath("W/Input/SpinBox")
+input_x = NodePath("X/Input/SpinBox")
+input_y = NodePath("Y/Input/SpinBox")
+input_z = NodePath("Z/Input/SpinBox")
+
+[node name="W" type="Node2D" parent="Input/VectorInput"]
 script = ExtResource("2_24ohc")
-size_override = Vector2(24, 24)
-scaling_mode = 1
-scaling_step = Vector2(1, 1)
+
+[node name="LabelBox" type="Node2D" parent="Input/VectorInput/W"]
+script = ExtResource("2_24ohc")
+
+[node name="TextureRect" type="TextureRect" parent="Input/VectorInput/W/LabelBox"]
+offset_right = 23.0
+offset_bottom = 24.0
+texture = ExtResource("10_pqp1y")
+
+[node name="Label" type="Node2D" parent="Input/VectorInput/W"]
+script = ExtResource("2_24ohc")
+origin_preset = 1
+anchor = SubResource("Resource_yi1hn")
+
+[node name="Label" type="Label" parent="Input/VectorInput/W/Label"]
+modulate = Color(1, 0.831719, 0.217234, 1)
+offset_right = 7.0
+offset_bottom = 14.0
+text = "W"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Input" type="Node2D" parent="Input/VectorInput/W"]
+script = ExtResource("2_24ohc")
+origin = Vector2(0, 0.5)
+anchor = SubResource("Resource_fe2pp")
+
+[node name="SpinBox" type="SpinBox" parent="Input/VectorInput/W/Input"]
+offset_right = 44.0
+offset_bottom = 22.0
+alignment = 2
+
+[node name="X" type="Node2D" parent="Input/VectorInput"]
+script = ExtResource("2_24ohc")
+margin = SubResource("Resource_kg065")
+
+[node name="LabelBox" type="Node2D" parent="Input/VectorInput/X"]
+script = ExtResource("2_24ohc")
+
+[node name="TextureRect" type="TextureRect" parent="Input/VectorInput/X/LabelBox"]
+offset_right = 23.0
+offset_bottom = 24.0
+texture = ExtResource("10_pqp1y")
+
+[node name="Label" type="Node2D" parent="Input/VectorInput/X"]
+script = ExtResource("2_24ohc")
+origin_preset = 1
+anchor = SubResource("Resource_yufw3")
+
+[node name="Label" type="Label" parent="Input/VectorInput/X/Label"]
+modulate = Color(1, 0.292756, 0.294352, 1)
+offset_right = 7.0
+offset_bottom = 14.0
+text = "X"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Input" type="Node2D" parent="Input/VectorInput/X"]
+script = ExtResource("2_24ohc")
+origin = Vector2(0, 0.5)
+anchor = SubResource("Resource_drd2x")
+
+[node name="SpinBox" type="SpinBox" parent="Input/VectorInput/X/Input"]
+offset_right = 44.0
+offset_bottom = 22.0
+alignment = 2
+
+[node name="Y" type="Node2D" parent="Input/VectorInput"]
+script = ExtResource("2_24ohc")
+anchor = SubResource("Resource_ea5p7")
+margin = SubResource("Resource_e8y0m")
+
+[node name="LabelBox" type="Node2D" parent="Input/VectorInput/Y"]
+script = ExtResource("2_24ohc")
+
+[node name="TextureRect" type="TextureRect" parent="Input/VectorInput/Y/LabelBox"]
+offset_right = 23.0
+offset_bottom = 24.0
+texture = ExtResource("10_pqp1y")
+
+[node name="Label" type="Node2D" parent="Input/VectorInput/Y"]
+script = ExtResource("2_24ohc")
+origin_preset = 1
+anchor = SubResource("Resource_01yxx")
+
+[node name="Label" type="Label" parent="Input/VectorInput/Y/Label"]
+modulate = Color(0.569396, 1, 0.389748, 1)
+offset_right = 7.0
+offset_bottom = 14.0
+text = "Y"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Input" type="Node2D" parent="Input/VectorInput/Y"]
+script = ExtResource("2_24ohc")
+origin = Vector2(0, 0.5)
+anchor = SubResource("Resource_4fmil")
+
+[node name="SpinBox" type="SpinBox" parent="Input/VectorInput/Y/Input"]
+offset_right = 44.0
+offset_bottom = 22.0
+alignment = 2
+
+[node name="Z" type="Node2D" parent="Input/VectorInput"]
+script = ExtResource("2_24ohc")
+anchor = SubResource("Resource_1x6ql")
+margin = SubResource("Resource_s0ggt")
+
+[node name="LabelBox" type="Node2D" parent="Input/VectorInput/Z"]
+script = ExtResource("2_24ohc")
+
+[node name="TextureRect" type="TextureRect" parent="Input/VectorInput/Z/LabelBox"]
+offset_right = 23.0
+offset_bottom = 24.0
+texture = ExtResource("10_pqp1y")
+
+[node name="Label" type="Node2D" parent="Input/VectorInput/Z"]
+script = ExtResource("2_24ohc")
+origin_preset = 1
+anchor = SubResource("Resource_qawjs")
+
+[node name="Label" type="Label" parent="Input/VectorInput/Z/Label"]
+modulate = Color(0.477451, 0.924669, 1, 1)
+offset_right = 7.0
+offset_bottom = 14.0
+text = "Z"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Input" type="Node2D" parent="Input/VectorInput/Z"]
+script = ExtResource("2_24ohc")
+origin = Vector2(0, 0.5)
+anchor = SubResource("Resource_1ip7j")
+
+[node name="SpinBox" type="SpinBox" parent="Input/VectorInput/Z/Input"]
+offset_right = 44.0
+offset_bottom = 22.0
+alignment = 2
+
+[node name="InputInput" type="Node2D" parent="Input" node_paths=PackedStringArray("button")]
+script = ExtResource("13_1vru3")
+input_type = 5
+button = NodePath("DefaultButton")
+
+[node name="DefaultButton" parent="Input/InputInput" instance=ExtResource("14_dv8by")]
+scaling_mode = 0
 
 [connection signal="input_selected" from="." to="Input/ToggleInput" method="_on_input_selected"]
-[connection signal="input_selected" from="." to="Input/NumberInput" method="_on_input_selected"]
 [connection signal="input_selected" from="." to="Input/DropdownInput" method="_on_input_selected"]
+[connection signal="input_selected" from="." to="Input/NumberInput" method="_on_input_selected"]
 [connection signal="input_selected" from="." to="Input/TextLineInput" method="_on_input_selected"]
+[connection signal="input_selected" from="." to="Input/VectorInput" method="_on_input_selected"]
+[connection signal="input_selected" from="." to="Input/InputInput" method="_on_input_selected"]
 [connection signal="load_display_value" from="." to="Input/ToggleInput" method="_on_load_value"]
-[connection signal="load_display_value" from="." to="Input/NumberInput" method="_on_load_value"]
 [connection signal="load_display_value" from="." to="Input/DropdownInput" method="_on_load_value"]
+[connection signal="load_display_value" from="." to="Input/NumberInput" method="_on_load_value"]
 [connection signal="load_display_value" from="." to="Input/TextLineInput" method="_on_load_value"]
+[connection signal="load_display_value" from="." to="Input/VectorInput" method="_on_load_value"]
+[connection signal="load_display_value" from="." to="Input/InputInput" method="_on_load_value"]
 [connection signal="toggled" from="Input/ToggleInput" to="." method="_on_input"]
+[connection signal="item_selected" from="Input/DropdownInput" to="." method="_on_input"]
 [connection signal="value_changed" from="Input/NumberInput/Slider/HSlider" to="." method="_on_input"]
 [connection signal="value_changed" from="Input/NumberInput/Slider/HSlider" to="Input/NumberInput/Box/SpinBox" method="_on_slider_input"]
 [connection signal="value_changed" from="Input/NumberInput/Box/SpinBox" to="." method="_on_input"]
 [connection signal="value_changed" from="Input/NumberInput/Box/SpinBox" to="Input/NumberInput/Slider/HSlider" method="_on_box_input"]
-[connection signal="item_selected" from="Input/DropdownInput" to="." method="_on_input"]
 [connection signal="text_submitted" from="Input/TextLineInput" to="." method="_on_input"]
+[connection signal="value_changed" from="Input/VectorInput" to="." method="_on_input"]
+[connection signal="value_changed" from="Input/VectorInput/W/Input/SpinBox" to="Input/VectorInput" method="_on_input"]
+[connection signal="value_changed" from="Input/VectorInput/X/Input/SpinBox" to="Input/VectorInput" method="_on_input"]
+[connection signal="value_changed" from="Input/VectorInput/Y/Input/SpinBox" to="Input/VectorInput" method="_on_input"]
+[connection signal="value_changed" from="Input/VectorInput/Z/Input/SpinBox" to="Input/VectorInput" method="_on_input"]
+[connection signal="pressed" from="Input/InputInput/DefaultButton" to="Input/InputInput" method="_on_input"]

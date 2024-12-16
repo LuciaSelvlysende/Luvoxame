@@ -21,6 +21,8 @@ signal closed  ## Emitted when the menu is closed.
 @export var reset_animation: StringName  ## The name of the animation that should be played immedietly after [member close_animation], resetting the menu to it's default state.
 @export var animations: Array[Animation]  ## Holds animations used by the menu, inlcuding those specified by [member open_animation], [member close_animation], [member reset_animation].
 
+var menu_manager: MenuManager
+
 var _animation_player: AnimationPlayer = AnimationPlayer.new()  # The animation player used to play animations for this menu.
 var _animation_library: AnimationLibrary = AnimationLibrary.new()  # The animation library used to store animations for this menu.
 
@@ -37,6 +39,9 @@ func _ready():
 
 ## Visually closes the menu. More functionality may be desired.
 func close() -> void:
+	#if self == menu_manager.root_menu:
+		#menu_manager.change_root_menu(self)
+	
 	if close_animation and reset_animation:
 		_animation_player.play(close_animation)
 		_animation_player.queue(reset_animation)

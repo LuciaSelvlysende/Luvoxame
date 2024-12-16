@@ -5,7 +5,7 @@ extends OptionButton
 @export var input_type: SettingDisplay.InputTypes
 
 
-func _on_input_selected(selected_type: SettingDisplay.InputTypes, property_info: Dictionary) -> void:
+func _on_input_selected(selected_type: SettingDisplay.InputTypes, _property_info: Dictionary) -> void:
 	visible = input_type == selected_type
 
 

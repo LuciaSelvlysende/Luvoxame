@@ -31,19 +31,28 @@ func connect_signals(manager: SettingsManager) -> void:
 
 ## Updates the display with the current values from the [object].
 func update() -> void:
-	confirmed_value = object.get(property)
+	if object.has_method("_load_setting"):
+		confirmed_value = object._load_setting(self)
+	else:
+		confirmed_value = object.get(property)
+	
 	display._load_display_value(confirmed_value)
 
 
 ## Saves the new settings and applies them to the [member object].
 func save() -> void:
-	confirmed_value = unconfirmed_value
-	object.set(property, confirmed_value)
+	if unconfirmed_value:
+		confirmed_value = unconfirmed_value
+	
+	if object.has_method("_save_setting"):
+		object._save_setting(self)
+	else:
+		object.set(property, confirmed_value)
 
 
 ## Does nothing, will be expanded upon later.
 func discard() -> void:
-	object.set(property, confirmed_value)  # Yes, this is nothing.
+	pass
 
 
 ## Gets a name for the [SettingDisplay].
@@ -52,7 +61,10 @@ func get_display_name() -> String:
 
 
 func get_property_info() -> Dictionary:
-	for property_dictionary in object.get_property_list():
-		if property_dictionary.name == property: return property_dictionary
+	if object.has_method("_get_setting_property_info"):
+		return object._get_setting_property_info(self)
+	else:
+		for property_dictionary in object.get_property_list():
+			if property_dictionary.name == property: return property_dictionary
 	
 	return Dictionary()

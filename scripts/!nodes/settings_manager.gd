@@ -35,10 +35,8 @@ func _ready():
 	for subdivision in subdivisions:
 		subdivision = []
 	
-	for setting in get_settings():
-		setting.connect_signals(self)
-		create_subdivision(setting)
-		create_display(setting)
+	for settings_library in settings_libraries:
+		add_settings_library(settings_library)
 	
 	if not get_tree().root.is_node_ready(): await get_tree().root.ready
 	ResourceInitializer.initialize_batch(get_tree().root, settings_libraries)
@@ -54,6 +52,16 @@ func _on_save() -> void:
 
 func _on_discard() -> void:
 	discard_settings.emit()
+
+
+func add_settings_library(settings_library: SettingsLibrary) -> void:
+	for setting in settings_library.settings:
+		setting.connect_signals(self)
+		create_subdivision(setting)
+		create_display(setting)
+	
+	if not settings_libraries.has(settings_library):
+		settings_libraries.append(settings_library)
 
 
 func create_display(setting: Setting) -> void:
@@ -86,15 +94,6 @@ func create_subdivision(setting: Setting) -> void:
 		subdivision_parents[index]._add_subdivision(subdivision)
 		subdivisions[index].append(subdivision)
 		setting.subdivisions[index] = subdivision
-
-
-func get_settings() -> Array[Setting]:
-	var settings: Array[Setting] = []
-	
-	for settings_library in settings_libraries:
-		settings.append_array(settings_library.settings)
-	
-	return settings
 
 
 func get_subdivision(index: int, id: StringName) -> Node:

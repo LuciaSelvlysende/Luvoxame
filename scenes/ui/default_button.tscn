@@ -14,9 +14,10 @@ presets = Array[int]([6])
 termini = Array[Vector2]([Vector2(0, 0)])
 weights = Array[Vector2]([Vector2(1, 1)])
 
-[node name="DefaultButton" type="Node2D" node_paths=PackedStringArray("label")]
+[node name="DefaultButton" type="Node2D" node_paths=PackedStringArray("label", "button")]
 script = ExtResource("1_hjqf8")
 label = NodePath("Text/Label")
+button = NodePath("Button/TextureButton")
 scaling_mode = 1
 keep_aspect_mode = 1
 scaling_step = Vector2(1, 1)

@@ -93,6 +93,7 @@ environment = SubResource("Environment_n3lhx")
 [node name="SkyLight" type="DirectionalLight3D" parent="Environment"]
 transform = Transform3D(0.96669, 0.135729, -0.217, 0, 0.847817, 0.530289, 0.255952, -0.512625, 0.819576, 0, 0, 0)
 light_color = Color(0.901961, 0.780392, 0.721569, 1)
+light_energy = 0.6
 light_angular_distance = 0.5
 shadow_opacity = 0.75
 
@@ -104,6 +105,7 @@ tick_speed = 20.0
 [node name="VoxelTerrain" type="VoxelTerrain" parent="."]
 generator = SubResource("VoxelGeneratorGraph_522jk")
 mesher = SubResource("VoxelMesherBlocky_wyrrm")
+max_view_distance = 384
 script = ExtResource("3_kpafy")
 
 [node name="Player" parent="." instance=ExtResource("8_usu38")]

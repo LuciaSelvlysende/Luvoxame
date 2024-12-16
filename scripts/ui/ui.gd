@@ -1,5 +1,5 @@
 class_name UI_Lvx
-extends InterfaceManager
+extends MenuManager
 
 ## A more advanced [InterfaceManager] specialized for Luvoxame.
 ##
@@ -17,38 +17,59 @@ func _unhandled_input(event):
 		get_window().mode = SC.toggle(get_window().mode, Window.MODE_WINDOWED, Window.MODE_FULLSCREEN)
 	
 	if event.is_action_pressed("escape"):
-		if not active_menu:
-			open_menu(escape_menu)
-		elif active_menu == escape_menu:
-			close_menu(escape_menu)
+		if root_menu:
+			change_root_menu()
 		else:
-			close_menu(active_menu)
+			change_root_menu(escape_menu)
+		
+		#if not active_menu:
+			#open_menu(escape_menu)
+		#elif active_menu == escape_menu:
+			#close_menu(escape_menu)
+		#else:
+			#close_menu(active_menu)
 
 
-## Opens a [Menu], closing the currently [member active_menu], and making the provided [param menu] the new [member active_menu].
-func open_menu(menu: Menu) -> void:
-	if active_menu:
-		active_menu.close()
+func _on_new_root(new_root: Menu) -> void:
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE if new_root.show_mouse else Input.MOUSE_MODE_CAPTURED
+	get_tree().paused = new_root.pause_game
 	
-	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE if menu.show_mouse else Input.MOUSE_MODE_CAPTURED
-	get_tree().paused = menu.pause_game
-	
-	if menu.use_background:
+	if new_root.use_background:
 		background.open()
 	else:
 		background.close()
-	
-	menu.open()
-	active_menu = menu
+
+
+func _on_null_root() -> void:
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	get_tree().paused = false
+	background.close()
+
+
+## Opens a [Menu], closing the currently [member active_menu], and making the provided [param menu] the new [member active_menu].
+#func open_menu(menu: Menu) -> void:
+	#if active_menu:
+		#active_menu.close()
+	#
+	#Input.mouse_mode = Input.MOUSE_MODE_VISIBLE if menu.show_mouse else Input.MOUSE_MODE_CAPTURED
+	#get_tree().paused = menu.pause_game
+	#
+	#if menu.use_background:
+		#background.open()
+	#else:
+		#background.close()
+	#
+	#menu.open()
+	#active_menu = menu
 
 
 ## Closes the provided [param menu], and opens that menu's [member Menu.close_destination] menu.
-func close_menu(menu: Menu) -> void:
-	if menu.close_destination:
-		open_menu(menu.close_destination)
-	else:  # This occurs when all menus are closed.
-		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-		get_tree().paused = false
-		background.close()
-		menu.close()
-		active_menu = null
+#func close_menu(menu: Menu) -> void:
+	#if menu.close_destination:
+		#open_menu(menu.close_destination)
+	#else:  # This occurs when all menus are closed.
+		#Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+		#get_tree().paused = false
+		#background.close()
+		#menu.close()
+		#active_menu = null

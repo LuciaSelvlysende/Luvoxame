@@ -1,8 +1,11 @@
-[gd_resource type="Theme" load_steps=6 format=3 uid="uid://t3isi7ybcs74"]
+[gd_resource type="Theme" load_steps=19 format=3 uid="uid://t3isi7ybcs74"]
 
 [ext_resource type="FontFile" uid="uid://cpo5la27eij4x" path="res://assets/fonts/HelvetiPixel.ttf" id="1_0t8ih"]
 [ext_resource type="Texture2D" uid="uid://cuftmkjvboggo" path="res://assets/textures/ui/on.png" id="1_epivb"]
 [ext_resource type="Texture2D" uid="uid://b1fm1s85nknyv" path="res://assets/textures/ui/off.png" id="2_xdt5d"]
+[ext_resource type="Texture2D" uid="uid://b8cgmbvgmfx5w" path="res://assets/textures/ui/slider_grab.png" id="3_6qmkv"]
+[ext_resource type="Texture2D" uid="uid://dinqrxr6as055" path="res://assets/textures/ui/slider.png" id="4_crx5t"]
+[ext_resource type="Texture2D" uid="uid://j7ufaxcho6x2" path="res://assets/textures/ui/text_box_small.png" id="5_fwtbb"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lk1v6"]
 content_margin_left = 4.0
@@ -21,6 +24,39 @@ expand_margin_top = 2.0
 expand_margin_right = 2.0
 expand_margin_bottom = 2.0
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_g3v0w"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hipcr"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mehce"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0anhw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_16lny"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1fy5s"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4w36d"]
+bg_color = Color(0.760239, 0.764123, 0.910806, 0.156863)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1oaln"]
+bg_color = Color(0.760239, 0.764123, 0.910806, 0.156863)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_m50b6"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+texture = ExtResource("4_crx5t")
+modulate_color = Color(0.73535, 0.73535, 0.73535, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8g5jx"]
+texture = ExtResource("5_fwtbb")
+texture_margin_left = 4.0
+texture_margin_top = 3.0
+texture_margin_right = 4.0
+texture_margin_bottom = 3.0
+
 [sub_resource type="ImageTexture" id="ImageTexture_6biw6"]
 
 [resource]
@@ -29,4 +65,17 @@ default_font_size = 16
 Button/styles/focus = SubResource("StyleBoxFlat_lk1v6")
 CheckButton/icons/checked = ExtResource("1_epivb")
 CheckButton/icons/unchecked = ExtResource("2_xdt5d")
+CheckButton/styles/disabled = SubResource("StyleBoxEmpty_g3v0w")
+CheckButton/styles/focus = SubResource("StyleBoxEmpty_hipcr")
+CheckButton/styles/hover = SubResource("StyleBoxEmpty_mehce")
+CheckButton/styles/hover_pressed = SubResource("StyleBoxEmpty_0anhw")
+CheckButton/styles/normal = SubResource("StyleBoxEmpty_16lny")
+CheckButton/styles/pressed = SubResource("StyleBoxEmpty_1fy5s")
+HSlider/icons/grabber = ExtResource("3_6qmkv")
+HSlider/icons/grabber_disabled = ExtResource("3_6qmkv")
+HSlider/icons/grabber_highlight = ExtResource("3_6qmkv")
+HSlider/styles/grabber_area = SubResource("StyleBoxFlat_4w36d")
+HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_1oaln")
+HSlider/styles/slider = SubResource("StyleBoxTexture_m50b6")
+LineEdit/styles/normal = SubResource("StyleBoxTexture_8g5jx")
 SpinBox/icons/updown = SubResource("ImageTexture_6biw6")

@@ -10,6 +10,8 @@ enum InputTypes {
 	DROPDOWN,
 	SLIDER,
 	TEXT_LINE,
+	VECTOR,
+	INPUT,
 }
 
 @export var label: Label
@@ -41,3 +43,10 @@ func select_type() -> void:
 			input_selected.emit(InputTypes.SLIDER, property_info)
 		TYPE_STRING, TYPE_STRING_NAME: 
 			input_selected.emit(InputTypes.TEXT_LINE, property_info)
+		TYPE_VECTOR2, TYPE_VECTOR2I, TYPE_VECTOR3, TYPE_VECTOR3I:
+			input_selected.emit(InputTypes.VECTOR, property_info)
+	
+	if not property_info.type == TYPE_OBJECT: return
+	
+	if property_info.class_name == "InputEvent":
+		input_selected.emit(InputTypes.INPUT, property_info)
