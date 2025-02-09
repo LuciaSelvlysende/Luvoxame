@@ -1,0 +1,122 @@
+[gd_resource type="Resource" script_class="BlockLibrary" load_steps=21 format=3 uid="uid://qng2hx01nyki"]
+
+[ext_resource type="Script" path="res://scripts/voxels/block.gd" id="1_csxuu"]
+[ext_resource type="ArrayMesh" uid="uid://ccn2lqf32kcnq" path="res://assets/models/full.obj" id="2_0awv2"]
+[ext_resource type="Script" path="res://scripts/voxels/block_library.gd" id="2_ck55m"]
+[ext_resource type="Script" path="res://addons/lucia-utilities/resources/orthagonal_basis.gd" id="3_fasi3"]
+[ext_resource type="Image" uid="uid://bvibseuec5l0" path="res://assets/textures/dirt.png" id="4_utfgu"]
+[ext_resource type="Image" uid="uid://wpngu30mgxhn" path="res://assets/textures/stone.png" id="5_vkwi5"]
+[ext_resource type="ArrayMesh" uid="uid://bv068dynhgq0v" path="res://assets/models/stair.obj" id="6_idtwy"]
+[ext_resource type="ArrayMesh" uid="uid://dm5pt4gqwb2i4" path="res://assets/models/slab.obj" id="7_ap6no"]
+[ext_resource type="Image" uid="uid://biy1tc61n5pv8" path="res://assets/textures/cobblestone.png" id="8_1hp6r"]
+[ext_resource type="Image" uid="uid://kbpr1tvktt7m" path="res://assets/textures/wood_planks.png" id="9_iudih"]
+
+[sub_resource type="Resource" id="Resource_1oyv0"]
+resource_name = "Dirt"
+script = ExtResource("1_csxuu")
+id = &"dirt"
+attributes = Array[StringName]([])
+mesh = ExtResource("2_0awv2")
+textures = Array[Image]([ExtResource("4_utfgu")])
+rotation_preset = 0
+rotations = Array[ExtResource("3_fasi3")]([])
+
+[sub_resource type="Resource" id="Resource_dbyy6"]
+resource_name = "Stone"
+script = ExtResource("1_csxuu")
+id = &"stone"
+attributes = Array[StringName]([])
+mesh = ExtResource("2_0awv2")
+textures = Array[Image]([ExtResource("5_vkwi5")])
+rotation_preset = 0
+rotations = Array[ExtResource("3_fasi3")]([])
+
+[sub_resource type="Resource" id="Resource_idtg6"]
+resource_name = "Stone Stair"
+script = ExtResource("1_csxuu")
+id = &"%p_stair"
+base_block = SubResource("Resource_dbyy6")
+attributes = Array[StringName]([])
+mesh = ExtResource("6_idtwy")
+textures = Array[Image]([])
+rotation_preset = 3
+rotations = Array[ExtResource("3_fasi3")]([])
+
+[sub_resource type="Resource" id="Resource_1s2m7"]
+resource_name = "Stone Slab"
+script = ExtResource("1_csxuu")
+id = &"%p_slab"
+base_block = SubResource("Resource_dbyy6")
+attributes = Array[StringName]([])
+mesh = ExtResource("7_ap6no")
+textures = Array[Image]([])
+rotation_preset = 2
+rotations = Array[ExtResource("3_fasi3")]([])
+
+[sub_resource type="Resource" id="Resource_0q12t"]
+resource_name = "Cobblestone"
+script = ExtResource("1_csxuu")
+id = &"cobblestone"
+attributes = Array[StringName]([])
+mesh = ExtResource("2_0awv2")
+textures = Array[Image]([ExtResource("8_1hp6r")])
+rotation_preset = 0
+rotations = Array[ExtResource("3_fasi3")]([])
+
+[sub_resource type="Resource" id="Resource_d4xy8"]
+resource_name = "Cobblestone Stair"
+script = ExtResource("1_csxuu")
+id = &"%p_stair"
+base_block = SubResource("Resource_0q12t")
+attributes = Array[StringName]([])
+mesh = ExtResource("6_idtwy")
+textures = Array[Image]([])
+rotation_preset = 3
+rotations = Array[ExtResource("3_fasi3")]([])
+
+[sub_resource type="Resource" id="Resource_qgcpu"]
+resource_name = "Cobblestone Slab"
+script = ExtResource("1_csxuu")
+id = &"%p_slab"
+base_block = SubResource("Resource_0q12t")
+attributes = Array[StringName]([])
+mesh = ExtResource("7_ap6no")
+textures = Array[Image]([])
+rotation_preset = 2
+rotations = Array[ExtResource("3_fasi3")]([])
+
+[sub_resource type="Resource" id="Resource_k6i5a"]
+resource_name = "Wood Planks"
+script = ExtResource("1_csxuu")
+id = &"wood_planks"
+attributes = Array[StringName]([])
+mesh = ExtResource("2_0awv2")
+textures = Array[Image]([ExtResource("9_iudih")])
+rotation_preset = 0
+rotations = Array[ExtResource("3_fasi3")]([])
+
+[sub_resource type="Resource" id="Resource_737cc"]
+resource_name = "Wood Stair"
+script = ExtResource("1_csxuu")
+id = &"wood_stair"
+base_block = SubResource("Resource_k6i5a")
+attributes = Array[StringName]([])
+mesh = ExtResource("6_idtwy")
+textures = Array[Image]([])
+rotation_preset = 3
+rotations = Array[ExtResource("3_fasi3")]([])
+
+[sub_resource type="Resource" id="Resource_vamr2"]
+resource_name = "Wood Slab"
+script = ExtResource("1_csxuu")
+id = &"wood_slab"
+base_block = SubResource("Resource_k6i5a")
+attributes = Array[StringName]([])
+mesh = ExtResource("7_ap6no")
+textures = Array[Image]([])
+rotation_preset = 2
+rotations = Array[ExtResource("3_fasi3")]([])
+
+[resource]
+script = ExtResource("2_ck55m")
+blocks = Array[ExtResource("1_csxuu")]([SubResource("Resource_1oyv0"), SubResource("Resource_dbyy6"), SubResource("Resource_idtg6"), SubResource("Resource_1s2m7"), SubResource("Resource_0q12t"), SubResource("Resource_d4xy8"), SubResource("Resource_qgcpu"), SubResource("Resource_k6i5a"), SubResource("Resource_737cc"), SubResource("Resource_vamr2")])
