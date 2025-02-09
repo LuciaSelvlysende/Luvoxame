@@ -1,0 +1,14 @@
+[remap]
+
+importer="image"
+type="Image"
+uid="uid://wpngu30mgxhn"
+path="res://.godot/imported/stone.png-005a59f14bd4c49707ae6ded67307167.image"
+
+[deps]
+
+source_file="res://assets/textures/stone.png"
+dest_files=["res://.godot/imported/stone.png-005a59f14bd4c49707ae6ded67307167.image"]
+
+[params]
+

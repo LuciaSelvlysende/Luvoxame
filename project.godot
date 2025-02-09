@@ -8,26 +8,14 @@
 
 config_version=5
 
-[addons]
-
-resources_spreadsheet_view/array_color_tint=100.0
-resources_spreadsheet_view/color_rows=false
-resources_spreadsheet_view/array_min_width=128.0
-resources_spreadsheet_view/resource_preview_size=32.0
-resources_spreadsheet_view/clip_headers=false
-resources_spreadsheet_view/dupe_arrays=true
-resources_spreadsheet_view/context_menu_on_leftclick=false
-
 [application]
 
 config/name="Luvoxame"
-run/main_scene="res://scenes/game.tscn"
-config/features=PackedStringArray("4.3", "GL Compatibility")
-boot_splash/bg_color=Color(0.117, 0.13, 0.12935, 1)
-config/icon="res://z.misc/icon.png"
+config/features=PackedStringArray("4.3", "Forward Plus")
 
 [autoload]
 
+<<<<<<< Updated upstream
 SC="*res://scripts/!autoloads/shortcuts.gd"
 Math="*res://scripts/!autoloads/math.gd"
 Voxels="*res://scripts/!autoloads/voxels.gd"
@@ -184,3 +172,10 @@ textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
 environment/defaults/default_clear_color=Color(0.117647, 0.129412, 0.129412, 1)
+=======
+Voxels="*res://scripts/voxels/voxels.gd"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/script-ide/plugin.cfg")
+>>>>>>> Stashed changes
