@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/voxels/block.gd" id="1_csxuu"]
 [ext_resource type="ArrayMesh" uid="uid://ccn2lqf32kcnq" path="res://assets/models/full.obj" id="2_0awv2"]
 [ext_resource type="Script" path="res://scripts/voxels/block_library.gd" id="2_ck55m"]
-[ext_resource type="Script" path="res://addons/lucia-utilities/resources/orthagonal_basis.gd" id="3_fasi3"]
+[ext_resource type="Script" path="res://addons/lucia-utilities/resources/ortho_basis.gd" id="3_fasi3"]
 [ext_resource type="Image" uid="uid://bvibseuec5l0" path="res://assets/textures/dirt.png" id="4_utfgu"]
 [ext_resource type="Image" uid="uid://wpngu30mgxhn" path="res://assets/textures/stone.png" id="5_vkwi5"]
 [ext_resource type="ArrayMesh" uid="uid://bv068dynhgq0v" path="res://assets/models/stair.obj" id="6_idtwy"]

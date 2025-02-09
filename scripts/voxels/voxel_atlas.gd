@@ -17,7 +17,7 @@ static func create_atlas(block_library: BlockLibrary) -> Image:
 	for texture_size in textures.keys():
 		for texture in textures[texture_size]:
 			voxel_atlas.blit_rect(texture, Rect2i(Vector2i.ZERO, texture_size), atlas_position)
-			_record_texture_rect(block_library, texture, atlas_position)
+			#_record_texture_rect(block_library, texture, atlas_position)
 			atlas_position.x += texture_size.x
 			
 			atlas_position.x = 0
@@ -56,7 +56,7 @@ static func _get_textures(block_library: BlockLibrary) -> Dictionary:
 
 
 # Helper function for create_atlas(). Records the Rect2i that contains [param texture] for each block that uses [param texture].
-static func _record_texture_rect(block_library: BlockLibrary, texture: Image, position: Vector2i) -> void:
-	for block in block_library.blocks:
-		if not block.textures.has(texture): continue
-		block.texture_rects[block.textures.append]
+#static func _record_texture_rect(block_library: BlockLibrary, texture: Image, position: Vector2i) -> void:
+	#for block in block_library.blocks:
+		#if not block.textures.has(texture): continue
+		#block.texture_rects[block.textures.append]
