@@ -15,9 +15,9 @@
 resource_name = "Dirt"
 script = ExtResource("1_csxuu")
 id = &"dirt"
-attributes = Array[StringName]([])
 mesh = ExtResource("2_0awv2")
 textures = Array[Image]([ExtResource("4_utfgu")])
+texture_sides = Array[int]([0])
 rotation_preset = 0
 rotations = Array[int]([0])
 
@@ -25,9 +25,9 @@ rotations = Array[int]([0])
 resource_name = "Stone"
 script = ExtResource("1_csxuu")
 id = &"stone"
-attributes = Array[StringName]([])
 mesh = ExtResource("2_0awv2")
 textures = Array[Image]([ExtResource("5_vkwi5")])
+texture_sides = Array[int]([0])
 rotation_preset = 0
 rotations = Array[int]([0])
 
@@ -36,9 +36,9 @@ resource_name = "Stone Stair"
 script = ExtResource("1_csxuu")
 id = &"%p_stair"
 base_block = SubResource("Resource_dbyy6")
-attributes = Array[StringName]([])
 mesh = ExtResource("6_idtwy")
 textures = Array[Image]([])
+texture_sides = Array[int]([0])
 rotation_preset = 3
 rotations = Array[int]([0])
 
@@ -47,9 +47,9 @@ resource_name = "Stone Slab"
 script = ExtResource("1_csxuu")
 id = &"%p_slab"
 base_block = SubResource("Resource_dbyy6")
-attributes = Array[StringName]([])
 mesh = ExtResource("7_ap6no")
 textures = Array[Image]([])
+texture_sides = Array[int]([0])
 rotation_preset = 2
 rotations = Array[int]([0])
 
@@ -57,9 +57,9 @@ rotations = Array[int]([0])
 resource_name = "Cobblestone"
 script = ExtResource("1_csxuu")
 id = &"cobblestone"
-attributes = Array[StringName]([])
 mesh = ExtResource("2_0awv2")
 textures = Array[Image]([ExtResource("8_1hp6r")])
+texture_sides = Array[int]([0])
 rotation_preset = 0
 rotations = Array[int]([0])
 
@@ -68,9 +68,9 @@ resource_name = "Cobblestone Stair"
 script = ExtResource("1_csxuu")
 id = &"%p_stair"
 base_block = SubResource("Resource_0q12t")
-attributes = Array[StringName]([])
 mesh = ExtResource("6_idtwy")
 textures = Array[Image]([])
+texture_sides = Array[int]([0])
 rotation_preset = 3
 rotations = Array[int]([0])
 
@@ -79,9 +79,9 @@ resource_name = "Cobblestone Slab"
 script = ExtResource("1_csxuu")
 id = &"%p_slab"
 base_block = SubResource("Resource_0q12t")
-attributes = Array[StringName]([])
 mesh = ExtResource("7_ap6no")
 textures = Array[Image]([])
+texture_sides = Array[int]([0])
 rotation_preset = 2
 rotations = Array[int]([0])
 
@@ -89,9 +89,9 @@ rotations = Array[int]([0])
 resource_name = "Wood Planks"
 script = ExtResource("1_csxuu")
 id = &"wood_planks"
-attributes = Array[StringName]([])
 mesh = ExtResource("2_0awv2")
 textures = Array[Image]([ExtResource("9_iudih")])
+texture_sides = Array[int]([0])
 rotation_preset = 0
 rotations = Array[int]([0])
 
@@ -100,9 +100,9 @@ resource_name = "Wood Stair"
 script = ExtResource("1_csxuu")
 id = &"wood_stair"
 base_block = SubResource("Resource_k6i5a")
-attributes = Array[StringName]([])
 mesh = ExtResource("6_idtwy")
 textures = Array[Image]([])
+texture_sides = Array[int]([0])
 rotation_preset = 3
 rotations = Array[int]([0])
 
@@ -111,9 +111,9 @@ resource_name = "Wood Slab"
 script = ExtResource("1_csxuu")
 id = &"wood_slab"
 base_block = SubResource("Resource_k6i5a")
-attributes = Array[StringName]([])
 mesh = ExtResource("7_ap6no")
 textures = Array[Image]([])
+texture_sides = Array[int]([0])
 rotation_preset = 2
 rotations = Array[int]([0])
 
@@ -121,9 +121,9 @@ rotations = Array[int]([0])
 resource_name = "Test"
 script = ExtResource("1_csxuu")
 id = &"test"
-attributes = Array[StringName]([])
-mesh = ExtResource("2_0awv2")
-textures = Array[Image]([ExtResource("9_y0fmo")])
+mesh = ExtResource("6_idtwy")
+textures = Array[Image]([ExtResource("9_y0fmo"), ExtResource("8_1hp6r")])
+texture_sides = Array[int]([0, 6])
 rotation_preset = 0
 rotations = Array[int]([0])
 

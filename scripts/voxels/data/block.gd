@@ -2,6 +2,19 @@ class_name Block
 extends Resource
 
 
+enum Sides {
+	ALL,
+	X,
+	Y,
+	Z,
+	POS_X,
+	NEG_X,
+	POS_Y,
+	NEG_Y,
+	POS_Z,
+	NEG_Z,
+}
+
 enum RotationPresets {
 	USE_PROVIDED,
 	HORIZONTAL,
@@ -16,6 +29,7 @@ enum RotationPresets {
 @export_group("Visuals")
 @export var mesh: Mesh
 @export var textures: Array[Image] = []
+@export var texture_sides: Array[Sides] = [Sides.ALL]
 
 @export_group("Rotations")
 @export var rotation_preset: RotationPresets
@@ -36,6 +50,21 @@ func prepare() -> void:
 	for property in base_block.get_property_list():
 		if get(property.name) != default_block.get(property.name): continue
 		set(property.name, base_block.get(property.name))
+
+
+func get_texture_rect(side: Sides) -> Rect2i:
+	if texture_sides.has(side):
+		return texture_rects[texture_sides.find(side)]
+	
+	match side:
+		Sides.POS_X, Sides.NEG_X: if texture_sides.has(Sides.X):
+			return texture_rects[texture_sides.find(Sides.X)]
+		Sides.POS_Y, Sides.NEG_Y: if texture_sides.has(Sides.Y):
+			return texture_rects[texture_sides.find(Sides.Y)]
+		Sides.POS_Z, Sides.NEG_Z: if texture_sides.has(Sides.Z):
+			return texture_rects[texture_sides.find(Sides.Z)]
+	
+	return texture_rects[texture_sides.find(Sides.ALL)]
 
 
 func _get_rotations() -> Array[int]:
