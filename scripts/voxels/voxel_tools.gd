@@ -1,25 +1,8 @@
-class_name VoxelsAutoload
-extends Node3D
+class_name Voxels
+extends  RefCounted
 
 
-const AIR: int = 0
-
-var block_library: BlockLibrary
-var voxel_atlas: VoxelAtlas
-var voxel_library: VoxelLibrary
-var voxel_material: StandardMaterial3D
-var voxel_terrain: VoxelTerrain
-var voxel_tool: VoxelTool
-
-
-func _ready() -> void:
-	block_library = load("uid://qng2hx01nyki")
-	voxel_atlas = VoxelAtlas.create_atlas(block_library)
-	voxel_library = VoxelLibrary.create(block_library)
-	voxel_material = load("uid://bl8pu4arv3vjc")
-	voxel_material.albedo_texture = ImageTexture.create_from_image(voxel_atlas)
-	voxel_terrain = find_child("VoxelTerrain", false)
-	voxel_tool = voxel_terrain.get_voxel_tool()
+var _voxel_tool: VoxelTool
 
 
 ## Returns a [Dictionary] of adjacent voxel positions.
@@ -34,9 +17,9 @@ func get_adjacent_voxels(voxel: Vector3i) -> Dictionary:
 		}
 
 
-## Shortcut function that checks if an position is air.
-func is_air(position: Vector3i) -> bool:
-	return voxel_tool.get_voxel(position) == 0
+## Shortcut function that checks if a voxel is air.
+func is_air(voxel: Vector3i) -> bool:
+	return _voxel_tool.get_voxel(voxel) == 0
 
 
 ## Checks if the voxel is supported on any side. Can optionally specify particular [param directions] to check for support.

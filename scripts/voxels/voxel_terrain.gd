@@ -1,8 +1,7 @@
 extends VoxelTerrain
 
 
-func _ready() -> void:
-	await Voxels.ready
+func prepare() -> void:
 	mesher = VoxelMesherBlocky.new()
-	mesher.library = Voxels.voxel_library
-	material_override = Voxels.voxel_material
+	mesher.library = VoxelAssets.voxel_library
+	material_override = VoxelAssets.voxel_material

@@ -11,13 +11,18 @@ config_version=5
 [application]
 
 config/name="Luvoxame"
+run/main_scene="res://scenes/game.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://misc/icon.png"
 
-[autoload]
+[debug]
 
-Voxels="*res://scripts/voxels/voxels.gd"
+gdscript/warnings/shadowed_variable=0
 
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/script-ide/plugin.cfg")
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0

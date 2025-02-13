@@ -1,11 +1,52 @@
-[gd_scene load_steps=3 format=3 uid="uid://j6wxibgdvvas"]
+[gd_scene load_steps=11 format=3 uid="uid://j6wxibgdvvas"]
 
+[ext_resource type="Script" path="res://scripts/voxels/voxel_manager.gd" id="1_7t0o3"]
 [ext_resource type="Script" path="res://scripts/voxels/voxel_terrain.gd" id="1_q0oau"]
 
-[sub_resource type="VoxelMesherTransvoxel" id="VoxelMesherTransvoxel_2y2qw"]
+[sub_resource type="VoxelGeneratorFlat" id="VoxelGeneratorFlat_pt2ih"]
+channel = 0
+
+[sub_resource type="VoxelBlockyModelEmpty" id="VoxelBlockyModelEmpty_sjcdr"]
+
+[sub_resource type="VoxelBlockyModelCube" id="VoxelBlockyModelCube_2gxvx"]
+
+[sub_resource type="VoxelBlockyLibrary" id="VoxelBlockyLibrary_bbx5x"]
+models = Array[VoxelBlockyModel]([SubResource("VoxelBlockyModelEmpty_sjcdr"), SubResource("VoxelBlockyModelCube_2gxvx")])
+
+[sub_resource type="VoxelMesherBlocky" id="VoxelMesherBlocky_8eoye"]
+library = SubResource("VoxelBlockyLibrary_bbx5x")
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2y174"]
+
+[sub_resource type="Sky" id="Sky_3giy1"]
+sky_material = SubResource("ProceduralSkyMaterial_2y174")
+
+[sub_resource type="Environment" id="Environment_rpkhc"]
+background_mode = 2
+sky = SubResource("Sky_3giy1")
 
 [node name="Game" type="Node3D"]
 
-[node name="VoxelTerrain" type="VoxelTerrain" parent="."]
-mesher = SubResource("VoxelMesherTransvoxel_2y2qw")
+[node name="VoxelManager" type="Node" parent="." node_paths=PackedStringArray("voxel_terrain")]
+script = ExtResource("1_7t0o3")
+voxel_terrain = NodePath("../World/VoxelTerrain")
+
+[node name="World" type="Node3D" parent="."]
+
+[node name="VoxelTerrain" type="VoxelTerrain" parent="World"]
+generator = SubResource("VoxelGeneratorFlat_pt2ih")
+mesher = SubResource("VoxelMesherBlocky_8eoye")
 script = ExtResource("1_q0oau")
+
+[node name="Environment" type="WorldEnvironment" parent="World"]
+environment = SubResource("Environment_rpkhc")
+
+[node name="SkyLight" type="DirectionalLight3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 0.34202, 0.939693, 0, -0.939693, 0.34202, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Camera" type="Camera3D" parent="World"]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 5, 0)
+current = true
+
+[node name="VoxelViewer" type="VoxelViewer" parent="World/Camera"]

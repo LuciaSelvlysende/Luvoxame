@@ -14,12 +14,15 @@ func _init(assign_rotations: Vector3i = Vector3i.ZERO, assign_reflections: Vecto
 func get_basis() -> Basis:
 	var basis: Basis = Basis()
 	
-	basis.rotated(Vector3.RIGHT, rotations.x * TAU * 0.25)
-	basis.rotated(Vector3.UP, rotations.y * TAU * 0.25)
-	basis.rotated(Vector3.BACK, rotations.z * TAU * 0.25)
+	basis = basis.rotated(Vector3.RIGHT, rotations.x * TAU * 0.25)
+	basis = basis.rotated(Vector3.UP, rotations.y * TAU * 0.25)
+	basis = basis.rotated(Vector3.BACK, rotations.z * TAU * 0.25)
 	
-	basis.x * -Vectors.bool(reflections.x)
-	basis.y * -Vectors.bool(reflections.y)
-	basis.z * -Vectors.bool(reflections.z)
+	if reflections.x:
+		basis.x *= -Vectors.bool(reflections.x)
+	if reflections.y:
+		basis.y *= -Vectors.bool(reflections.y)
+	if reflections.z:
+		basis.z *= -Vectors.bool(reflections.z)
 	
 	return basis

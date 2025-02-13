@@ -17,7 +17,7 @@ static func exp_decay(initial, final, rate, delta) -> Variant:
 
 
 ## Rotates a mesh around a pivot by rotating all of it's vertices.
-static func rotate_mesh(mesh: Mesh, rotation: Quaternion, pivot: Vector3) -> ArrayMesh:
+static func rotate_mesh(mesh: Mesh, basis: Basis, pivot: Vector3) -> ArrayMesh:
 	var rotated_mesh: ArrayMesh = mesh.duplicate()
 	
 	# There is no built-in method of ArrayMesh that allows a surface to be replaced, so the
@@ -37,7 +37,7 @@ static func rotate_mesh(mesh: Mesh, rotation: Quaternion, pivot: Vector3) -> Arr
 		if typeof(vertex_array[0]) != TYPE_VECTOR3: continue
 		
 		for vertex_index in vertex_array.size():
-			vertex_array[vertex_index] = rotate_point(vertex_array[vertex_index], rotation, pivot)
+			vertex_array[vertex_index] = rotate_point(vertex_array[vertex_index], basis, pivot)
 		
 		rotated_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, surface)
 	
@@ -45,14 +45,10 @@ static func rotate_mesh(mesh: Mesh, rotation: Quaternion, pivot: Vector3) -> Arr
 
 
 ## Rotates a point around a pivot.
-static func rotate_point(point: Vector3, rotation: Quaternion, pivot: Vector3) -> Vector3:
-	if rotation.get_axis() == Vector3.ZERO:
-		return point
-	
+static func rotate_point(point: Vector3, basis: Basis, pivot: Vector3) -> Vector3:
 	point -= pivot
 	
-	rotation = Quaternion(rotation.get_axis().normalized(), deg_to_rad(rotation.w))
-	point *= rotation
+	point *= basis
 	
 	point += pivot
 	
