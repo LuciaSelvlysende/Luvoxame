@@ -58,7 +58,7 @@ static func has_array(array_a: Array, array_b: Array, has_all: bool = true) -> b
 		if has_all: return false
 		array_b.erase(element)
 	
-	return not array_b.is_empty()
+	return true if has_all else not array_b.is_empty()
 
 
 ## Equivalent to [method Array.reverse], but actually returns the reversed array.

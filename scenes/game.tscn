@@ -1,6 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://j6wxibgdvvas"]
+[gd_scene load_steps=12 format=3 uid="uid://j6wxibgdvvas"]
 
 [ext_resource type="Script" path="res://scripts/voxels/voxel_manager.gd" id="1_7t0o3"]
+[ext_resource type="Script" path="res://scripts/mods/mod_manager.gd" id="1_ggpxs"]
 [ext_resource type="Script" path="res://scripts/voxels/voxel_terrain.gd" id="1_q0oau"]
 
 [sub_resource type="VoxelGeneratorFlat" id="VoxelGeneratorFlat_pt2ih"]
@@ -26,6 +27,9 @@ background_mode = 2
 sky = SubResource("Sky_3giy1")
 
 [node name="Game" type="Node3D"]
+
+[node name="ModManager" type="Node" parent="."]
+script = ExtResource("1_ggpxs")
 
 [node name="VoxelManager" type="Node" parent="." node_paths=PackedStringArray("voxel_terrain")]
 script = ExtResource("1_7t0o3")
