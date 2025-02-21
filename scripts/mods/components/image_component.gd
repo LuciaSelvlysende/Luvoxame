@@ -9,7 +9,7 @@ extends ModComponent
 func _load_component() -> Error:
 	var image: Image = Image.new()
 	
-	var error: Error = image.load(mod.directory + file_path)
+	var error: Error = image.load(mod.directory + "/" + file_path)
 	if error: return error
 	
 	return ResourceManager.add(image, resource_id)

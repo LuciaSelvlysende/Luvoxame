@@ -2,7 +2,7 @@ class_name Mods
 extends Node
 
 
-const MODS_PATH: String = "user://mods/"
+const MODS_PATH: String = "user://mods"
 const MOD_FILE: String = "mod.tres"
 
 var mods: Dictionary = {}
@@ -24,19 +24,20 @@ func scan_mods(path: StringName = MODS_PATH, mod: Mod = null) -> Error:
 	if not directory: return DirAccess.get_open_error()
 	
 	if not mod and directory.file_exists(MOD_FILE):
-		var resource: Resource = ResourceLoader.load(directory.get_current_dir() + MOD_FILE)
+		var resource: Resource = ResourceLoader.load(directory.get_current_dir() + "/" + MOD_FILE)
 		mod = resource if resource is Mod else null
 		mod.directory = path
 		mods[mod] = []
 	
 	for subdirectory in directory.get_directories():
-		scan_mods(path + subdirectory + "/", mod)
+		scan_mods(path + "/" + subdirectory, mod)
 	
 	if not mod: return OK
 	
 	for file in directory.get_files():
 		if not file.ends_with(".tres"): continue
-		var resource: Resource = ResourceLoader.load(directory.get_current_dir() + file)
+		print(directory.get_current_dir() + "/" + file)
+		var resource: Resource = ResourceLoader.load(directory.get_current_dir() + "/" + file)
 		if not resource is ModComponent: continue
 		resource.mod = mod
 		mods[mod].append(resource)
