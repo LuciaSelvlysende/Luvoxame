@@ -1,4 +1,4 @@
-class_name ModManager
+class_name Mods
 extends Node
 
 

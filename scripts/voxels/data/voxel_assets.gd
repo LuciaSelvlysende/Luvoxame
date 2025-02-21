@@ -21,9 +21,6 @@ static func prepare() -> void:
 	voxel_material.albedo_texture = ImageTexture.create_from_image(voxel_atlas)
 	
 	locked = true
-	
-	ResourceSaver.save(voxel_atlas, "res://misc/atlas.tres")
-	ResourceSaver.save(voxel_library, "res://misc/library.tres")
 
 
 static func add_block(block: Block) -> Error:

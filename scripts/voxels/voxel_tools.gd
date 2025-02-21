@@ -1,4 +1,4 @@
-class_name Voxels
+class_name VoxelTools
 extends  RefCounted
 
 

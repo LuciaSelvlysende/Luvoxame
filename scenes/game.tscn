@@ -1,8 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://j6wxibgdvvas"]
+[gd_scene load_steps=14 format=3 uid="uid://j6wxibgdvvas"]
 
 [ext_resource type="Script" path="res://scripts/voxels/voxel_manager.gd" id="1_7t0o3"]
 [ext_resource type="Script" path="res://scripts/mods/mod_manager.gd" id="1_ggpxs"]
 [ext_resource type="Script" path="res://scripts/voxels/voxel_terrain.gd" id="1_q0oau"]
+[ext_resource type="Script" path="res://scripts/items/item_manager.gd" id="3_172op"]
+[ext_resource type="Script" path="res://scripts/entities/entity.gd" id="4_a06vq"]
 
 [sub_resource type="VoxelGeneratorFlat" id="VoxelGeneratorFlat_pt2ih"]
 channel = 0
@@ -35,6 +37,9 @@ script = ExtResource("1_ggpxs")
 script = ExtResource("1_7t0o3")
 voxel_terrain = NodePath("../World/VoxelTerrain")
 
+[node name="ItemManager" type="Node" parent="."]
+script = ExtResource("3_172op")
+
 [node name="World" type="Node3D" parent="."]
 
 [node name="VoxelTerrain" type="VoxelTerrain" parent="World"]
@@ -49,8 +54,18 @@ environment = SubResource("Environment_rpkhc")
 transform = Transform3D(1, 0, 0, 0, 0.34202, 0.939693, 0, -0.939693, 0.34202, 0, 0, 0)
 shadow_enabled = true
 
-[node name="Camera" type="Camera3D" parent="World"]
-transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 5, 0)
+[node name="Entity" type="CharacterBody3D" parent="World" node_paths=PackedStringArray("camera")]
+script = ExtResource("4_a06vq")
+up = &"up"
+down = &"down"
+right = &"right"
+left = &"left"
+backward = &"back"
+forward = &"forward"
+camera = NodePath("Camera")
+
+[node name="Camera" type="Camera3D" parent="World/Entity"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
 current = true
 
-[node name="VoxelViewer" type="VoxelViewer" parent="World/Camera"]
+[node name="VoxelViewer" type="VoxelViewer" parent="World/Entity/Camera"]
