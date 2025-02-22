@@ -23,8 +23,6 @@ gdscript/warnings/shadowed_variable=0
 
 [display]
 
-window/size/viewport_width=288
-window/size/viewport_height=162
 display_server/driver="wayland"
 display_server/driver.linuxbsd="wayland"
 window/vsync/vsync_mode=0
