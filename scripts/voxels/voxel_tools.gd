@@ -2,11 +2,11 @@ class_name VoxelTools
 extends  RefCounted
 
 
-var _voxel_tool: VoxelTool
+static var _voxel_tool: VoxelTool
 
 
 ## Returns a [Dictionary] of adjacent voxel positions.
-func get_adjacent_voxels(voxel: Vector3i) -> Dictionary:
+static func get_adjacent_voxels(voxel: Vector3i) -> Dictionary:
 	return {
 		"up"    = voxel + Vector3i(0, 1, 0),
 		"down"  = voxel + Vector3i(0, -1, 0),
@@ -18,15 +18,19 @@ func get_adjacent_voxels(voxel: Vector3i) -> Dictionary:
 
 
 ## Shortcut function that checks if a voxel is air.
-func is_air(voxel: Vector3i) -> bool:
+static func is_air(voxel: Vector3i) -> bool:
 	return _voxel_tool.get_voxel(voxel) == 0
 
 
 ## Checks if the voxel is supported on any side. Can optionally specify particular [param directions] to check for support.
-func is_supported(voxel_position: Vector3i, directions: Array[StringName] = ["up", "down", "north", "east", "south", "west"]) -> bool:
+static func is_supported(voxel_position: Vector3i, directions: Array[StringName] = ["up", "down", "north", "east", "south", "west"]) -> bool:
 	var adjacent_voxels = get_adjacent_voxels(voxel_position)
 
 	for voxel in adjacent_voxels.keys():
 		if is_air(voxel) and directions.has(voxel): return true
 
 	return false
+
+
+static func set_voxel(position: Vector3i, voxel_id: int) -> void:
+	_voxel_tool.set_voxel(position, voxel_id)

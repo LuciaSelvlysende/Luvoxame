@@ -16,7 +16,7 @@ func _prepare() -> void:
 		slots.append(ItemSlot.new())
 
 
-func add_at(slot_index: int, item_id: StringName, quantity: int) -> int:
+func add_at(item_id: StringName, slot_index: int, quantity: int) -> int:
 	if slot_index >= size: return quantity
 	
 	var slot: ItemSlot = slots[slot_index]
@@ -100,6 +100,22 @@ func place_slot(slot_a_index: int, slot_b: ItemSlot) -> ItemSlot:
 	else:
 		slots[slot_a_index] = slot_b
 		return slot_a
+
+
+func print_inventory() -> void:
+	for slot in slots:
+		var index: int = slots.find(slot)
+		
+		if not slot.item:
+			print("Slot %s: Empty" % (index + 1))
+			continue
+		
+		print("Slot %s: %s (%s) - %s" % [
+			index + 1,
+			slot.item.name,
+			slot.quantity,
+			slot.item.description,
+		])
 
 
 class ItemSlot:

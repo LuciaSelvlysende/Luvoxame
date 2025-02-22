@@ -12,6 +12,7 @@ func _ready() -> void:
 	VoxelAssets.prepare()
 	voxel_terrain.prepare()
 	voxel_tool = voxel_terrain.get_voxel_tool()
+	VoxelTools._voxel_tool = voxel_tool
 
 
 func _input(event: InputEvent) -> void:

@@ -36,7 +36,6 @@ func scan_mods(path: StringName = MODS_PATH, mod: Mod = null) -> Error:
 	
 	for file in directory.get_files():
 		if not file.ends_with(".tres"): continue
-		print(directory.get_current_dir() + "/" + file)
 		var resource: Resource = ResourceLoader.load(directory.get_current_dir() + "/" + file)
 		if not resource is ModComponent: continue
 		resource.mod = mod

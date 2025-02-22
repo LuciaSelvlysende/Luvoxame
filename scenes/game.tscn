@@ -1,10 +1,12 @@
-[gd_scene load_steps=14 format=3 uid="uid://j6wxibgdvvas"]
+[gd_scene load_steps=17 format=3 uid="uid://j6wxibgdvvas"]
 
 [ext_resource type="Script" path="res://scripts/voxels/voxel_manager.gd" id="1_7t0o3"]
 [ext_resource type="Script" path="res://scripts/mods/mod_manager.gd" id="1_ggpxs"]
 [ext_resource type="Script" path="res://scripts/voxels/voxel_terrain.gd" id="1_q0oau"]
 [ext_resource type="Script" path="res://scripts/items/item_manager.gd" id="3_172op"]
-[ext_resource type="Script" path="res://scripts/entities/entity.gd" id="4_a06vq"]
+[ext_resource type="Script" path="res://scripts/world.gd" id="4_pwdbe"]
+[ext_resource type="Script" path="res://scripts/player.gd" id="6_cetmp"]
+[ext_resource type="Texture2D" uid="uid://bixxompal05kt" path="res://assets/crosshair.png" id="7_6lfg5"]
 
 [sub_resource type="VoxelGeneratorFlat" id="VoxelGeneratorFlat_pt2ih"]
 channel = 0
@@ -28,6 +30,9 @@ sky_material = SubResource("ProceduralSkyMaterial_2y174")
 background_mode = 2
 sky = SubResource("Sky_3giy1")
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_uncdb"]
+size = Vector3(0.6, 1.8, 0.6)
+
 [node name="Game" type="Node3D"]
 
 [node name="ModManager" type="Node" parent="."]
@@ -41,6 +46,7 @@ voxel_terrain = NodePath("../World/VoxelTerrain")
 script = ExtResource("3_172op")
 
 [node name="World" type="Node3D" parent="."]
+script = ExtResource("4_pwdbe")
 
 [node name="VoxelTerrain" type="VoxelTerrain" parent="World"]
 generator = SubResource("VoxelGeneratorFlat_pt2ih")
@@ -54,18 +60,33 @@ environment = SubResource("Environment_rpkhc")
 transform = Transform3D(1, 0, 0, 0, 0.34202, 0.939693, 0, -0.939693, 0.34202, 0, 0, 0)
 shadow_enabled = true
 
-[node name="Entity" type="CharacterBody3D" parent="World" node_paths=PackedStringArray("camera")]
-script = ExtResource("4_a06vq")
-up = &"up"
-down = &"down"
-right = &"right"
-left = &"left"
-backward = &"back"
-forward = &"forward"
-camera = NodePath("Camera")
+[node name="Player" type="CharacterBody3D" parent="World" node_paths=PackedStringArray("camera", "collision")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.87145, 0)
+script = ExtResource("6_cetmp")
+sensitivity = 50.0
+camera = NodePath("Camera3D")
+collision = NodePath("Collision")
 
-[node name="Camera" type="Camera3D" parent="World/Entity"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+[node name="Camera3D" type="Camera3D" parent="World/Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
 current = true
 
-[node name="VoxelViewer" type="VoxelViewer" parent="World/Entity/Camera"]
+[node name="VoxelViewer" type="VoxelViewer" parent="World/Player/Camera3D"]
+
+[node name="Collision" type="CollisionShape3D" parent="World/Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("BoxShape3D_uncdb")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Crosshair" type="CenterContainer" parent="UI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Texture" type="TextureRect" parent="UI/Crosshair"]
+layout_mode = 2
+texture = ExtResource("7_6lfg5")
+stretch_mode = 2
