@@ -1,0 +1,80 @@
+[gd_scene load_steps=8 format=3 uid="uid://co3742srd4864"]
+
+[ext_resource type="Script" uid="uid://ds6oudei10or0" path="res://scenes/player/player.gd" id="1_dovo2"]
+[ext_resource type="Script" uid="uid://brw5vgsjhq2u8" path="res://scenes/player/interaction.gd" id="2_gmlin"]
+[ext_resource type="Script" uid="uid://dkhbrf3wy6k33" path="res://scenes/player/inventory.gd" id="2_lvxji"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_p47bc"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_75vfm"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.12549)
+
+[sub_resource type="BoxMesh" id="BoxMesh_0owmy"]
+material = SubResource("StandardMaterial3D_75vfm")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uncdb"]
+size = Vector3(0.6, 1.8, 0.6)
+
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("camera", "collision")]
+script = ExtResource("1_dovo2")
+speed = 20.0
+camera = NodePath("Camera")
+collision = NodePath("Collision")
+
+[node name="Inventory" type="Node" parent="."]
+unique_name_in_owner = true
+process_mode = 3
+script = ExtResource("2_lvxji")
+
+[node name="Interaction" type="Node3D" parent="."]
+unique_name_in_owner = true
+top_level = true
+script = ExtResource("2_gmlin")
+
+[node name="ManualTimer" type="Timer" parent="Interaction"]
+unique_name_in_owner = true
+wait_time = 0.05
+one_shot = true
+
+[node name="AutoInitialTimer" type="Timer" parent="Interaction"]
+unique_name_in_owner = true
+wait_time = 0.5
+one_shot = true
+
+[node name="AutoContinuousTimer" type="Timer" parent="Interaction"]
+unique_name_in_owner = true
+wait_time = 0.25
+one_shot = true
+
+[node name="IndicatorTimer" type="Timer" parent="Interaction"]
+unique_name_in_owner = true
+wait_time = 0.05
+autostart = true
+
+[node name="IndicatorArea" type="Area3D" parent="Interaction"]
+unique_name_in_owner = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interaction/IndicatorArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.5, 0.5)
+shape = SubResource("BoxShape3D_p47bc")
+
+[node name="IndicatorMesh" type="MeshInstance3D" parent="Interaction"]
+unique_name_in_owner = true
+transform = Transform3D(1.003, 0, 0, 0, 1.003, 0, 0, 0, 1.003, 0.5, 0.5, 0.5)
+mesh = SubResource("BoxMesh_0owmy")
+
+[node name="Camera" type="Camera3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
+current = true
+
+[node name="VoxelViewer" type="VoxelViewer" parent="Camera"]
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("BoxShape3D_uncdb")
+
+[connection signal="timeout" from="Interaction/AutoInitialTimer" to="Interaction" method="_on_cooldown_timeout"]
+[connection signal="timeout" from="Interaction/AutoContinuousTimer" to="Interaction" method="_on_cooldown_timeout"]
+[connection signal="timeout" from="Interaction/IndicatorTimer" to="Interaction" method="_on_refresh_indicator"]

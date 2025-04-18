@@ -2,15 +2,6 @@ class_name SC
 extends RefCounted
 
 
-## An array of 4 [Vector2]s that represent the corners of a 2x2 rectangle centered on (0, 0).
-const CORNERS_ARRAY_2D: Array[Vector2] = [
-	Vector2(1, 1),
-	Vector2(1, -1),
-	Vector2(-1, 1),
-	Vector2(-1, -1),
-]
-
-
 ## Returns ALL parents of the specified [param Node].
 static func get_ancestors(node: Node) -> Array[Node]:
 	var parent: Node = node.get_parent()
@@ -21,6 +12,7 @@ static func get_ancestors(node: Node) -> Array[Node]:
 		ancestors.append(parent)
 	
 	return ancestors
+
 
 ## Returns ALL children, grandchildren, etc. of the specified [param Node].
 static func get_decendents(node: Node):
@@ -59,6 +51,18 @@ static func has_array(array_a: Array, array_b: Array, has_all: bool = true) -> b
 		array_b.erase(element)
 	
 	return true if has_all else not array_b.is_empty()
+
+
+static func inherit_values(child: Object, parent: Object, default: Object = Object.new(), exclude: Object = Object.new(), exclude_array: Array[StringName] = []) -> void:
+	print(true)
+	if not (child and parent): return
+	
+	for property in child.get_property_list():
+		if [PROPERTY_USAGE_CATEGORY, PROPERTY_USAGE_GROUP, PROPERTY_USAGE_SUBGROUP].has(property.usage): continue
+		if property.name in exclude: continue
+		if exclude_array.has(property.name): continue
+		if child.get(property.name) != default.get(property.name): continue
+		child.set(property.name, parent.get(property.name))
 
 
 ## Equivalent to [method Array.reverse], but actually returns the reversed array.

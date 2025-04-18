@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://c0x2ybi80je2d"]
+
+[ext_resource type="Theme" uid="uid://qy6ye6p2co0" path="res://assets/themes/item_slot_display_theme.tres" id="1_al1su"]
+[ext_resource type="Script" uid="uid://djfwc0er8v6uv" path="res://scenes/ui/item_slot_display/item_slot_display.gd" id="1_g10lj"]
+[ext_resource type="LabelSettings" uid="uid://blu4ddky38d7y" path="res://assets/themes/item_slot_display_label_theme.tres" id="3_pvyqu"]
+
+[node name="ItemSlotDisplay" type="Button" node_paths=PackedStringArray("texture_rect", "quantity_label")]
+offset_right = 16.0
+offset_bottom = 16.0
+focus_mode = 0
+theme = ExtResource("1_al1su")
+script = ExtResource("1_g10lj")
+texture_rect = NodePath("Texture")
+quantity_label = NodePath("Quantity")
+
+[node name="Texture" type="TextureRect" parent="."]
+layout_mode = 0
+mouse_filter = 2
+expand_mode = 2
+
+[node name="Quantity" type="Label" parent="."]
+layout_mode = 0
+offset_right = 1.0
+offset_bottom = 14.0
+label_settings = ExtResource("3_pvyqu")
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]
+[connection signal="resized" from="." to="." method="_on_resized"]

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ResourceGroup" load_steps=2 format=3 uid="uid://dmbwxtdj2au4d"]
+
+[ext_resource type="Script" uid="uid://brk1mma3lldgm" path="res://addons/godot_resource_groups/resource_group.gd" id="1_1qjib"]
+
+[resource]
+script = ExtResource("1_1qjib")
+base_folder = "res://assets/inventories"
+includes = Array[String]([])
+excludes = Array[String](["!inventories.tres", "templates/*"])
+paths = Array[String](["res://assets/inventories/player.tres"])
+metadata/_custom_type_script = "uid://brk1mma3lldgm"

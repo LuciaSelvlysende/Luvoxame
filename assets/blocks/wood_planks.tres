@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Block" load_steps=3 format=3 uid="uid://b53h42ax88n5"]
+
+[ext_resource type="Script" uid="uid://bj2lvil47uqpr" path="res://classes/blocks/block.gd" id="1_r35xl"]
+[ext_resource type="Texture2D" uid="uid://ch5a4qyirap2k" path="res://assets/textures/blocks/wood_planks.png" id="2_r35xl"]
+
+[resource]
+script = ExtResource("1_r35xl")
+id = &"wood_planks"
+base_block_id = &""
+use_texture_atlas = true
+textures = Array[Texture2D]([ExtResource("2_r35xl")])
+texture_sides = Array[int]([0])
+rotation_preset = 0
+rotations = Array[int]([0])

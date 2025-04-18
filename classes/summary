@@ -1,0 +1,39 @@
+Luvoxame Systems
+
+Mod System:
+	ModManager
+	Mod
+	ModComponent
+	-/-
+	ResourceManager
+
+Voxel System:
+	VoxelManager
+	Block
+	VoxelType
+	VoxelAssets
+	VoxelTerrain (WIP)
+	VoxelTools (WIP)
+
+Item System:
+
+	Item Subsystem:
+		ItemManager
+		Item
+		ItemProperty (WIP)
+	
+	ItemSlot Subsystem:
+		ItemSlot
+		ItemSlotProperty (WIP)
+	
+	Inventory Subsystem:
+		InventoryManager
+		Inventory
+		InventoryProperty (WIP)
+
+Property System:
+	PropertyManager
+	GenericProperty
+
+Other:
+	ResourceManager

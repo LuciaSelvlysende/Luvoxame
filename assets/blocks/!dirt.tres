@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Block" load_steps=3 format=3 uid="uid://vl184o7fec82"]
+
+[ext_resource type="Script" uid="uid://bj2lvil47uqpr" path="res://classes/blocks/block.gd" id="1_qp6sq"]
+[ext_resource type="Texture2D" uid="uid://cldpbhtsbaxlq" path="res://assets/textures/blocks/dirt.png" id="2_8ratt"]
+
+[resource]
+script = ExtResource("1_qp6sq")
+id = &"dirt"
+base_block_id = &""
+use_texture_atlas = true
+textures = Array[Texture2D]([ExtResource("2_8ratt")])
+texture_sides = Array[int]([0])
+rotation_preset = 0
+rotations = Array[int]([0])
+metadata/_custom_type_script = "uid://djcencntxnh0q"

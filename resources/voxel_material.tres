@@ -1,6 +1,0 @@
-[gd_resource type="StandardMaterial3D" format=3 uid="uid://bl8pu4arv3vjc"]
-
-[resource]
-anisotropy = 0.85
-texture_filter = 0
-texture_repeat = false

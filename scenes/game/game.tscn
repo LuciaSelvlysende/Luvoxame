@@ -1,0 +1,100 @@
+[gd_scene load_steps=21 format=3 uid="uid://j6wxibgdvvas"]
+
+[ext_resource type="Script" uid="uid://k73kd86eu33j" path="res://scenes/game/game.gd" id="1_0io4q"]
+[ext_resource type="Script" uid="uid://dl2vw5d5ksl28" path="res://scenes/world/voxel_terrain.gd" id="1_q0oau"]
+[ext_resource type="PackedScene" uid="uid://co3742srd4864" path="res://scenes/player/player.tscn" id="3_5i0tg"]
+[ext_resource type="Script" uid="uid://b7nc5wn1k040n" path="res://scenes/game/ui.gd" id="4_bdhmt"]
+[ext_resource type="PackedScene" uid="uid://8y7yxbvr4lyi" path="res://scenes/ui/inventory/inventory.tscn" id="6_5i0tg"]
+[ext_resource type="Texture2D" uid="uid://bixxompal05kt" path="res://assets/textures/ui/crosshair.png" id="7_6lfg5"]
+[ext_resource type="PackedScene" uid="uid://c0x2ybi80je2d" path="res://scenes/ui/item_slot_display/item_slot_display.tscn" id="8_2a8rs"]
+[ext_resource type="Script" uid="uid://dbe20lnli7qkr" path="res://scenes/ui/inventory/player_inventory.gd" id="8_4j704"]
+[ext_resource type="PackedScene" uid="uid://b6fdx3stud81p" path="res://scenes/ui/hotbar/hotbar.tscn" id="8_87uf6"]
+[ext_resource type="Theme" uid="uid://dqdgmrtc6bgv3" path="res://assets/themes/item_slot_display_theme_no_hover.tres" id="9_4j704"]
+
+[sub_resource type="Curve" id="Curve_5i0tg"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.571429, 0.0871671), 0.221913, 0.221913, 0, 0, Vector2(0.680851, 0.134383), 1.38695, 1.38695, 0, 0, Vector2(0.702128, 0.433414), 0.147942, 0.147942, 0, 0, Vector2(0.99999, 0.48063), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_bdhmt"]
+noise_type = 3
+seed = 2
+metadata/_preview_in_3d_space_ = true
+
+[sub_resource type="VoxelGeneratorNoise2D" id="VoxelGeneratorNoise2D_87uf6"]
+channel = 0
+noise = SubResource("FastNoiseLite_bdhmt")
+curve = SubResource("Curve_5i0tg")
+
+[sub_resource type="VoxelBlockyModelEmpty" id="VoxelBlockyModelEmpty_sjcdr"]
+
+[sub_resource type="VoxelBlockyModelCube" id="VoxelBlockyModelCube_2gxvx"]
+
+[sub_resource type="VoxelBlockyLibrary" id="VoxelBlockyLibrary_bbx5x"]
+models = Array[VoxelBlockyModel]([SubResource("VoxelBlockyModelEmpty_sjcdr"), SubResource("VoxelBlockyModelCube_2gxvx")])
+
+[sub_resource type="VoxelMesherBlocky" id="VoxelMesherBlocky_8eoye"]
+library = SubResource("VoxelBlockyLibrary_bbx5x")
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2y174"]
+
+[sub_resource type="Sky" id="Sky_3giy1"]
+sky_material = SubResource("ProceduralSkyMaterial_2y174")
+
+[sub_resource type="Environment" id="Environment_rpkhc"]
+background_mode = 2
+sky = SubResource("Sky_3giy1")
+
+[node name="Game" type="Node3D" node_paths=PackedStringArray("voxel_terrain")]
+script = ExtResource("1_0io4q")
+voxel_terrain = NodePath("World/VoxelTerrain")
+
+[node name="World" type="Node3D" parent="."]
+
+[node name="VoxelTerrain" type="VoxelTerrain" parent="World"]
+generator = SubResource("VoxelGeneratorNoise2D_87uf6")
+mesher = SubResource("VoxelMesherBlocky_8eoye")
+script = ExtResource("1_q0oau")
+
+[node name="Environment" type="WorldEnvironment" parent="World"]
+environment = SubResource("Environment_rpkhc")
+
+[node name="SkyLight" type="DirectionalLight3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 0.34202, 0.939693, 0, -0.939693, 0.34202, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Player" parent="World" instance=ExtResource("3_5i0tg")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.87145, 0)
+
+[node name="UI" type="CanvasLayer" parent="World"]
+process_mode = 3
+script = ExtResource("4_bdhmt")
+
+[node name="Crosshair" type="CenterContainer" parent="World/UI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Texture" type="TextureRect" parent="World/UI/Crosshair"]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+texture = ExtResource("7_6lfg5")
+
+[node name="Hotbar" parent="World/UI" instance=ExtResource("8_87uf6")]
+unique_name_in_owner = true
+mouse_filter = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Inventory" parent="World/UI" instance=ExtResource("6_5i0tg")]
+unique_name_in_owner = true
+script = ExtResource("8_4j704")
+metadata/_edit_use_anchors_ = true
+
+[node name="HeldSlotDisplay" parent="World/UI" instance=ExtResource("8_2a8rs")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(32, 32)
+mouse_filter = 2
+theme = ExtResource("9_4j704")

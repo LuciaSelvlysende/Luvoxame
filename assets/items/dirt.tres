@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://doco2jgw2r41n"]
+
+[ext_resource type="Script" uid="uid://dj00gkiwcufts" path="res://classes/items/item.gd" id="1_7ekwe"]
+[ext_resource type="Resource" uid="uid://vl184o7fec82" path="res://assets/blocks/!dirt.tres" id="1_txnui"]
+[ext_resource type="Texture2D" uid="uid://cldpbhtsbaxlq" path="res://assets/textures/blocks/dirt.png" id="2_txnui"]
+
+[resource]
+script = ExtResource("1_7ekwe")
+id = &"dirt"
+stack_size = 0
+block = ExtResource("1_txnui")
+base_item_id = &""
+name = "Dirt"
+description = "Ground up dead things."
+texture = ExtResource("2_txnui")
+texture_id = &""
+metadata/_custom_type_script = "uid://dj00gkiwcufts"

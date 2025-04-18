@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ResourceGroup" load_steps=2 format=3 uid="uid://bvbyhvj5r7ahq"]
+
+[ext_resource type="Script" uid="uid://brk1mma3lldgm" path="res://addons/godot_resource_groups/resource_group.gd" id="1_emlg2"]
+
+[resource]
+script = ExtResource("1_emlg2")
+base_folder = "res://assets/items"
+includes = Array[String]([])
+excludes = Array[String](["!items.tres", "templates/*"])
+paths = Array[String](["res://assets/items/cobblestone.tres", "res://assets/items/dirt.tres", "res://assets/items/stone.tres", "res://assets/items/wood_planks.tres"])
+metadata/_custom_type_script = "uid://brk1mma3lldgm"

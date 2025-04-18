@@ -1,0 +1,16 @@
+[gd_resource type="ArrayMesh" load_steps=0 format=4 uid="uid://baosaurum4ev0"]
+
+[resource]
+_surfaces = [{
+"aabb": AABB(0, 0, 0, 1, 1, 1),
+"attribute_data": PackedByteArray("AAAAAP//AAAAAP//////////AAD/////AAAAAAAA////////AAD/////AAAAAAAA//8AAP////8AAAAAAAD/////AAD/////AAAAAAAA//8AAAAA//8AAAAA////////"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAgABAAMABAAFAAYABgAFAAcACAAJAAoACgAJAAsADAANAA4ADgANAA8AEAARABIAEgARABMAFAAVABYAFgAVABcA"),
+"name": "none",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("/////////7//////AAD/v///AAD///+///8AAAAA/78AAP//////vwAAAAD///+/AAD//wAA/78AAAAAAAD/v/////////+/AAD//////7//////AAD/vwAA//8AAP+///8AAP///7///wAAAAD/vwAAAAD///+/AAAAAAAA/7////////8AgP//AAD//wCAAAD/////AIAAAAAA//8AgP////8AAP//AAD//wAA/////wAAAAD//wAAAAAAAP///38AAP9/AAD/fwAA/38AAP9/////f////3////9///////9/////f////3////9/AAD/fwAA/38AAP9/AAD/f/9/////f////3////9/////f////3////9/////f///")
+}]
+blend_shape_mode = 0

@@ -1,0 +1,140 @@
+[gd_scene load_steps=5 format=3 uid="uid://b6fdx3stud81p"]
+
+[ext_resource type="Script" uid="uid://dhieavfjvbie8" path="res://scenes/ui/hotbar/hotbar.gd" id="1_m1s8h"]
+[ext_resource type="Script" uid="uid://dxne7et7a3ysf" path="res://classes/ui/inventory_node_reader.gd" id="2_6hkf2"]
+[ext_resource type="PackedScene" uid="uid://c0x2ybi80je2d" path="res://scenes/ui/item_slot_display/item_slot_display.tscn" id="2_m1s8h"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yjdhc"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[node name="Hotbar" type="Control" node_paths=PackedStringArray("assembler")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_m1s8h")
+assembler = NodePath("InventoryNodeReader")
+show_held_slot = false
+metadata/_custom_type_script = "uid://dar7de2k6hh40"
+
+[node name="InventoryNodeReader" type="Node" parent="." node_paths=PackedStringArray("root_nodes")]
+script = ExtResource("2_6hkf2")
+root_nodes = [NodePath("../Margin/Panel/Margin/Grid")]
+metadata/_custom_type_script = "uid://dxne7et7a3ysf"
+
+[node name="Margin" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -164.0
+offset_top = -48.0
+offset_right = 164.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_bottom = 4
+
+[node name="Panel" type="PanelContainer" parent="Margin"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Margin" type="MarginContainer" parent="Margin/Panel"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="Grid" type="GridContainer" parent="Margin/Panel/Margin"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/h_separation = 4
+theme_override_constants/v_separation = 4
+columns = 9
+
+[node name="SlotPanel1" type="PanelContainer" parent="Margin/Panel/Margin/Grid"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+
+[node name="ItemSlotDisplay" parent="Margin/Panel/Margin/Grid/SlotPanel1" instance=ExtResource("2_m1s8h")]
+layout_mode = 2
+
+[node name="Selector" type="Panel" parent="Margin/Panel/Margin/Grid/SlotPanel1"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_yjdhc")
+
+[node name="SlotPanel2" type="PanelContainer" parent="Margin/Panel/Margin/Grid"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+
+[node name="ItemSlotDisplay" parent="Margin/Panel/Margin/Grid/SlotPanel2" instance=ExtResource("2_m1s8h")]
+layout_mode = 2
+
+[node name="SlotPanel3" type="PanelContainer" parent="Margin/Panel/Margin/Grid"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+
+[node name="ItemSlotDisplay" parent="Margin/Panel/Margin/Grid/SlotPanel3" instance=ExtResource("2_m1s8h")]
+layout_mode = 2
+
+[node name="SlotPanel4" type="PanelContainer" parent="Margin/Panel/Margin/Grid"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+
+[node name="ItemSlotDisplay" parent="Margin/Panel/Margin/Grid/SlotPanel4" instance=ExtResource("2_m1s8h")]
+layout_mode = 2
+
+[node name="SlotPanel5" type="PanelContainer" parent="Margin/Panel/Margin/Grid"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+
+[node name="ItemSlotDisplay" parent="Margin/Panel/Margin/Grid/SlotPanel5" instance=ExtResource("2_m1s8h")]
+layout_mode = 2
+
+[node name="SlotPanel6" type="PanelContainer" parent="Margin/Panel/Margin/Grid"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+
+[node name="ItemSlotDisplay" parent="Margin/Panel/Margin/Grid/SlotPanel6" instance=ExtResource("2_m1s8h")]
+layout_mode = 2
+
+[node name="SlotPanel7" type="PanelContainer" parent="Margin/Panel/Margin/Grid"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+
+[node name="ItemSlotDisplay" parent="Margin/Panel/Margin/Grid/SlotPanel7" instance=ExtResource("2_m1s8h")]
+layout_mode = 2
+
+[node name="SlotPanel8" type="PanelContainer" parent="Margin/Panel/Margin/Grid"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+
+[node name="ItemSlotDisplay" parent="Margin/Panel/Margin/Grid/SlotPanel8" instance=ExtResource("2_m1s8h")]
+layout_mode = 2
+
+[node name="SlotPanel9" type="PanelContainer" parent="Margin/Panel/Margin/Grid"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+
+[node name="ItemSlotDisplay" parent="Margin/Panel/Margin/Grid/SlotPanel9" instance=ExtResource("2_m1s8h")]
+layout_mode = 2

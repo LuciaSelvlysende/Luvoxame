@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://hsi1lj71ehgj"]
+
+[ext_resource type="Resource" uid="uid://b53h42ax88n5" path="res://assets/blocks/wood_planks.tres" id="1_e7dj3"]
+[ext_resource type="Script" uid="uid://dj00gkiwcufts" path="res://classes/items/item.gd" id="2_meu1x"]
+[ext_resource type="Texture2D" uid="uid://ch5a4qyirap2k" path="res://assets/textures/blocks/wood_planks.png" id="3_meu1x"]
+
+[resource]
+script = ExtResource("2_meu1x")
+id = &"wood_planks"
+stack_size = 0
+block = ExtResource("1_e7dj3")
+base_item_id = &""
+name = "Wood Planks"
+description = "Tree flesh, sliced thin."
+texture = ExtResource("3_meu1x")
+texture_id = &""
+metadata/_custom_type_script = "uid://dj00gkiwcufts"

@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://cgs2olyes525"]
+
+[ext_resource type="Resource" uid="uid://c68pk7r4ayu4a" path="res://assets/blocks/cobblestone.tres" id="1_tm3qn"]
+[ext_resource type="Script" uid="uid://dj00gkiwcufts" path="res://classes/items/item.gd" id="2_7pego"]
+[ext_resource type="Texture2D" uid="uid://88gf60u28m1t" path="res://assets/textures/blocks/cobblestone.png" id="3_7pego"]
+
+[resource]
+script = ExtResource("2_7pego")
+id = &"cobblestone"
+stack_size = 0
+block = ExtResource("1_tm3qn")
+base_item_id = &""
+name = "Cobblestone"
+description = "Incoherent stone."
+texture = ExtResource("3_7pego")
+texture_id = &""
+metadata/_custom_type_script = "uid://dj00gkiwcufts"
