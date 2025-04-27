@@ -8,4 +8,3 @@ extends Node3D
 @export var items: Array[Item] = []
 @export var default_item: Item
 @export var inventories: Array[Inventory] = []
-@export var menus: Array[Menu] = []
