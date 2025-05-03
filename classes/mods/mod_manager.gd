@@ -60,7 +60,7 @@ func sort_mods() -> Error:
 	while true:
 		for mod in mods:
 			if sorted_mod_ids.has(mod.id): continue
-			if not SC.has_array(sorted_mod_ids, mod.dependencies): continue
+			if not Arrays.has_array(sorted_mod_ids, mod.dependencies): continue
 			sorted_mod_ids.append(mod.id)
 			added_mods += 1
 		

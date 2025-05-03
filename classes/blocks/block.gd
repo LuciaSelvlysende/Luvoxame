@@ -47,7 +47,7 @@ enum RotationPresets {
 ## information. Any @export property changed from the default value will NOT be modified.
 @export var base_block: Block
 ## The [ValueInheritor] used to copy values from [member base_block] and [member BlockManager.base_block].
-@export var inheritor: ValueInheritor = ValueInheritor.new()
+@export var inheritor: ValueInheritor
 
 @export_group("Visuals")
 ## The mesh used for [member VoxelBlockyModelMesh.mesh]. If
@@ -84,6 +84,9 @@ var texture_rects: Array[Rect2i] = []
 
 func prepare() -> void:
 	# Inherit property values from base_block and Items.base_block.
+	if not inheritor:
+		inheritor = ValueInheritor.new()
+	
 	inheritor.default_object = Block.new()
 	inheritor.exclude_object = Resource.new()
 	

@@ -29,7 +29,7 @@ extends Resource
 ## information. Any @export property changed from the default value will NOT be modified.
 @export var base_item: Item
 ## The [ValueInheritor] used to copy values from [member base_item] and [member ItemManager.base_item].
-@export var inheritor: ValueInheritor = ValueInheritor.new()
+@export var inheritor: ValueInheritor
 
 @export_group("Visuals")
 
@@ -43,6 +43,9 @@ extends Resource
 
 func _prepare() -> void:
 	# Inherit property values from base_item.
+	if not inheritor:
+		inheritor = ValueInheritor.new()
+	
 	if base_item_id:
 		base_item = Items.get_item(base_item_id)
 	
